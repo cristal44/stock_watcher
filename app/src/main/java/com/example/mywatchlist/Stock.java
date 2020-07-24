@@ -1,9 +1,11 @@
 package com.example.mywatchlist;
 
 
+import java.io.Serializable;
+
 import static android.graphics.Color.rgb;
 
-public class Stock {
+public class Stock implements Serializable {
     private String symbol;
     private double price;
     private String companyName;

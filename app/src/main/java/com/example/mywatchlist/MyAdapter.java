@@ -12,6 +12,7 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     private List<Stock> stockList;
+    private MainActivity mainActivity;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView stockSymbol;
@@ -34,14 +35,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         }
     }
 
-    public MyAdapter(List<Stock> stockList) {
+    public MyAdapter(List<Stock> stockList, MainActivity mainActivity) {
         this.stockList = stockList;
+        this.mainActivity = mainActivity;
     }
 
     @NonNull
     @Override
     public MyAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.stocklist, parent, false);
+        itemView.setOnClickListener(mainActivity);
         return new MyViewHolder(itemView);
     }
 
