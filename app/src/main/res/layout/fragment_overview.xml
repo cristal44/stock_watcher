@@ -12,66 +12,1146 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/overviewLayout"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@drawable/custom_rounded_corners"
-                android:layout_marginTop="16dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp">
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/custom_rounded_corners">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+                <TextView
+                    android:id="@+id/overviewCompanyName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Facebook,Inc."
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/overviewStockClass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_toRightOf="@+id/overviewCompanyName"
+                    android:text="- Class A Common Stock"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/overviewPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/overviewCompanyName"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="bottom"
+                    android:text="158.91"
+                    android:textColor="#000000"
+                    android:textSize="28dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/overviewCompanyName"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_toRightOf="@+id/overviewPrice"
+                    android:gravity="bottom"
+                    android:paddingBottom="4dp"
+                    android:text="USD"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/overviewChange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/overviewPrice"
+                    android:layout_marginLeft="16dp"
+                    android:gravity="bottom"
+                    android:text="+ 0.60"
+                    android:textColor="#000000"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/overviewPercentage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/overviewPrice"
+                    android:layout_marginLeft="4dp"
+                    android:layout_toRightOf="@+id/overviewChange"
+                    android:gravity="bottom"
+                    android:text="(+ 2.04%)"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/overviewArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/overviewPrice"
+                    android:layout_marginLeft="4dp"
+                    android:layout_toRightOf="@+id/overviewPercentage"
+                    android:gravity="bottom"
+                    android:text="▲"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:id="@+id/overviewDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_below="@id/overviewPrice"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:gravity="bottom"
+                    android:text="14:37 APR 06 CST"
+                    android:textSize="14dp" />
+
+                <GridLayout
+                    android:id="@+id/overviewGridLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/overviewChange"
+                    android:layout_marginTop="16dp"
+                    android:columnCount="3"
+                    android:orientation="horizontal"
+                    android:rowCount="6">
+
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout1"
+                        android:layout_width="100dp"
+                        android:layout_height="60dp"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_marginTop="4dp"
+                        android:orientation="vertical">
+
+                        <View
+                            android:id="@+id/divider"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:background="?android:attr/listDivider" />
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="16dp"
+                            android:text="Open"
+                            android:textColor="#000000"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:id="@+id/open"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="16dp"
+                            android:text="157.73"
+                            android:textColor="#000000"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="60dp"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_marginTop="4dp"
+                        android:orientation="vertical">
+
+                        <View
+                            android:id="@+id/divider1"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:background="?android:attr/listDivider" />
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="16dp"
+                            android:maxLines="1"
+                            android:text="Previous Close"
+                            android:textColor="#000000"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:id="@+id/previousClose"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginLeft="16dp"
+                            android:text="382.48B"
+                            android:textColor="#000000"
+                            android:textSize="16dp" />
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="60dp"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_marginTop="4dp"
+                        android:orientation="vertical">
+
+                        <View
+                            android:id="@+id/divider2"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:background="?android:attr/listDivider" />
+
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="16dp"
+                            android:text="Day Range"
+                            android:textColor="#000000"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:id="@+id/dayRange"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="16dp"
+                            android:maxLines="1"
+                            android:text="157.05 - 161.42"
+                            android:textColor="#000000"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="60dp"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_marginTop="4dp"
+                        android:orientation="vertical">
+
+                        <View
+                            android:id="@+id/divider3"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:background="?android:attr/listDivider" />
+
+                        <TextView
+                            android:id="@+id/textView7"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="16dp"
+                            android:text="Volume"
+                            android:textColor="#000000"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:id="@+id/volume"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="16dp"
+                            android:maxLines="1"
+                            android:text="123.4M"
+                            android:textColor="#000000"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="60dp"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_marginTop="4dp"
+                        android:orientation="vertical">
+
+                        <View
+                            android:id="@+id/divider4"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:background="?android:attr/listDivider" />
+
+                        <TextView
+                            android:id="@+id/textView8"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="16dp"
+                            android:text="Average Volume"
+                            android:textColor="#000000"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:id="@+id/averageVolume"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="16dp"
+                            android:maxLines="1"
+                            android:text="123.4M"
+                            android:textColor="#000000"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="60dp"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_marginTop="4dp"
+                        android:orientation="vertical"></LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="60dp"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_marginTop="4dp"
+                        android:orientation="vertical">
+
+                        <View
+                            android:id="@+id/divider5"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:background="?android:attr/listDivider" />
+
+                        <TextView
+                            android:id="@+id/textView9"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="16dp"
+                            android:text="Last 5 Days % Change"
+                            android:textColor="#000000"
+                            android:textSize="8.5dp" />
+
+                        <TextView
+                            android:id="@+id/day5Change"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="16dp"
+                            android:maxLines="1"
+                            android:text="- 13.23%"
+                            android:textColor="#000000"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="60dp"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_marginTop="4dp"
+                        android:orientation="vertical">
+
+                        <View
+                            android:id="@+id/divider6"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:background="?android:attr/listDivider" />
+
+                        <TextView
+                            android:id="@+id/textView10"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="16dp"
+                            android:text="Last 3 Mo. % Change"
+                            android:textColor="#000000"
+                            android:textSize="8.5dp" />
+
+                        <TextView
+                            android:id="@+id/mo3Change"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="16dp"
+                            android:maxLines="1"
+                            android:text="- 13.23%"
+                            android:textColor="#000000"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="100dp"
+                        android:layout_height="60dp"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:layout_marginTop="4dp"
+                        android:orientation="vertical">
+
+                        <View
+                            android:id="@+id/divider7"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp"
+                            android:background="?android:attr/listDivider" />
+
+                        <TextView
+                            android:id="@+id/textView11"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="16dp"
+                            android:text="Last 1 Year % Change"
+                            android:textColor="#000000"
+                            android:textSize="8.5dp" />
+
+                        <TextView
+                            android:id="@+id/yearChange"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginRight="16dp"
+                            android:maxLines="1"
+                            android:text="- 13.23%"
+                            android:textColor="#000000"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+
+                </GridLayout>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="KEY STATISTICS"
+                android:textAlignment="textStart"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:id="@+id/keyLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/custom_rounded_corners"
+                android:orientation="vertical">>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:text="52 Weeks Range"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/week52Range"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:text="52 Weeks Range"
+                        android:textAlignment="textEnd"
+                        android:textColor="#000000"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/divider8"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="?android:attr/listDivider" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:text="Market Cap"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/marketCap"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:text="382.48B"
+                        android:textAlignment="textEnd"
+                        android:textColor="#000000"
+                        android:textSize="16dp" />
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/divider9"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="?android:attr/listDivider" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:text="P/E Rato"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/peRatio"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:text="382.48B"
+                        android:textAlignment="textEnd"
+                        android:textColor="#000000"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/divider10"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="?android:attr/listDivider" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:text="Earrings per Share"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/earningPerShare"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:text="382.48B"
+                        android:textAlignment="textEnd"
+                        android:textColor="#000000"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/divider11"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="?android:attr/listDivider" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:text="Yield%"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/yield"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+
+                        android:text="382.48B"
+                        android:textAlignment="textEnd"
+                        android:textColor="#000000"
+                        android:textSize="16dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:text="EARNINGS ANNOUNCEMENT"
+                android:textAlignment="textStart"
+                android:textSize="12dp"
+                android:textStyle="bold" />
+
+
+            <GridLayout
+                android:id="@+id/earningGridLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:columnCount="3"
+                android:orientation="horizontal"
+                android:rowCount="6"
+                android:background="@drawable/custom_rounded_corners">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnSpan="3"
+                    android:layout_gravity="fill"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Upcoming Earnings"
+                    android:textSize="16dp"
+                    android:textColor="#000000"
+                    android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="4dp"
+                    android:orientation="vertical">
+
+                    <View
+                        android:id="@+id/divider12"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <TextView
+                        android:id="@+id/textView17"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="16dp"
+                        android:text="Date"
+                        android:textColor="#000000"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/earningDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="16dp"
+                        android:text="04/25"
+                        android:textColor="#000000"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/openOrCloseTextview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_columnSpan="3"
+                        android:layout_gravity="fill"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="4dp"
+                        android:text="After Close"
+                        android:textSize="12dp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="4dp"
+                    android:orientation="vertical">
+
+                    <View
+                        android:id="@+id/divider13"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <TextView
+                        android:id="@+id/textView18"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="16dp"
+                        android:text="Estimate"
+                        android:textColor="#000000"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/estimate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="16dp"
+                        android:text="1.36"
+                        android:textColor="#000000"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="4dp"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="16dp"
+                        android:text="Estimate Range"
+                        android:textColor="#000000"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/estimateRange"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="16dp"
+                        android:text="1.07 - 1.58"
+                        android:textColor="#000000"
+                        android:textSize="16dp" />
+                </LinearLayout>
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="33333"/>
+                    android:layout_columnSpan="3"
+                    android:layout_gravity="fill"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Latest Earnings"
+                    android:textSize="16dp"
+                    android:textColor="#000000"
+                    android:textStyle="bold"/>
 
-            </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="4dp"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="16dp"
+                        android:text="Actual"
+                        android:textColor="#000000"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/earningActual"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="16dp"
+                        android:text="1.44"
+                        android:textColor="#000000"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="4dp"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="16dp"
+                        android:text="Estimate"
+                        android:textColor="#000000"
+                        android:textSize="12dp" />
+
+                    <TextView
+                        android:id="@+id/earningLatestEstimate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="16dp"
+                        android:text="1.36"
+                        android:textColor="#000000"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_marginTop="4dp"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="16dp"
+                        android:text="5D % Chg After Earning"
+                        android:textColor="#000000"
+                        android:textSize="8dp" />
+
+                    <TextView
+                        android:id="@+id/d5change"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginRight="16dp"
+                        android:text="-9.72%"
+                        android:textColor="#000000"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnSpan="3"
+                    android:layout_gravity="fill"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Earnings History"
+                    android:textSize="16dp"
+                    android:textColor="#000000"
+                    android:textStyle="bold"/>
+
+
+
+            </GridLayout>
+
+
+
 
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="@drawable/custom_rounded_corners"
-                android:layout_marginTop="16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp">
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/custom_rounded_corners">
 
             </RelativeLayout>
 
-            <RelativeLayout
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@drawable/custom_rounded_corners"
-                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp">
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="COMPANY PROFILE"
+                android:textAlignment="textStart"
+                android:textSize="12dp"
+                android:textStyle="bold" />
 
-            </RelativeLayout>
 
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/companyProfileLayout"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@drawable/custom_rounded_corners"
-                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp">
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="32dp"
                 android:background="@drawable/custom_rounded_corners"
-                android:layout_marginTop="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp">
+                android:orientation="vertical">>
 
-            </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:text="Sector"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/sector"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:text="Internet/Online"
+                        android:textAlignment="textEnd"
+                        android:textColor="#000000"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="?android:attr/listDivider" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:text="Industry"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/industry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:text="Technology"
+                        android:textAlignment="textEnd"
+                        android:textColor="#000000"
+                        android:textSize="16dp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="?android:attr/listDivider" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:text="Style"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:text="Large Cap Growth"
+                        android:textAlignment="textEnd"
+                        android:textColor="#000000"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="?android:attr/listDivider" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:text="Full Time Employees"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/employee"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:text="25,105"
+                        android:textAlignment="textEnd"
+                        android:textColor="#000000"
+                        android:textSize="16dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="?android:attr/listDivider" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:text="Founded"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/founded"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:text="Feb 2004 (14 years ago)"
+                        android:textAlignment="textEnd"
+                        android:textColor="#000000"
+                        android:textSize="16dp" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
+
     </ScrollView>
 </FrameLayout>

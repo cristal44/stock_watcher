@@ -5,9 +5,12 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.mywatchlist.R;
@@ -71,10 +74,29 @@ public class OverviewFragment extends Fragment {
 
         View fragmentView = inflater.inflate(R.layout.fragment_overview, container, false);
 
-        RelativeLayout layout = fragmentView.findViewById(R.id.overviewLayout);
-        GradientDrawable backgroundGradient = (GradientDrawable) layout.getBackground();
+        RelativeLayout overviewLayout = fragmentView.findViewById(R.id.overviewLayout);
+        GradientDrawable backgroundGradient = (GradientDrawable) overviewLayout.getBackground();
         backgroundGradient.setColor(rgb(255,255,255));
+
+        LinearLayout keyLayout = fragmentView.findViewById(R.id.keyLayout);
+        GradientDrawable backgroundGradient1 = (GradientDrawable) keyLayout.getBackground();
+        backgroundGradient1.setColor(rgb(255,255,255));
+
+        GridLayout earningLayout = fragmentView.findViewById(R.id.earningGridLayout);
+        GradientDrawable backgroundGradient2 = (GradientDrawable) earningLayout.getBackground();
+        backgroundGradient2.setColor(rgb(255,255,255));
+
+        LinearLayout companyProfileLayout = fragmentView.findViewById(R.id.companyProfileLayout);
+        GradientDrawable backgroundGradient3 = (GradientDrawable) companyProfileLayout.getBackground();
+        backgroundGradient3.setColor(rgb(255,255,255));
+
         // Inflate the layout for this fragment
         return fragmentView;
     }
+
+//    public void changeLayoutBackgroudColor(View fragmentView, RelativeLayout layout){
+//        GradientDrawable backgroundGradient = (GradientDrawable) layout.getBackground();
+//        backgroundGradient.setColor(rgb(255,255,255));
+//
+//    }
 }
