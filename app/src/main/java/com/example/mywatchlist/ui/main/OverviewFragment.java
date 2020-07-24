@@ -1,5 +1,6 @@
 package com.example.mywatchlist.ui.main;
 
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.example.mywatchlist.R;
+
+import static android.graphics.Color.rgb;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,12 +59,22 @@ public class OverviewFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View fragmentView = inflater.inflate(R.layout.fragment_overview, container, false);
+
+        RelativeLayout layout = fragmentView.findViewById(R.id.overviewLayout);
+        GradientDrawable backgroundGradient = (GradientDrawable) layout.getBackground();
+        backgroundGradient.setColor(rgb(255,255,255));
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_overview, container, false);
+        return fragmentView;
     }
 }
