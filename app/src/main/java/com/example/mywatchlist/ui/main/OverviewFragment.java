@@ -4,6 +4,9 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Layout;
 import android.view.LayoutInflater;
@@ -13,7 +16,13 @@ import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.example.mywatchlist.CompetitorAdapter;
+import com.example.mywatchlist.MyAdapter;
 import com.example.mywatchlist.R;
+import com.example.mywatchlist.Stock;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.graphics.Color.rgb;
 
@@ -90,13 +99,34 @@ public class OverviewFragment extends Fragment {
         GradientDrawable backgroundGradient3 = (GradientDrawable) companyProfileLayout.getBackground();
         backgroundGradient3.setColor(rgb(255,255,255));
 
+
+        RelativeLayout competitorLayout = fragmentView.findViewById(R.id.competitorLayout);
+        GradientDrawable backgroundGradient4 = (GradientDrawable) competitorLayout.getBackground();
+        backgroundGradient4.setColor(rgb(255,255,255));
+
+
+        List<Stock> competitorList = getStockList();
+        RecyclerView recyclerView = fragmentView.findViewById(R.id.competitorRecyclerView);
+        CompetitorAdapter competitorAdapter = new CompetitorAdapter(competitorList);
+        recyclerView.setAdapter(competitorAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+
         // Inflate the layout for this fragment
         return fragmentView;
     }
 
-//    public void changeLayoutBackgroudColor(View fragmentView, RelativeLayout layout){
-//        GradientDrawable backgroundGradient = (GradientDrawable) layout.getBackground();
-//        backgroundGradient.setColor(rgb(255,255,255));
-//
-//    }
+
+    public List<Stock> getStockList(){
+        List<Stock> stocks = new ArrayList<>();
+        stocks.add(new Stock("AAPL", 312.54,"Apple cccccccccccccccccc",2.74,0.03));
+        stocks.add(new Stock("AAPL", 312.54,"Apple",2.74,0.03));
+        stocks.add(new Stock("AAPL", 312.54,"Apple",2.74,0.03));
+        stocks.add(new Stock("AAPL", 312.54,"Apple",-1.25,0.03));
+        stocks.add(new Stock("AAPL", 312.54,"Apple",0,0.03));
+        stocks.add(new Stock("AAPL", 312.54,"Apple",2.74,0.03));
+
+        return stocks;
+    }
+
 }

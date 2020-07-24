@@ -13,6 +13,7 @@ public class Stock implements Serializable {
     private double percentage;
     private String plusOrMinor;
     private int color;
+    private double pe;
 
     public Stock(String symbol, double price, String companyName, double change, double percentage) {
         this.symbol = symbol;
@@ -20,6 +21,7 @@ public class Stock implements Serializable {
         this.companyName = companyName;
         this.change = change;
         this.percentage = percentage;
+        this.pe = 20.44;
 
         if (change > 0){
             color = rgb(15,157,88);
@@ -31,6 +33,9 @@ public class Stock implements Serializable {
             color = rgb(171,171,171);
             plusOrMinor = "";
         }
+    }
+
+    public String getPe() {return String.format("%.2f",pe);
     }
 
     public String getSymbol() {

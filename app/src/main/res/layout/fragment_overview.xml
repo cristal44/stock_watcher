@@ -965,17 +965,67 @@
             </GridLayout>
 
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="COMPETITORS"
+                android:textAlignment="textStart"
+                android:textSize="12dp"
+                android:textStyle="bold" />
 
 
 
             <RelativeLayout
+                android:id="@+id/competitorLayout"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
                 android:background="@drawable/custom_rounded_corners">
 
+                <TextView
+                    android:id="@+id/tickerTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Ticker"
+                    android:textSize="14dp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/peTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="100dp"
+                    android:layout_marginTop="16dp"
+                    android:text="P/E"
+                    android:textSize="14dp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/textView22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="% Change"
+                    android:textSize="14dp"
+                    android:textStyle="bold"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/competitorRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/tickerTitle"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp" />
             </RelativeLayout>
 
             <TextView
@@ -997,7 +1047,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="16dp"
                 android:background="@drawable/custom_rounded_corners"
                 android:orientation="vertical">>
 
