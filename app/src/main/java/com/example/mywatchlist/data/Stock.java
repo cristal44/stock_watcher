@@ -1,9 +1,34 @@
-package com.example.mywatchlist;
+package com.example.mywatchlist.data;
 
 
 import java.io.Serializable;
 
 import static android.graphics.Color.rgb;
+
+//
+//import com.google.gson.annotations.Expose;
+//import com.google.gson.annotations.SerializedName;
+//
+//public class Stock {
+//
+//    @SerializedName("quote")
+//    @Expose
+//    private Quote quote;
+//
+//    public Stock(Quote quote) {
+//        super();
+//        this.quote = quote;
+//    }
+//
+//    public Quote getQuote() {
+//        return quote;
+//    }
+//
+//    public void setQuote(Quote quote) {
+//        this.quote = quote;
+//    }
+//
+//}
 
 public class Stock implements Serializable {
     private String symbol;

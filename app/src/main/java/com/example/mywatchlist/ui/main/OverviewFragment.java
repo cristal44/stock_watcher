@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.mywatchlist.CompetitorAdapter;
-import com.example.mywatchlist.MyAdapter;
 import com.example.mywatchlist.R;
-import com.example.mywatchlist.Stock;
+import com.example.mywatchlist.data.Stock;
 
 import java.util.ArrayList;
 import java.util.List;
