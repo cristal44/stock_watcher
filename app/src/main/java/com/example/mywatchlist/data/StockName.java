@@ -4,7 +4,9 @@ package com.example.mywatchlist.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class StockName {
+import java.io.Serializable;
+
+public class StockName implements Serializable {
 
     @SerializedName("symbol")
     @Expose

@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.mywatchlist.data.Stock;
+import com.example.mywatchlist.data.StockName;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +40,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
+        toolbar.setTitle("My Watchlist");
+        toolbar.setTitleTextAppearance(this,R.style.CustomText);
 
-
+        Intent intent = getIntent();
+        StockName stockName = (StockName) intent.getSerializableExtra("SELECTED");
+        if (stockName != null) {
+             String selectedSymbol = stockName.getSymbol();
+             System.out.println(selectedSymbol);
+        }
     }
 
 
@@ -75,6 +83,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.addStock){
             Toast.makeText(this,"IIIII",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this,SearchActivity.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
