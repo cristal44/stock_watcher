@@ -1,9 +1,11 @@
-package com.example.mywatchlist;
+package com.example.mywatchlist.View;
 
 import android.annotation.SuppressLint;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+
+import com.example.mywatchlist.R;
 import com.google.android.material.tabs.TabLayout;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;

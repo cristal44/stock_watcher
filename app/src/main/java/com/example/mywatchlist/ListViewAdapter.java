@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.mywatchlist.View.MainActivity;
 import com.example.mywatchlist.data.StockName;
 
 import java.util.ArrayList;

@@ -22,36 +22,62 @@ public class Quote {
     @SerializedName("open")
     @Expose
     private double open;
+//    @SerializedName("openTime")
+//    @Expose
+//    private int openTime;
+
+
     @SerializedName("openTime")
     @Expose
-    private int openTime;
+    private float openTime;
+
     @SerializedName("openSource")
     @Expose
     private String openSource;
     @SerializedName("close")
     @Expose
     private double close;
+//    @SerializedName("closeTime")
+//    @Expose
+//    private int closeTime;
+
+
     @SerializedName("closeTime")
     @Expose
-    private int closeTime;
+    private float closeTime;
+
+
+
     @SerializedName("closeSource")
     @Expose
     private String closeSource;
     @SerializedName("high")
     @Expose
     private double high;
+//    @SerializedName("highTime")
+//    @Expose
+//    private int highTime;
+
     @SerializedName("highTime")
     @Expose
-    private int highTime;
+    private float highTime;
+
+
     @SerializedName("highSource")
     @Expose
     private String highSource;
     @SerializedName("low")
     @Expose
     private double low;
+//    @SerializedName("lowTime")
+//    @Expose
+//    private int lowTime;
+
     @SerializedName("lowTime")
     @Expose
-    private int lowTime;
+    private float lowTime;
+
+
     @SerializedName("lowSource")
     @Expose
     private String lowSource;
@@ -64,9 +90,15 @@ public class Quote {
     @SerializedName("latestTime")
     @Expose
     private String latestTime;
+//    @SerializedName("latestUpdate")
+//    @Expose
+//    private int latestUpdate;
+
     @SerializedName("latestUpdate")
     @Expose
-    private int latestUpdate;
+    private float latestUpdate;
+
+
     @SerializedName("latestVolume")
     @Expose
     private int latestVolume;
@@ -82,15 +114,15 @@ public class Quote {
     @SerializedName("delayedPrice")
     @Expose
     private double delayedPrice;
+//    @SerializedName("delayedPriceTime")
+//    @Expose
+//    private int delayedPriceTime;
+
     @SerializedName("delayedPriceTime")
     @Expose
-    private int delayedPriceTime;
-    @SerializedName("oddLotDelayedPrice")
-    @Expose
-    private double oddLotDelayedPrice;
-    @SerializedName("oddLotDelayedPriceTime")
-    @Expose
-    private int oddLotDelayedPriceTime;
+    private float delayedPriceTime;
+
+
     @SerializedName("extendedPrice")
     @Expose
     private double extendedPrice;
@@ -100,9 +132,7 @@ public class Quote {
     @SerializedName("extendedChangePercent")
     @Expose
     private double extendedChangePercent;
-    @SerializedName("extendedPriceTime")
-    @Expose
-    private int extendedPriceTime;
+
     @SerializedName("previousClose")
     @Expose
     private double previousClose;
@@ -148,12 +178,9 @@ public class Quote {
     @SerializedName("iexClose")
     @Expose
     private double iexClose;
-    @SerializedName("iexCloseTime")
-    @Expose
-    private int iexCloseTime;
     @SerializedName("marketCap")
     @Expose
-    private int marketCap;
+    private float marketCap;
     @SerializedName("peRatio")
     @Expose
     private double peRatio;
@@ -166,9 +193,6 @@ public class Quote {
     @SerializedName("ytdChange")
     @Expose
     private double ytdChange;
-    @SerializedName("lastTradeTime")
-    @Expose
-    private int lastTradeTime;
     @SerializedName("isUSMarketOpen")
     @Expose
     private boolean isUSMarketOpen;
@@ -177,7 +201,7 @@ public class Quote {
     private int color;
     private String plusOrMinor;
 
-    public Quote(String symbol, String companyName, String primaryExchange, String calculationPrice, double open, int openTime, String openSource, double close, int closeTime, String closeSource, double high, int highTime, String highSource, double low, int lowTime, String lowSource, double latestPrice, String latestSource, String latestTime, int latestUpdate, int latestVolume, Object iexRealtimePrice, Object iexRealtimeSize, Object iexLastUpdated, double delayedPrice, int delayedPriceTime, double oddLotDelayedPrice, int oddLotDelayedPriceTime, double extendedPrice, double extendedChange, double extendedChangePercent, int extendedPriceTime, double previousClose, int previousVolume, double change, double changePercent, int volume, Object iexMarketPercent, Object iexVolume, int avgTotalVolume, Object iexBidPrice, Object iexBidSize, Object iexAskPrice, Object iexAskSize, Object iexOpen, Object iexOpenTime, double iexClose, int iexCloseTime, int marketCap, double peRatio, double week52High, double week52Low, double ytdChange, int lastTradeTime, boolean isUSMarketOpen) {
+    public Quote(String symbol, String companyName, String primaryExchange, String calculationPrice, double open, float openTime, String openSource, double close, float closeTime, String closeSource, double high, float highTime, String highSource, double low, float lowTime, String lowSource, double latestPrice, String latestSource, String latestTime, float latestUpdate, int latestVolume, Object iexRealtimePrice, Object iexRealtimeSize, Object iexLastUpdated, double delayedPrice, float delayedPriceTime, double extendedPrice, double extendedChange, double extendedChangePercent,  double previousClose, int previousVolume, double change, double changePercent, int volume, Object iexMarketPercent, Object iexVolume, int avgTotalVolume, Object iexBidPrice, Object iexBidSize, Object iexAskPrice, Object iexAskSize, Object iexOpen, Object iexOpenTime, double iexClose, float marketCap, double peRatio, double week52High, double week52Low, double ytdChange,  boolean isUSMarketOpen) {
         super();
         this.symbol = symbol;
         this.companyName = companyName;
@@ -205,12 +229,9 @@ public class Quote {
         this.iexLastUpdated = iexLastUpdated;
         this.delayedPrice = delayedPrice;
         this.delayedPriceTime = delayedPriceTime;
-        this.oddLotDelayedPrice = oddLotDelayedPrice;
-        this.oddLotDelayedPriceTime = oddLotDelayedPriceTime;
         this.extendedPrice = extendedPrice;
         this.extendedChange = extendedChange;
         this.extendedChangePercent = extendedChangePercent;
-        this.extendedPriceTime = extendedPriceTime;
         this.previousClose = previousClose;
         this.previousVolume = previousVolume;
         this.change = change;
@@ -226,13 +247,11 @@ public class Quote {
         this.iexOpen = iexOpen;
         this.iexOpenTime = iexOpenTime;
         this.iexClose = iexClose;
-        this.iexCloseTime = iexCloseTime;
         this.marketCap = marketCap;
         this.peRatio = peRatio;
         this.week52High = week52High;
         this.week52Low = week52Low;
         this.ytdChange = ytdChange;
-        this.lastTradeTime = lastTradeTime;
         this.isUSMarketOpen = isUSMarketOpen;
 
         // xue
@@ -289,7 +308,7 @@ public class Quote {
         this.open = open;
     }
 
-    public int getOpenTime() {
+    public float getOpenTime() {
         return openTime;
     }
 
@@ -313,7 +332,7 @@ public class Quote {
         this.close = close;
     }
 
-    public int getCloseTime() {
+    public float getCloseTime() {
         return closeTime;
     }
 
@@ -337,7 +356,7 @@ public class Quote {
         this.high = high;
     }
 
-    public int getHighTime() {
+    public float getHighTime() {
         return highTime;
     }
 
@@ -361,7 +380,7 @@ public class Quote {
         this.low = low;
     }
 
-    public int getLowTime() {
+    public float getLowTime() {
         return lowTime;
     }
 
@@ -401,7 +420,7 @@ public class Quote {
         this.latestTime = latestTime;
     }
 
-    public int getLatestUpdate() {
+    public float getLatestUpdate() {
         return latestUpdate;
     }
 
@@ -449,28 +468,12 @@ public class Quote {
         this.delayedPrice = delayedPrice;
     }
 
-    public int getDelayedPriceTime() {
+    public float getDelayedPriceTime() {
         return delayedPriceTime;
     }
 
     public void setDelayedPriceTime(int delayedPriceTime) {
         this.delayedPriceTime = delayedPriceTime;
-    }
-
-    public double getOddLotDelayedPrice() {
-        return oddLotDelayedPrice;
-    }
-
-    public void setOddLotDelayedPrice(double oddLotDelayedPrice) {
-        this.oddLotDelayedPrice = oddLotDelayedPrice;
-    }
-
-    public int getOddLotDelayedPriceTime() {
-        return oddLotDelayedPriceTime;
-    }
-
-    public void setOddLotDelayedPriceTime(int oddLotDelayedPriceTime) {
-        this.oddLotDelayedPriceTime = oddLotDelayedPriceTime;
     }
 
     public double getExtendedPrice() {
@@ -497,13 +500,6 @@ public class Quote {
         this.extendedChangePercent = extendedChangePercent;
     }
 
-    public int getExtendedPriceTime() {
-        return extendedPriceTime;
-    }
-
-    public void setExtendedPriceTime(int extendedPriceTime) {
-        this.extendedPriceTime = extendedPriceTime;
-    }
 
     public double getPreviousClose() {
         return previousClose;
@@ -625,15 +621,8 @@ public class Quote {
         this.iexClose = iexClose;
     }
 
-    public int getIexCloseTime() {
-        return iexCloseTime;
-    }
 
-    public void setIexCloseTime(int iexCloseTime) {
-        this.iexCloseTime = iexCloseTime;
-    }
-
-    public int getMarketCap() {
+    public float getMarketCap() {
         return marketCap;
     }
 
@@ -673,13 +662,6 @@ public class Quote {
         this.ytdChange = ytdChange;
     }
 
-    public int getLastTradeTime() {
-        return lastTradeTime;
-    }
-
-    public void setLastTradeTime(int lastTradeTime) {
-        this.lastTradeTime = lastTradeTime;
-    }
 
     public boolean isIsUSMarketOpen() {
         return isUSMarketOpen;
@@ -689,4 +671,11 @@ public class Quote {
         this.isUSMarketOpen = isUSMarketOpen;
     }
 
+    public int getColor() {
+        return color;
+    }
+
+    public String getPlusOrMinor() {
+        return plusOrMinor;
+    }
 }

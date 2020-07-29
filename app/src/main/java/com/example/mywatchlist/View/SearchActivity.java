@@ -1,4 +1,4 @@
-package com.example.mywatchlist;
+package com.example.mywatchlist.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.PorterDuff;
@@ -8,42 +8,34 @@ import android.text.TextUtils;
 import android.widget.ListView;
 import android.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import com.example.mywatchlist.ListViewAdapter;
+import com.example.mywatchlist.R;
 import com.example.mywatchlist.data.StockName;
 import java.util.ArrayList;
+import java.util.List;
 import static android.graphics.Color.rgb;
 
 public class SearchActivity extends AppCompatActivity {
     private ListView listView;
     private ListViewAdapter adapter;
-    String[] symbols;
-    String[] names;
-    ArrayList<StockName> arrayList = new ArrayList<>();
+    List<StockName> arrayList = new ArrayList<>();
     private SearchView searchView;
     private Toolbar toolbar;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        arrayList = MainActivity.stockNames;
 
         setToolbar();
 
         listView = findViewById(R.id.listView);
 
-        sampleList();
         adapter = new ListViewAdapter(this,arrayList);
         listView.setAdapter(adapter);
 
         setSearchView();
-    }
-
-    private void sampleList() {
-        symbols = new String[]{"AAPL", "PPLA", "CCTV"};
-        names = new String[]{"Apple", "dddddddddddddd", "222222222"};
-        for (int i = 0; i < symbols.length; i++){
-            arrayList.add(new StockName(symbols[i], names[i]));
-        }
     }
 
     private void setSearchView() {
