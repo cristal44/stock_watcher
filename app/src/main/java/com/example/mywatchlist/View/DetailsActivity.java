@@ -1,11 +1,13 @@
 package com.example.mywatchlist.View;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-
 import com.example.mywatchlist.R;
+import com.example.mywatchlist.data.Quote;
+import com.example.mywatchlist.data.StockData;
 import com.google.android.material.tabs.TabLayout;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
@@ -15,9 +17,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.mywatchlist.ui.main.SectionsPagerAdapter;
+import java.util.List;
 import static android.graphics.Color.rgb;
 
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends AppCompatActivity implements BaseView{
     private TabLayout tabs;
     private ViewPager viewPager;
     private Toolbar toolbar;
@@ -28,6 +31,9 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+
+        Intent intent = getIntent();
+        Quote stock = (Quote) intent.getSerializableExtra("SELECTEDSTOCK");
 
         init();
         setTabDivider();
@@ -65,5 +71,15 @@ public class DetailsActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         toolbar.getNavigationIcon().setColorFilter(rgb(15,157,88), PorterDuff.Mode.SRC_ATOP);
         toolbar.setNavigationIcon(R.drawable.ic_back);
+    }
+
+    @Override
+    public void display() {
+
+    }
+
+    @Override
+    public void updateData(List<StockData> list) {
+
     }
 }

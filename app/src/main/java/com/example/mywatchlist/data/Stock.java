@@ -47,17 +47,6 @@ public class Stock implements Serializable {
         this.change = change;
         this.percentage = percentage;
         this.pe = 20.44;
-
-        if (change > 0){
-            color = rgb(15,157,88);
-            plusOrMinor = "+";
-        } else if (change < 0){
-            color = rgb(219,68,55);
-            plusOrMinor = "–";
-        } else{
-            color = rgb(171,171,171);
-            plusOrMinor = "";
-        }
     }
 
     public String getPe() {return String.format("%.2f",pe);

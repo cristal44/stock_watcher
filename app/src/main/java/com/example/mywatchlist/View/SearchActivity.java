@@ -10,12 +10,15 @@ import android.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import com.example.mywatchlist.ListViewAdapter;
 import com.example.mywatchlist.R;
+import com.example.mywatchlist.data.PresenterBase;
+import com.example.mywatchlist.data.SearchViewPresenter;
+import com.example.mywatchlist.data.StockData;
 import com.example.mywatchlist.data.StockName;
 import java.util.ArrayList;
 import java.util.List;
 import static android.graphics.Color.rgb;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements BaseView{
     private ListView listView;
     private ListViewAdapter adapter;
     List<StockName> arrayList = new ArrayList<>();
@@ -26,14 +29,13 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        arrayList = MainActivity.stockNames;
+
+        PresenterBase presenterBase = new SearchViewPresenter(this);
+        presenterBase.getData();
 
         setToolbar();
 
         listView = findViewById(R.id.listView);
-
-        adapter = new ListViewAdapter(this,arrayList);
-        listView.setAdapter(adapter);
 
         setSearchView();
     }
@@ -74,4 +76,19 @@ public class SearchActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_back);
     }
 
+    @Override
+    public void display() {
+
+    }
+
+    @Override
+    public void updateData(List<StockData> list) {
+        arrayList.clear();
+        for (StockData stockName : list){
+            arrayList.add((StockName) stockName);
+        }
+
+        adapter = new ListViewAdapter(this,arrayList);
+        listView.setAdapter(adapter);
+    }
 }

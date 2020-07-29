@@ -3,9 +3,11 @@ package com.example.mywatchlist.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 import static android.graphics.Color.rgb;
 
-public class Quote {
+public class Quote implements Serializable, StockData {
 
     @SerializedName("symbol")
     @Expose
@@ -255,7 +257,7 @@ public class Quote {
         this.isUSMarketOpen = isUSMarketOpen;
 
         // xue
-        if (change > 0){
+        if (this.change > 0){
             color = rgb(15,157,88);
             plusOrMinor = "+";
         } else if (change < 0){
@@ -677,5 +679,10 @@ public class Quote {
 
     public String getPlusOrMinor() {
         return plusOrMinor;
+    }
+
+    @Override
+    public void display() {
+
     }
 }

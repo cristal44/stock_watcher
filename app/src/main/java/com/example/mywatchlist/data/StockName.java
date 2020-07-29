@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class StockName implements Serializable {
+public class StockName implements StockData, Serializable {
 
     @SerializedName("symbol")
     @Expose
@@ -15,9 +15,7 @@ public class StockName implements Serializable {
     @Expose
     private String name;
 
-
     public StockName(String symbol, String name) {
-        super();
         this.symbol = symbol;
         this.name = name;
     }
@@ -28,5 +26,10 @@ public class StockName implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    @Override
+    public void display() {
+
     }
 }
