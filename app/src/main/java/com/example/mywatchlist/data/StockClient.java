@@ -6,20 +6,7 @@ import java.util.Map;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class StockSymbolClient {
-//    private static Retrofit retrofit = null;
-//
-//    public static Retrofit getRetrofit(){
-//        if (retrofit == null){
-//            retrofit = new Retrofit.Builder()
-//                    .baseUrl("https://api.iextrading.com/1.0/")
-//                    .addConverterFactory(GsonConverterFactory.create())
-//                    .build();
-//        }
-//
-//        return retrofit;
-//    }
-
+public class StockClient {
     private static Retrofit symbolRetrofit = null;
     private static Retrofit stockRetrofit = null;
 

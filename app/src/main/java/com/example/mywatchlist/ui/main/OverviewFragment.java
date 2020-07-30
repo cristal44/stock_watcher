@@ -15,9 +15,10 @@ import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.example.mywatchlist.CompetitorAdapter;
+//import com.example.mywatchlist.CompetitorAdapter;
 import com.example.mywatchlist.R;
 import com.example.mywatchlist.data.Stock;
+import com.example.mywatchlist.data.StockData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +42,6 @@ public class OverviewFragment extends Fragment {
     private String mParam2;
 
     public OverviewFragment() {
-        // Required empty public constructor
     }
 
     /**
@@ -103,10 +103,10 @@ public class OverviewFragment extends Fragment {
         backgroundGradient4.setColor(rgb(255,255,255));
 
 
-        List<Stock> competitorList = getStockList();
+//        List<Stock> competitorList = getStockList();
         RecyclerView recyclerView = fragmentView.findViewById(R.id.competitorRecyclerView);
-        CompetitorAdapter competitorAdapter = new CompetitorAdapter(competitorList);
-        recyclerView.setAdapter(competitorAdapter);
+//        CompetitorAdapter competitorAdapter = new CompetitorAdapter(competitorList);
+//        recyclerView.setAdapter(competitorAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
@@ -114,17 +114,17 @@ public class OverviewFragment extends Fragment {
         return fragmentView;
     }
 
-
-    public List<Stock> getStockList(){
-        List<Stock> stocks = new ArrayList<>();
-        stocks.add(new Stock("AAPL", 312.54,"Apple cccccccccccccccccc",2.74,0.03));
-        stocks.add(new Stock("AAPL", 312.54,"Apple",2.74,0.03));
-        stocks.add(new Stock("AAPL", 312.54,"Apple",2.74,0.03));
-        stocks.add(new Stock("AAPL", 312.54,"Apple",-1.25,0.03));
-        stocks.add(new Stock("AAPL", 312.54,"Apple",0,0.03));
-        stocks.add(new Stock("AAPL", 312.54,"Apple",2.74,0.03));
-
-        return stocks;
-    }
+//
+//    public List<Stock> getStockList(){
+//        List<Stock> stocks = new ArrayList<>();
+//        stocks.add(new Stock("AAPL", 312.54,"Apple cccccccccccccccccc",2.74,0.03));
+//        stocks.add(new Stock("AAPL", 312.54,"Apple",2.74,0.03));
+//        stocks.add(new Stock("AAPL", 312.54,"Apple",2.74,0.03));
+//        stocks.add(new Stock("AAPL", 312.54,"Apple",-1.25,0.03));
+//        stocks.add(new Stock("AAPL", 312.54,"Apple",0,0.03));
+//        stocks.add(new Stock("AAPL", 312.54,"Apple",2.74,0.03));
+//
+//        return stocks;
+//    }
 
 }

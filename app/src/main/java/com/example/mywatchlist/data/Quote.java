@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 import static android.graphics.Color.rgb;
 
-public class Quote implements Serializable, StockData {
+public class Quote{
 
     @SerializedName("symbol")
     @Expose
@@ -679,10 +679,5 @@ public class Quote implements Serializable, StockData {
 
     public String getPlusOrMinor() {
         return plusOrMinor;
-    }
-
-    @Override
-    public void display() {
-
     }
 }

@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.mywatchlist.R;
+import com.example.mywatchlist.data.StockData;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -19,11 +20,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3};
     private final Context mContext;
     private int numberOfTabs;
+    private StockData stock;
 
-    public SectionsPagerAdapter(FragmentManager fm, Context mContext, int numberOfTabs) {
+    public SectionsPagerAdapter(FragmentManager fm, Context mContext, int numberOfTabs, StockData stock) {
         super(fm);
         this.numberOfTabs = numberOfTabs;
         this.mContext = mContext;
+        this.stock = stock;
     }
 
 

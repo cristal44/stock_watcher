@@ -14,7 +14,7 @@ import android.view.View;
 import com.example.mywatchlist.MyAdapter;
 import com.example.mywatchlist.R;
 import com.example.mywatchlist.data.MainActivityPresenter;
-import com.example.mywatchlist.data.Quote;
+import com.example.mywatchlist.data.Stock;
 import com.example.mywatchlist.data.StockData;
 import com.example.mywatchlist.data.StockName;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, BaseView{
     private RecyclerView recyclerView;
     private MyAdapter myAdapter;
-    private List<Quote> quoteList = new ArrayList<>();
+    private List<Stock> stockList = new ArrayList<>();
     private MainActivityPresenter mainActivityPresenter;
 
     @Override
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         recyclerView = findViewById(R.id.stockRecyclerView);
 
-        myAdapter = new MyAdapter(quoteList, this);
+        myAdapter = new MyAdapter(stockList, this);
         recyclerView.setAdapter(myAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
@@ -51,7 +51,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         StockName stockName = (StockName) intent.getSerializableExtra("SELECTED");
         if (stockName != null) {
             String selectedSymbol = stockName.getSymbol();
-            mainActivityPresenter.getStock(selectedSymbol);
+            mainActivityPresenter.getStockObject(selectedSymbol);
+//            mainActivityPresenter.getStock(selectedSymbol);
         }
     }
 
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         final int position = recyclerView.getChildLayoutPosition(v);
-        final Quote stock = quoteList.get(position);
+        final Stock stock = stockList.get(position);
 
         Intent intent = new Intent(this, DetailsActivity.class);
         intent.putExtra("SELECTEDSTOCK", stock);
@@ -85,9 +86,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void updateData(List<StockData> list) {
-        quoteList.clear();
+        stockList.clear();
         for (StockData data : list){
-            quoteList.add((Quote) data);
+            stockList.add((Stock) data);
         }
         myAdapter.notifyDataSetChanged();
     }

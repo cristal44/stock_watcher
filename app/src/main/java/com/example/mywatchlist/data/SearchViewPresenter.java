@@ -3,7 +3,6 @@ package com.example.mywatchlist.data;
 import com.example.mywatchlist.View.BaseView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -22,7 +21,7 @@ public class SearchViewPresenter implements PresenterBase {
     @Override
     public void getData() {
 
-        Call<List<StockName>> stockNameCall = StockSymbolClient.getSymbolRetrofit().create(StockDataAPI.class).getStockSymbolNameList();
+        Call<List<StockName>> stockNameCall = StockClient.getSymbolRetrofit().create(StockDataAPI.class).getStockSymbolNameList();
 
         stockNameCall.enqueue(new Callback<List<StockName>>() {
             @Override

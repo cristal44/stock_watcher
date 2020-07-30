@@ -1,82 +1,97 @@
 package com.example.mywatchlist.data;
 
 
-import java.io.Serializable;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+import java.util.List;
 import static android.graphics.Color.rgb;
 
-//
-//import com.google.gson.annotations.Expose;
-//import com.google.gson.annotations.SerializedName;
-//
-//public class Stock {
-//
-//    @SerializedName("quote")
-//    @Expose
-//    private Quote quote;
-//
-//    public Stock(Quote quote) {
-//        super();
-//        this.quote = quote;
-//    }
-//
-//    public Quote getQuote() {
-//        return quote;
-//    }
-//
-//    public void setQuote(Quote quote) {
-//        this.quote = quote;
-//    }
-//
-//}
+public class Stock implements StockData, Serializable{
 
-public class Stock implements Serializable {
-    private String symbol;
-    private double price;
-    private String companyName;
-    private double change;
-    private double percentage;
-    private String plusOrMinor;
-    private int color;
-    private double pe;
+    @SerializedName("quote")
+    @Expose
+    private Quote quote;
+    @SerializedName("chart")
+    @Expose
+    private List<Chart> chart = null;
+    @SerializedName("news")
+    @Expose
+    private List<News> news = null;
+    @SerializedName("company")
+    @Expose
+    private Company company;
+    @SerializedName("earnings")
+    @Expose
+    private Earnings earnings;
 
-    public Stock(String symbol, double price, String companyName, double change, double percentage) {
-        this.symbol = symbol;
-        this.price = price;
-        this.companyName = companyName;
-        this.change = change;
-        this.percentage = percentage;
-        this.pe = 20.44;
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public Stock() {
     }
 
-    public String getPe() {return String.format("%.2f",pe);
+    /**
+     *
+     * @param news
+     * @param earnings
+     * @param quote
+     * @param company
+     * @param chart
+     */
+    public Stock(Quote quote, List<Chart> chart, List<News> news, Company company, Earnings earnings) {
+        super();
+        this.quote = quote;
+        this.chart = chart;
+        this.news = news;
+        this.company = company;
+        this.earnings = earnings;
     }
 
-    public String getSymbol() {
-        return symbol;
+    public Quote getQuote() {
+        return quote;
     }
 
-    public String getPrice() {
-        return String.format("%.2f",price);
+    public void setQuote(Quote quote) {
+        this.quote = quote;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public List<Chart> getChart() {
+        return chart;
     }
 
-    public String getChange() {
-        return String.format("%.2f",change);
+    public void setChart(List<Chart> chart) {
+        this.chart = chart;
     }
 
-    public String getPercentage() {
-        return String.format("%.2f%%",percentage);
+    public List<News> getNews() {
+        return news;
     }
 
-    public String getPlusOrMinor() {
-        return plusOrMinor;
+    public void setNews(List<News> news) {
+        this.news = news;
     }
 
-    public int getColor() {
-        return color;
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Earnings getEarnings() {
+        return earnings;
+    }
+
+    public void setEarnings(Earnings earnings) {
+        this.earnings = earnings;
+    }
+
+    @Override
+    public void display() {
+
     }
 }

@@ -7,6 +7,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import com.example.mywatchlist.R;
 import com.example.mywatchlist.data.Quote;
+import com.example.mywatchlist.data.Stock;
 import com.example.mywatchlist.data.StockData;
 import com.google.android.material.tabs.TabLayout;
 import androidx.appcompat.app.ActionBar;
@@ -25,6 +26,7 @@ public class DetailsActivity extends AppCompatActivity implements BaseView{
     private ViewPager viewPager;
     private Toolbar toolbar;
     private TextView title;
+    private Stock stock;
 
     @SuppressLint("ResourceType")
     @Override
@@ -33,13 +35,13 @@ public class DetailsActivity extends AppCompatActivity implements BaseView{
         setContentView(R.layout.activity_details);
 
         Intent intent = getIntent();
-        Quote stock = (Quote) intent.getSerializableExtra("SELECTEDSTOCK");
+        stock = (Stock) intent.getSerializableExtra("SELECTEDSTOCK");
 
         init();
         setTabDivider();
         setupToolbar();
 
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),this,3);
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),this,3,stock);
         viewPager.setAdapter(sectionsPagerAdapter);
         tabs.setupWithViewPager(viewPager);
     }
@@ -64,7 +66,7 @@ public class DetailsActivity extends AppCompatActivity implements BaseView{
     }
 
     public void setupToolbar(){
-        title.setText("AAPL");
+        title.setText(stock.getQuote().getSymbol());
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         ActionBar ab = getSupportActionBar();
