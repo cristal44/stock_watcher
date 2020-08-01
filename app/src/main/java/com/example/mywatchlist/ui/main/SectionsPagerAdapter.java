@@ -1,6 +1,7 @@
 package com.example.mywatchlist.ui.main;
 
 import android.content.Context;
+import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -10,6 +11,9 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.mywatchlist.R;
 import com.example.mywatchlist.data.StockData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -22,12 +26,14 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private int numberOfTabs;
     private StockData stock;
 
+
     public SectionsPagerAdapter(FragmentManager fm, Context mContext, int numberOfTabs, StockData stock) {
         super(fm);
         this.numberOfTabs = numberOfTabs;
         this.mContext = mContext;
         this.stock = stock;
     }
+
 
 
     @Override

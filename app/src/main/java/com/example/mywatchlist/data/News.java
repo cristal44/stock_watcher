@@ -3,7 +3,9 @@ package com.example.mywatchlist.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class News {
+import java.io.Serializable;
+
+public class News implements Serializable {
 
     @SerializedName("datetime")
     @Expose

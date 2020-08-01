@@ -84,4 +84,8 @@ public class DetailsActivity extends AppCompatActivity implements BaseView{
     public void updateData(List<StockData> list) {
 
     }
+
+    public Stock getData(){
+        return stock;
+    }
 }

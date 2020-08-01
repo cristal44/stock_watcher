@@ -1,10 +1,11 @@
 package com.example.mywatchlist.data;
 
+import java.io.Serializable;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Earnings {
+public class Earnings implements Serializable {
 
     @SerializedName("symbol")
     @Expose

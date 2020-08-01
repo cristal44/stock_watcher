@@ -3,7 +3,9 @@ package com.example.mywatchlist.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Earning {
+import java.io.Serializable;
+
+public class Earning implements Serializable {
 
     @SerializedName("actualEPS")
     @Expose

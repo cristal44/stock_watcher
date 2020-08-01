@@ -60,7 +60,9 @@ public class SearchActivity extends AppCompatActivity implements BaseView{
                     adapter.filter("");
                     listView.clearTextFilter();
                 } else {
-                    adapter.filter(newText);
+                    if (adapter != null) {
+                        adapter.filter(newText);
+                    }
                 }
                 return true;
             }

@@ -2,85 +2,93 @@ package com.example.mywatchlist.ui.main;
 
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-
-//import com.example.mywatchlist.CompetitorAdapter;
+import android.widget.TextView;
 import com.example.mywatchlist.R;
+import com.example.mywatchlist.View.DetailsActivity;
 import com.example.mywatchlist.data.Stock;
-import com.example.mywatchlist.data.StockData;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 import static android.graphics.Color.rgb;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link OverviewFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class OverviewFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Stock stock;
+    private TextView companyName;
+    private TextView classType;
+    private TextView price;
+    private TextView change;
+    private TextView changePercent;
+    private TextView upOrDownArrow;
+    private TextView time;
+    private TextView open;
+    private TextView previousClose;
+    private TextView dayRange;
+    private TextView volume;
+    private TextView averageVolume;
+    private TextView last5dayChange;
+    private TextView last3MonthChange;
+    private TextView last1YearChange;
+    private TextView week52Range;
+    private TextView marketCap;
+    private TextView peRatio;
+    private TextView earningPerShare;
+    private TextView yield;
+    private TextView upEarningDate;
+    private TextView upEarningEstimate;
+    private TextView upEarningEstimateRange;
+    private TextView laEarningActual;
+    private TextView laEarningEstimate;
+    private TextView laEarning5D;
+    private TextView sector;
+    private TextView industry;
+    private TextView style;
+    private TextView employees;
+    private TextView founded;
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        DetailsActivity detailsActivity = (DetailsActivity)getActivity();
+        stock = detailsActivity.getData();
+        System.out.println("onActivityCreated000000000000");
+                display();
+    }
 
     public OverviewFragment() {
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment OverviewFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static OverviewFragment newInstance(String param1, String param2) {
-        OverviewFragment fragment = new OverviewFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
-
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        System.out.println("00000000000000onCreateView");
+
         View fragmentView = inflater.inflate(R.layout.fragment_overview, container, false);
 
+        init(fragmentView);
+
+//
         RelativeLayout overviewLayout = fragmentView.findViewById(R.id.overviewLayout);
         GradientDrawable backgroundGradient = (GradientDrawable) overviewLayout.getBackground();
         backgroundGradient.setColor(rgb(255,255,255));
@@ -112,6 +120,86 @@ public class OverviewFragment extends Fragment {
 
         // Inflate the layout for this fragment
         return fragmentView;
+    }
+
+
+    public void init(View fragmentView){
+        companyName = fragmentView.findViewById(R.id.overviewCompanyName);
+        price = fragmentView.findViewById(R.id.overviewPrice);
+        change = fragmentView.findViewById(R.id.overviewChange);
+        changePercent = fragmentView.findViewById(R.id.overviewPercentage);
+        upOrDownArrow = fragmentView.findViewById(R.id.overviewArrow);
+        time = fragmentView.findViewById(R.id.overviewDate);
+        open = fragmentView.findViewById(R.id.open);
+        previousClose = fragmentView.findViewById(R.id.previousClose);
+        dayRange = fragmentView.findViewById(R.id.dayRange);
+        volume = fragmentView.findViewById(R.id.volume);
+        averageVolume = fragmentView.findViewById(R.id.averageVolume);
+        last5dayChange = fragmentView.findViewById(R.id.day5Change);
+        last3MonthChange  = fragmentView.findViewById(R.id.mo3Change);
+        last1YearChange = fragmentView.findViewById(R.id.yearChange);
+        week52Range = fragmentView.findViewById(R.id.week52Range);
+        marketCap = fragmentView.findViewById(R.id.marketCap);
+        peRatio = fragmentView.findViewById(R.id.peRatio);
+        earningPerShare = fragmentView.findViewById(R.id.earningPerShare);
+        yield = fragmentView.findViewById(R.id.yield);
+        upEarningDate = fragmentView.findViewById(R.id.earningDate);
+        upEarningEstimate = fragmentView.findViewById(R.id.estimate);
+        upEarningEstimateRange = fragmentView.findViewById(R.id.estimateRange);
+        laEarningActual= fragmentView.findViewById(R.id.earningActual);
+        laEarningEstimate = fragmentView.findViewById(R.id.earningLatestEstimate);
+        laEarning5D = fragmentView.findViewById(R.id.d5change);
+        sector = fragmentView.findViewById(R.id.sector);
+        industry = fragmentView.findViewById(R.id.industry);
+        style = fragmentView.findViewById(R.id.style);
+        employees = fragmentView.findViewById(R.id.employee);
+        founded = fragmentView.findViewById(R.id.founded);
+    }
+
+    public void display(){
+
+        double pricechange = stock.getQuote().getChange();
+        String plusOrMinor = stock.getQuote().getChange() > 0 ? "+" : (stock.getQuote().getChange() < 0 ? "-" : "");
+
+        companyName.setText(stock.getQuote().getCompanyName());
+        price.setText(String.format("%.2f",stock.getQuote().getLatestPrice()));
+        change.setText(String.format("%s %.2f", plusOrMinor, stock.getQuote().getChange()));
+//        changePercent.setText(String.format("%s %s%", plusOrMinor, String.format("%.2f", stock.getQuote().getChangePercent() * 100)));
+        upOrDownArrow.setText(plusOrMinor.equals("+") ? "▲" : (plusOrMinor.equals("") ? "" : "▼"));
+        Date date = new Date((long) stock.getQuote().getLatestUpdate());
+
+        TimeZone timeZone = TimeZone.getTimeZone("US/Central");
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm MMM dd zzz");
+        format.setTimeZone(timeZone);
+
+        String dateTime = format.format(date);
+
+
+        time.setText(dateTime);
+//        open = fragmentView.findViewById(R.id.open);
+//        previousClose = fragmentView.findViewById(R.id.previousClose);
+//        dayRange = fragmentView.findViewById(R.id.dayRange);
+//        volume = fragmentView.findViewById(R.id.volume);
+//        averageVolume = fragmentView.findViewById(R.id.averageVolume);
+//        last5dayChange = fragmentView.findViewById(R.id.day5Change);
+//        last3MonthChange  = fragmentView.findViewById(R.id.mo3Change);
+//        last1YearChange = fragmentView.findViewById(R.id.yearChange);
+//        week52Range = fragmentView.findViewById(R.id.week52Range);
+//        marketCap = fragmentView.findViewById(R.id.marketCap);
+//        peRatio = fragmentView.findViewById(R.id.peRatio);
+//        earningPerShare = fragmentView.findViewById(R.id.earningPerShare);
+//        yield = fragmentView.findViewById(R.id.yield);
+//        upEarningDate = fragmentView.findViewById(R.id.earningDate);
+//        upEarningEstimate = fragmentView.findViewById(R.id.estimate);
+//        upEarningEstimateRange = fragmentView.findViewById(R.id.estimateRange);
+//        laEarningActual= fragmentView.findViewById(R.id.earningActual);
+//        laEarningEstimate = fragmentView.findViewById(R.id.earningLatestEstimate);
+//        laEarning5D = fragmentView.findViewById(R.id.d5change);
+//        sector = fragmentView.findViewById(R.id.sector);
+//        industry = fragmentView.findViewById(R.id.industry);
+//        style = fragmentView.findViewById(R.id.style);
+//        employees = fragmentView.findViewById(R.id.employee);
+//        founded = fragmentView.findViewById(R.id.founded);
     }
 
 //

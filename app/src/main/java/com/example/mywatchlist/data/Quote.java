@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 import static android.graphics.Color.rgb;
 
-public class Quote{
+public class Quote implements Serializable {
 
     @SerializedName("symbol")
     @Expose
