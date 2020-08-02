@@ -30,7 +30,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
-                    android:text="Facebook,Inc."
                     android:textSize="14dp" />
 
                 <TextView
@@ -41,7 +40,6 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="16dp"
                     android:gravity="bottom"
-                    android:text="158.91"
                     android:textColor="#000000"
                     android:textSize="28dp"
                     android:textStyle="bold" />
@@ -65,7 +63,6 @@
                     android:layout_below="@id/overviewPrice"
                     android:layout_marginLeft="16dp"
                     android:gravity="bottom"
-                    android:text="+ 0.60"
                     android:textColor="#000000"
                     android:textSize="18dp" />
 
@@ -77,7 +74,6 @@
                     android:layout_marginLeft="4dp"
                     android:layout_toRightOf="@+id/overviewChange"
                     android:gravity="bottom"
-                    android:text="(+ 2.04%)"
                     android:textSize="18dp" />
 
                 <TextView
@@ -88,7 +84,6 @@
                     android:layout_marginLeft="4dp"
                     android:layout_toRightOf="@+id/overviewPercentage"
                     android:gravity="bottom"
-                    android:text="▲"
                     android:textSize="18dp" />
 
                 <TextView
@@ -99,7 +94,6 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
                     android:gravity="bottom"
-                    android:text="14:37 APR 06 CST"
                     android:textSize="14dp" />
 
                 <GridLayout
@@ -148,7 +142,6 @@
                             android:layout_marginLeft="16dp"
                             android:layout_marginTop="4dp"
                             android:layout_marginRight="16dp"
-                            android:text="157.73"
                             android:textColor="#000000"
                             android:textSize="16dp" />
                     </LinearLayout>
@@ -188,7 +181,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:layout_marginLeft="16dp"
-                            android:text="382.48B"
                             android:textColor="#000000"
                             android:textSize="16dp" />
 
@@ -228,12 +220,15 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="16dp"
-                            android:layout_marginTop="4dp"
+                            android:layout_marginTop="8dp"
                             android:layout_marginRight="16dp"
                             android:maxLines="1"
-                            android:text="157.05 - 161.42"
                             android:textColor="#000000"
-                            android:textSize="16dp" />
+                            android:layout_gravity="bottom"
+                            android:autoSizeTextType="uniform"
+                            android:autoSizeMinTextSize="4dp"
+                            android:autoSizeMaxTextSize="16dp"
+                            android:autoSizeStepGranularity="2dp"/>
                     </LinearLayout>
 
 
@@ -272,7 +267,6 @@
                             android:layout_marginTop="4dp"
                             android:layout_marginRight="16dp"
                             android:maxLines="1"
-                            android:text="123.4M"
                             android:textColor="#000000"
                             android:textSize="16dp" />
                     </LinearLayout>
@@ -313,7 +307,6 @@
                             android:layout_marginTop="4dp"
                             android:layout_marginRight="16dp"
                             android:maxLines="1"
-                            android:text="123.4M"
                             android:textColor="#000000"
                             android:textSize="16dp" />
                     </LinearLayout>
@@ -362,7 +355,6 @@
                             android:layout_marginTop="4dp"
                             android:layout_marginRight="16dp"
                             android:maxLines="1"
-                            android:text="- 13.23%"
                             android:textColor="#000000"
                             android:textSize="16dp" />
                     </LinearLayout>
@@ -402,7 +394,6 @@
                             android:layout_marginTop="4dp"
                             android:layout_marginRight="16dp"
                             android:maxLines="1"
-                            android:text="- 13.23%"
                             android:textColor="#000000"
                             android:textSize="16dp" />
                     </LinearLayout>
@@ -443,7 +434,6 @@
                             android:layout_marginTop="4dp"
                             android:layout_marginRight="16dp"
                             android:maxLines="1"
-                            android:text="- 13.23%"
                             android:textColor="#000000"
                             android:textSize="16dp" />
                     </LinearLayout>
@@ -493,7 +483,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="16dp"
-                        android:text="52 Weeks Range"
                         android:textAlignment="textEnd"
                         android:textColor="#000000"
                         android:textSize="16dp" />
@@ -526,7 +515,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="16dp"
-                        android:text="382.48B"
                         android:textAlignment="textEnd"
                         android:textColor="#000000"
                         android:textSize="16dp" />
@@ -560,7 +548,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="16dp"
-                        android:text="382.48B"
                         android:textAlignment="textEnd"
                         android:textColor="#000000"
                         android:textSize="16dp" />
@@ -593,7 +580,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="16dp"
-                        android:text="382.48B"
                         android:textAlignment="textEnd"
                         android:textColor="#000000"
                         android:textSize="16dp" />
@@ -627,8 +613,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="16dp"
-
-                        android:text="382.48B"
                         android:textAlignment="textEnd"
                         android:textColor="#000000"
                         android:textSize="16dp" />
@@ -708,7 +692,6 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="4dp"
                         android:layout_marginRight="16dp"
-                        android:text="04/25"
                         android:textColor="#000000"
                         android:textSize="16dp" />
 
@@ -759,7 +742,6 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="4dp"
                         android:layout_marginRight="16dp"
-                        android:text="1.36"
                         android:textColor="#000000"
                         android:textSize="16dp" />
                 </LinearLayout>
@@ -797,7 +779,6 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="4dp"
                         android:layout_marginRight="16dp"
-                        android:text="1.07 - 1.58"
                         android:textColor="#000000"
                         android:textSize="16dp" />
                 </LinearLayout>
@@ -849,7 +830,6 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="4dp"
                         android:layout_marginRight="16dp"
-                        android:text="1.44"
                         android:textColor="#000000"
                         android:textSize="16dp" />
                 </LinearLayout>
@@ -886,7 +866,6 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="4dp"
                         android:layout_marginRight="16dp"
-                        android:text="1.36"
                         android:textColor="#000000"
                         android:textSize="16dp" />
                 </LinearLayout>
@@ -898,6 +877,7 @@
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
                     android:layout_marginTop="4dp"
+                    android:layout_marginBottom="16dp"
                     android:orientation="vertical">
 
                     <View
@@ -925,93 +905,92 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="4dp"
                         android:layout_marginRight="16dp"
-                        android:text="-9.72%"
                         android:textColor="#000000"
                         android:textSize="16dp" />
                 </LinearLayout>
 
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_columnSpan="3"
-                    android:layout_gravity="fill"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="Earnings History"
-                    android:textSize="16dp"
-                    android:textColor="#000000"
-                    android:textStyle="bold"/>
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_columnSpan="3"-->
+<!--                    android:layout_gravity="fill"-->
+<!--                    android:layout_marginLeft="16dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_marginBottom="8dp"-->
+<!--                    android:text="Earnings History"-->
+<!--                    android:textSize="16dp"-->
+<!--                    android:textColor="#000000"-->
+<!--                    android:textStyle="bold"/>-->
 
 
 
             </GridLayout>
 
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="8dp"
-                android:text="COMPETITORS"
-                android:textAlignment="textStart"
-                android:textSize="12dp"
-                android:textStyle="bold" />
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="16dp"-->
+<!--                android:layout_marginTop="8dp"-->
+<!--                android:layout_marginRight="16dp"-->
+<!--                android:layout_marginBottom="8dp"-->
+<!--                android:text="COMPETITORS"-->
+<!--                android:textAlignment="textStart"-->
+<!--                android:textSize="12dp"-->
+<!--                android:textStyle="bold" />-->
 
 
 
-            <RelativeLayout
-                android:id="@+id/competitorLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:background="@drawable/custom_rounded_corners">
+<!--            <RelativeLayout-->
+<!--                android:id="@+id/competitorLayout"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="16dp"-->
+<!--                android:layout_marginRight="16dp"-->
+<!--                android:background="@drawable/custom_rounded_corners">-->
 
-                <TextView
-                    android:id="@+id/tickerTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Ticker"
-                    android:textSize="14dp"
-                    android:textStyle="bold"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/tickerTitle"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="16dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:text="Ticker"-->
+<!--                    android:textSize="14dp"-->
+<!--                    android:textStyle="bold"/>-->
 
-                <TextView
-                    android:id="@+id/peTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="100dp"
-                    android:layout_marginTop="16dp"
-                    android:text="P/E"
-                    android:textSize="14dp"
-                    android:textStyle="bold"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/peTitle"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:layout_marginRight="100dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:text="P/E"-->
+<!--                    android:textSize="14dp"-->
+<!--                    android:textStyle="bold"/>-->
 
-                <TextView
-                    android:id="@+id/textView22"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="% Change"
-                    android:textSize="14dp"
-                    android:textStyle="bold"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/textView22"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:layout_marginRight="16dp"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:text="% Change"-->
+<!--                    android:textSize="14dp"-->
+<!--                    android:textStyle="bold"/>-->
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/competitorRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/tickerTitle"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp" />
-            </RelativeLayout>
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/competitorRecyclerView"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_below="@+id/tickerTitle"-->
+<!--                    android:layout_marginLeft="16dp"-->
+<!--                    android:layout_marginRight="16dp" />-->
+<!--            </RelativeLayout>-->
 
             <TextView
                 android:layout_width="match_parent"
@@ -1172,11 +1151,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
-                        android:text="Founded"
+                        android:text="CEO"
                         android:textSize="16dp" />
 
                     <TextView
-                        android:id="@+id/founded"
+                        android:id="@+id/ceo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="16dp"
