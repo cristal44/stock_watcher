@@ -10,10 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".DisplayNewsActivity"></activity>
         <activity
             android:name=".View.SearchActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".View.MainActivity"></activity>
+            android:parentActivityName=".View.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".View.DetailsActivity"
             android:parentActivityName=".View.MainActivity"

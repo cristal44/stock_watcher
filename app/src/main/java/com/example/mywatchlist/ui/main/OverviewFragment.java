@@ -2,13 +2,8 @@ package com.example.mywatchlist.ui.main;
 
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,20 +11,16 @@ import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.example.mywatchlist.R;
 import com.example.mywatchlist.View.DetailsActivity;
 import com.example.mywatchlist.data.Stock;
-
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
-
 import static android.graphics.Color.rgb;
 
 public class OverviewFragment extends Fragment {
-
 
     private Stock stock;
     private TextView companyName;

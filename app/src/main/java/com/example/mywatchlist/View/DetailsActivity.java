@@ -6,7 +6,6 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import com.example.mywatchlist.R;
-import com.example.mywatchlist.data.Quote;
 import com.example.mywatchlist.data.Stock;
 import com.example.mywatchlist.data.StockData;
 import com.google.android.material.tabs.TabLayout;
