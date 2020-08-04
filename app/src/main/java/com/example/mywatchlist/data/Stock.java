@@ -26,28 +26,21 @@ public class Stock implements StockData, Serializable{
     @Expose
     private Earnings earnings;
 
-    /**
-     * No args constructor for use in serialization
-     *
-     */
+    @SerializedName("stats")
+    @Expose
+    private Stats stats;
+
     public Stock() {
     }
 
-    /**
-     *
-     * @param news
-     * @param earnings
-     * @param quote
-     * @param company
-     * @param chart
-     */
-    public Stock(Quote quote, List<Chart> chart, List<News> news, Company company, Earnings earnings) {
+    public Stock(Quote quote, List<Chart> chart, List<News> news, Company company, Earnings earnings, Stats stats) {
         super();
         this.quote = quote;
         this.chart = chart;
         this.news = news;
         this.company = company;
         this.earnings = earnings;
+        this.stats = stats;
     }
 
     public Quote getQuote() {
@@ -88,6 +81,10 @@ public class Stock implements StockData, Serializable{
 
     public void setEarnings(Earnings earnings) {
         this.earnings = earnings;
+    }
+
+    public Stats getStats() {
+        return stats;
     }
 
     @Override

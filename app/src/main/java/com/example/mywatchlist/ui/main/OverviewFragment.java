@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.example.mywatchlist.R;
+import com.example.mywatchlist.Utils;
 import com.example.mywatchlist.View.DetailsActivity;
 import com.example.mywatchlist.data.Stock;
 import java.text.DecimalFormat;
@@ -41,8 +42,8 @@ public class OverviewFragment extends Fragment {
     private TextView week52Range;
     private TextView marketCap;
     private TextView peRatio;
-    private TextView earningPerShare;
-    private TextView yield;
+    private TextView sharesOutstanding;
+    private TextView beta;
     private TextView upEarningDate;
     private TextView upEarningEstimate;
     private TextView upEarningEstimateRange;
@@ -80,7 +81,6 @@ public class OverviewFragment extends Fragment {
 
         init(fragmentView);
 
-//
         RelativeLayout overviewLayout = fragmentView.findViewById(R.id.overviewLayout);
         GradientDrawable backgroundGradient = (GradientDrawable) overviewLayout.getBackground();
         backgroundGradient.setColor(rgb(255, 255, 255));
@@ -133,8 +133,8 @@ public class OverviewFragment extends Fragment {
         week52Range = fragmentView.findViewById(R.id.week52Range);
         marketCap = fragmentView.findViewById(R.id.marketCap);
         peRatio = fragmentView.findViewById(R.id.peRatio);
-        earningPerShare = fragmentView.findViewById(R.id.earningPerShare);
-        yield = fragmentView.findViewById(R.id.yield);
+        sharesOutstanding = fragmentView.findViewById(R.id.sharesOutstanding);
+        beta = fragmentView.findViewById(R.id.beta);
         upEarningDate = fragmentView.findViewById(R.id.earningDate);
         upEarningEstimate = fragmentView.findViewById(R.id.estimate);
         upEarningEstimateRange = fragmentView.findViewById(R.id.estimateRange);
@@ -149,16 +149,20 @@ public class OverviewFragment extends Fragment {
     }
 
     public void display() {
-        String plusOrMinor = stock.getQuote().getChange() > 0 ? "+" : (stock.getQuote().getChange() < 0 ? "-" : "");
-
         companyName.setText(stock.getQuote().getCompanyName());
         price.setText(String.format("%.2f", stock.getQuote().getLatestPrice()));
-        change.setText(String.format("%s %.2f", plusOrMinor, stock.getQuote().getChange()));
-//        changePercent.setText(String.format("%s %s%", plusOrMinor, String.format("%.2f", stock.getQuote().getChangePercent() * 100)));
-        upOrDownArrow.setText(plusOrMinor.equals("+") ? "▲" : (plusOrMinor.equals("") ? "" : "▼"));
 
+        double stockChange = stock.getQuote().getChange();
 
-//        Date date = new Date((long) stock.getQuote().getLatestUpdate());
+        change.setText(String.format("%s %.2f", Utils.getPlusOrMinors(stockChange), Math.abs(stockChange)));
+        change.setTextColor(Utils.getColor(stockChange));
+
+        changePercent.setText(String.format("(%s %.2f%%)", Utils.getPlusOrMinors(stockChange),Math.abs(stock.getQuote().getChangePercent() * 100)));
+        changePercent.setTextColor(Utils.getColor(stockChange));
+
+        upOrDownArrow.setText(Utils.getUpOrDownArrow(stockChange));
+        upOrDownArrow.setTextColor(Utils.getColor(stockChange));
+
         TimeZone timeZone = TimeZone.getTimeZone("US/Central");
         SimpleDateFormat format = new SimpleDateFormat("HH:mm MMM dd zzz");
         format.setTimeZone(timeZone);
@@ -173,14 +177,28 @@ public class OverviewFragment extends Fragment {
         dayRange.setText(String.format("%.2f - %.2f", stock.getQuote().getHigh(), stock.getQuote().getLow()));
         volume.setText(formatValue(stock.getQuote().getVolume()));
         averageVolume.setText(formatValue(stock.getQuote().getAvgTotalVolume()));
-        last5dayChange.setText("–");
-        last3MonthChange.setText("–");
-        last1YearChange.setText(String.format("%s %.2f%%", plusOrMinor, stock.getQuote().getYtdChange()));
+
+
+        double d5Change = stock.getStats().getDay5ChangePercent();
+        last5dayChange.setText(String.format("%s %.2f%%", Utils.getPlusOrMinors(d5Change), Math.abs(d5Change)));
+        last5dayChange.setTextColor(Utils.getColor(d5Change));
+
+
+
+        double m6Change = stock.getStats().getMonth6ChangePercent();
+        last3MonthChange.setText(String.format("%s %.2f%%", Utils.getPlusOrMinors(m6Change), Math.abs(m6Change)));
+        last3MonthChange.setTextColor(Utils.getColor(m6Change));
+
+        double yearChange = stock.getStats().getYear1ChangePercent();
+        last1YearChange.setText(String.format("%s %.2f%%", Utils.getPlusOrMinors(yearChange), Math.abs(yearChange)));
+        last1YearChange.setTextColor(Utils.getColor(yearChange));
+
         week52Range.setText(String.format("%.2f - %.2f", stock.getQuote().getWeek52Low(), stock.getQuote().getWeek52High()));
         marketCap.setText(formatValue(stock.getQuote().getMarketCap()));
         peRatio.setText(String.format("%.2f", stock.getQuote().getPeRatio()));
-        earningPerShare.setText("–");
-        yield.setText("–");
+        sharesOutstanding.setText(formatValue(stock.getStats().getSharesOutstanding()));
+
+        beta.setText(String.format("%.2f",stock.getStats().getBeta()));
         upEarningDate.setText("–");
         upEarningEstimate.setText("–");
         upEarningEstimateRange.setText("–");

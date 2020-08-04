@@ -8,37 +8,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.mywatchlist.View.MainActivity;
-import com.example.mywatchlist.data.Quote;
 import com.example.mywatchlist.data.Stock;
-
 import java.util.List;
-import static android.graphics.Color.rgb;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     private List<Stock> stockList;
     private MainActivity mainActivity;
-
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView stockSymbol;
-        TextView stockPrice;
-        TextView stockChange;
-        TextView stockPercentage;
-        TextView stockCompanyName;
-        TextView stockPlusOrMinor;
-        View viewColor;
-
-        public MyViewHolder(@NonNull View itemView) {
-            super(itemView);
-            stockSymbol = itemView.findViewById(R.id.symbol);
-            stockPrice = itemView.findViewById(R.id.price);
-            stockChange = itemView.findViewById(R.id.change);
-            stockPercentage = itemView.findViewById(R.id.percentage);
-            stockCompanyName = itemView.findViewById(R.id.name);
-            stockPlusOrMinor = itemView.findViewById(R.id.plusOrMinus);
-            viewColor = itemView.findViewById(R.id.view);
-        }
-    }
 
     public MyAdapter(List<Stock> stockList, MainActivity mainActivity) {
         this.stockList = stockList;
@@ -66,30 +42,37 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         double percent = Math.abs(stock.getQuote().getChangePercent() * 100);
         String percentString = String.format("%.2f", percent) + "%";
         holder.stockPercentage.setText(percentString);
-
-        String plusOrMinor;
-        int color;
-
-        if (change > 0){
-            color = rgb(15,157,88);
-            plusOrMinor = "+";
-        } else if (change < 0){
-            color = rgb(219,68,55);
-            plusOrMinor = "–";
-        } else{
-            color = rgb(171,171,171);
-            plusOrMinor = "";
-        }
-        holder.stockPlusOrMinor.setText(plusOrMinor);
+        holder.stockPlusOrMinor.setText(Utils.getPlusOrMinors(change));
 
         holder.viewColor.setBackgroundResource(R.drawable.custom_rounded_corners);
         GradientDrawable drawable = (GradientDrawable) holder.viewColor.getBackground();
-        drawable.setColor(color);
-
+        drawable.setColor(Utils.getColor(change));
     }
 
     @Override
     public int getItemCount() {
         return stockList.size();
+    }
+
+
+    public static class MyViewHolder extends RecyclerView.ViewHolder{
+        TextView stockSymbol;
+        TextView stockPrice;
+        TextView stockChange;
+        TextView stockPercentage;
+        TextView stockCompanyName;
+        TextView stockPlusOrMinor;
+        View viewColor;
+
+        public MyViewHolder(@NonNull View itemView) {
+            super(itemView);
+            stockSymbol = itemView.findViewById(R.id.symbol);
+            stockPrice = itemView.findViewById(R.id.price);
+            stockChange = itemView.findViewById(R.id.change);
+            stockPercentage = itemView.findViewById(R.id.percentage);
+            stockCompanyName = itemView.findViewById(R.id.name);
+            stockPlusOrMinor = itemView.findViewById(R.id.plusOrMinus);
+            viewColor = itemView.findViewById(R.id.view);
+        }
     }
 }

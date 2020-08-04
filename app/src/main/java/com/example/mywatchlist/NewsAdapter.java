@@ -1,6 +1,5 @@
 package com.example.mywatchlist;
 
-import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,49 +7,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.mywatchlist.View.MainActivity;
 import com.example.mywatchlist.data.News;
-import com.example.mywatchlist.data.Quote;
-import com.example.mywatchlist.data.Stock;
 import com.example.mywatchlist.ui.main.NewsFragment;
-import com.example.mywatchlist.ui.main.OverviewFragment;
 import com.squareup.picasso.Picasso;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
-import static android.graphics.Color.rgb;
-
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyNewsViewHolder> {
-
     private List<News> newsList;
     private NewsFragment newsFragment;
 
-
     public NewsAdapter(List<News> newsList, NewsFragment newsFragment) {
-
         this.newsList = newsList;
         this.newsFragment = newsFragment;
     }
-
-
-    public static class MyNewsViewHolder extends RecyclerView.ViewHolder{
-        TextView title;
-        TextView source;
-        TextView date;
-        ImageView newsImage;
-
-        public MyNewsViewHolder(@NonNull View itemView) {
-            super(itemView);
-            title = itemView.findViewById(R.id.newsTitle);
-            source = itemView.findViewById(R.id.newsSource);
-            date = itemView.findViewById(R.id.newsDate);
-            newsImage = itemView.findViewById(R.id.newsImage);
-        }
-    }
-
 
     @NonNull
     @Override
@@ -78,5 +50,21 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyNewsViewHold
     @Override
     public int getItemCount() {
         return newsList.size();
+    }
+
+
+    public static class MyNewsViewHolder extends RecyclerView.ViewHolder{
+        TextView title;
+        TextView source;
+        TextView date;
+        ImageView newsImage;
+
+        public MyNewsViewHolder(@NonNull View itemView) {
+            super(itemView);
+            title = itemView.findViewById(R.id.newsTitle);
+            source = itemView.findViewById(R.id.newsSource);
+            date = itemView.findViewById(R.id.newsDate);
+            newsImage = itemView.findViewById(R.id.newsImage);
+        }
     }
 }

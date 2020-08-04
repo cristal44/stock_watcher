@@ -1,11 +1,14 @@
 package com.example.mywatchlist.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,8 +27,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, BaseView{
     private RecyclerView recyclerView;
     private MyAdapter myAdapter;
-    private List<Stock> stockList = new ArrayList<>();
+    private static List<Stock> stockList = new ArrayList<>();
     private MainActivityPresenter mainActivityPresenter;
+    private String selectedSymbol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +54,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = getIntent();
         StockName stockName = (StockName) intent.getSerializableExtra("SELECTED");
         if (stockName != null) {
-            String selectedSymbol = stockName.getSymbol();
+            selectedSymbol = stockName.getSymbol();
             mainActivityPresenter.getStockObject(selectedSymbol);
-//            mainActivityPresenter.getStock(selectedSymbol);
         }
     }
 
@@ -95,6 +98,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void display() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Duplicate Symbol")
+                .setMessage(selectedSymbol + " has been in the Watchlist")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+        builder.show();
+    }
+
+    public void displayAlertDialog(){
+
 
     }
 }

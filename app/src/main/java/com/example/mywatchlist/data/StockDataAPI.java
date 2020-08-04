@@ -17,6 +17,6 @@ public interface StockDataAPI {
     @GET("stock/{symbol}/quote")
     Call<Quote> getQuote(@Path("symbol") String symbol, @Query("token") String token);
 
-    @GET("stock/{symbol}/batch?types=quote,chart,news,company,earnings&period=annual")
+    @GET("stock/{symbol}/batch?types=quote,chart,news,company,stats,earnings&period=annual")
     Call<Stock> getStock(@Path("symbol") String symbol, @Query("token") String token);
 }

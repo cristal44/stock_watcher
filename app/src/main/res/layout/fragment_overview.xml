@@ -572,11 +572,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
-                        android:text="Earrings per Share"
+                        android:text="Shares Outstanding"
                         android:textSize="16dp" />
 
                     <TextView
-                        android:id="@+id/earningPerShare"
+                        android:id="@+id/sharesOutstanding"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="16dp"
@@ -605,11 +605,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
-                        android:text="Yield%"
+                        android:text="Beta"
                         android:textSize="16dp" />
 
                     <TextView
-                        android:id="@+id/yield"
+                        android:id="@+id/beta"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="16dp"

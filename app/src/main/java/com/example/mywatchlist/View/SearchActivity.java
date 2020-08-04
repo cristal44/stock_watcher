@@ -21,7 +21,7 @@ import static android.graphics.Color.rgb;
 public class SearchActivity extends AppCompatActivity implements BaseView{
     private ListView listView;
     private ListViewAdapter adapter;
-    List<StockName> arrayList = new ArrayList<>();
+    private List<StockName> arrayList = new ArrayList<>();
     private SearchView searchView;
     private Toolbar toolbar;
 
@@ -33,15 +33,26 @@ public class SearchActivity extends AppCompatActivity implements BaseView{
         PresenterBase presenterBase = new SearchViewPresenter(this);
         presenterBase.getData();
 
+        init();
         setToolbar();
-
-        listView = findViewById(R.id.listView);
-
         setSearchView();
     }
 
-    private void setSearchView() {
+    private void init() {
+        toolbar = findViewById(R.id.toolbar2);
+        listView = findViewById(R.id.listView);
         searchView = findViewById(R.id.searchView);
+    }
+
+    private void setToolbar() {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.getNavigationIcon().setColorFilter(rgb(15,157,88), PorterDuff.Mode.SRC_ATOP);
+//        toolbar.setNavigationIcon(R.drawable.ic_back);
+    }
+
+    private void setSearchView() {
         GradientDrawable backgroundGradient = (GradientDrawable) searchView.getBackground();
         backgroundGradient.setColor(rgb(255,255,255));
 
@@ -69,14 +80,6 @@ public class SearchActivity extends AppCompatActivity implements BaseView{
         });
     }
 
-    private void setToolbar() {
-        toolbar = findViewById(R.id.toolbar2);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.getNavigationIcon().setColorFilter(rgb(15,157,88), PorterDuff.Mode.SRC_ATOP);
-        toolbar.setNavigationIcon(R.drawable.ic_back);
-    }
 
     @Override
     public void display() {
