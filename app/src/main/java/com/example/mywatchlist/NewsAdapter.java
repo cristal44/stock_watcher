@@ -43,7 +43,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyNewsViewHold
         format.setTimeZone(timeZone);
 
         holder.date.setText(format.format(new Date((long) news.getDatetime())));
-        Picasso.get().load(news.getImage()).into(holder.newsImage);
+        Picasso.get().load(news.getImage()).resize(200, 200).into(holder.newsImage);
     }
 
 
