@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Chart implements Serializable {
+public class Chart implements Serializable ,StockData{
 
     @SerializedName("date")
     @Expose
@@ -210,4 +210,8 @@ public class Chart implements Serializable {
         this.changeOverTime = changeOverTime;
     }
 
+    @Override
+    public void display() {
+
+    }
 }
