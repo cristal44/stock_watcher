@@ -17,14 +17,14 @@ public interface StockDataAPI {
 //    @GET("stock/{symbol}/quote")
 //    Call<Quote> getQuote(@Path("symbol") String symbol, @Query("token") String token);
 
-    @GET("stock/{symbol}/batch?types=quote,chart,news,company,stats,earnings&period=annual")
+    @GET("stock/{symbol}/batch?types=quote,news,company,stats,earnings&period=annual")
     Call<Stock> getStock(@Path("symbol") String symbol, @Query("token") String token);
 
 
     @GET("stock/{symbol}/chart/{range}")
-    Call<Charts> getChart(@Path("symbol") String symbol, @Path("range") String range, @Query("token") String token);
+    Call<List<Data>>  getChart(@Path("symbol") String symbol, @Path("range") String range, @Query("token") String token);
 
 
-    @GET("stock/{symbol}/chart/today")
-    Call<List<Data>> getTodayChart(@Path("symbol") String symbol, @Query("token") String token);
+    @GET("stock/{symbol}/chart/dynamic")
+    Call<Charts> getTodayChart(@Path("symbol") String symbol, @Query("token") String token);
 }

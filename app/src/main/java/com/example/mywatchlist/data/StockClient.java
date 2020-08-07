@@ -24,7 +24,7 @@ public class StockClient {
     public static Retrofit getStockRetrofit(){
         if (stockRetrofit == null){
             stockRetrofit = new Retrofit.Builder()
-                    .baseUrl("https://cloud.iexapis.com/stable/")
+                    .baseUrl("https://sandbox.iexapis.com/stable/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

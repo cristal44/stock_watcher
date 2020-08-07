@@ -3,7 +3,7 @@ package com.example.mywatchlist.data;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Data {
+public class Data implements StockData {
     @SerializedName("date")
     @Expose
     public String date;
@@ -32,5 +32,10 @@ public class Data {
 
     public float getHigh() {
         return high;
+    }
+
+    @Override
+    public void display() {
+
     }
 }

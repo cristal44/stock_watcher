@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Charts {
+public class Charts implements StockData {
 
     @SerializedName("range")
     @Expose
@@ -20,5 +20,10 @@ public class Charts {
 
     public List<Data> getData() {
         return data;
+    }
+
+    @Override
+    public void display() {
+
     }
 }

@@ -17,11 +17,12 @@ public class MainActivityPresenter {
     }
 
     public void getStockObject(String symbol) {
-        Call<Stock> quoteCall = StockClient.getStockRetrofit().create(StockDataAPI.class).getStock(symbol, "pk_21c2a832de954d13b6ccdf397b29a341");
+        Call<Stock> quoteCall = StockClient.getStockRetrofit().create(StockDataAPI.class).getStock(symbol, "Tsk_c0c5eca3abc64defb30295bb4ed704a7");
         quoteCall.enqueue(new Callback<Stock>() {
             @Override
             public void onResponse(Call<Stock> call, Response<Stock> response) {
                 if (response.isSuccessful()) {
+
                     Stock stock = response.body();
 
                     for (int i = 0; i < stocks.size(); i++) {
