@@ -36,6 +36,7 @@ import com.github.mikephil.charting.listener.BarLineChartTouchListener;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.listener.OnDrawLineChartTouchListener;
 import com.github.mikephil.charting.renderer.LineChartRenderer;
 import com.github.mikephil.charting.utils.MPPointD;
 import com.github.mikephil.charting.utils.ViewPortHandler;
@@ -55,7 +56,7 @@ import static android.graphics.Color.WHITE;
 import static android.graphics.Color.rgb;
 
 
-public class ChartFragment extends Fragment implements BaseView,OnChartValueSelectedListener {
+public class ChartFragment extends Fragment implements BaseView,OnChartValueSelectedListener, View.OnTouchListener , View.OnClickListener{
 
     private Stock stock;
 
@@ -63,28 +64,22 @@ public class ChartFragment extends Fragment implements BaseView,OnChartValueSele
     private int filledDownColor = Color.argb(150,219,68,55);
 
     private LineChart lineChart;
-
-    private TextView day1, day5, month1, month6, year1, all, chartOpen, chartClose, chartHigh, chartLow, chartVolume, chartAverageVolume ,chartTime;
-
-    private String symbol;
-
-    private ChartPresenter chartPresenter;
-
     private XAxis xAxis;
-
-    private List<StockData> dataList = new ArrayList<>();
+    private TextView day1, day5, month1, month6, year1, all, chartOpen, chartClose, chartHigh, chartLow, chartVolume, chartAverageVolume ,chartTime;
+    private String symbol;
     private String clickTextView = "";
-
-
+    private ChartPresenter chartPresenter;
+    private List<StockData> dataList = new ArrayList<>();
     private Map<Entry, Data> map = new HashMap<>();
+    private Highlight highlight;
 
+    private boolean isPress = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         chartPresenter = new ChartPresenter(this);
-
         DetailsActivity detailsActivity = (DetailsActivity) getActivity();
         stock = detailsActivity.getData();
         symbol = stock.getQuote().getSymbol();
@@ -93,7 +88,6 @@ public class ChartFragment extends Fragment implements BaseView,OnChartValueSele
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View fragmentView = inflater.inflate(R.layout.fragment_chart, container, false);
         inti(fragmentView);
         intiChart();
@@ -106,7 +100,7 @@ public class ChartFragment extends Fragment implements BaseView,OnChartValueSele
         day1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                restoreBackGroundColor(clickTextView);
+                restoreTextViewBackGroundColor(clickTextView);
                 day1.setBackgroundColor(GRAY);
                 day1.setTextColor(WHITE);
                 clickTextView = day1.getText().toString();
@@ -117,7 +111,7 @@ public class ChartFragment extends Fragment implements BaseView,OnChartValueSele
         day5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                restoreBackGroundColor(clickTextView);
+                restoreTextViewBackGroundColor(clickTextView);
                 day5.setBackgroundColor(GRAY);
                 day5.setTextColor(WHITE);
                 clickTextView = day5.getText().toString();
@@ -129,7 +123,7 @@ public class ChartFragment extends Fragment implements BaseView,OnChartValueSele
         month1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                restoreBackGroundColor(clickTextView);
+                restoreTextViewBackGroundColor(clickTextView);
                 month1.setBackgroundColor(GRAY);
                 month1.setTextColor(WHITE);
                 clickTextView = month1.getText().toString();
@@ -141,7 +135,7 @@ public class ChartFragment extends Fragment implements BaseView,OnChartValueSele
         month6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                restoreBackGroundColor(clickTextView);
+                restoreTextViewBackGroundColor(clickTextView);
                 month6.setBackgroundColor(GRAY);
                 month6.setTextColor(WHITE);
                 clickTextView = month6.getText().toString();
@@ -153,7 +147,7 @@ public class ChartFragment extends Fragment implements BaseView,OnChartValueSele
         year1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                restoreBackGroundColor(clickTextView);
+                restoreTextViewBackGroundColor(clickTextView);
                 year1.setBackgroundColor(GRAY);
                 year1.setTextColor(WHITE);
                 clickTextView = year1.getText().toString();
@@ -165,7 +159,7 @@ public class ChartFragment extends Fragment implements BaseView,OnChartValueSele
         all.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                restoreBackGroundColor(clickTextView);
+                restoreTextViewBackGroundColor(clickTextView);
                 all.setBackgroundColor(GRAY);
                 all.setTextColor(WHITE);
                 clickTextView = all.getText().toString();
@@ -180,6 +174,7 @@ public class ChartFragment extends Fragment implements BaseView,OnChartValueSele
         lineChart.setScaleEnabled(true);
         lineChart.setDrawBorders(false);
         lineChart.setOnChartValueSelectedListener(this);
+        lineChart.setOnTouchListener(this);
 
         Legend legend = lineChart.getLegend();
         legend.setEnabled(false);
@@ -201,7 +196,8 @@ public class ChartFragment extends Fragment implements BaseView,OnChartValueSele
         rightAxis.setLabelCount(4);
         rightAxis.setDrawAxisLine(true);
 
-        setData(dataList);
+//        setData(dataList);
+        setData();
     }
 
     private void inti(View fragmentView) {
@@ -236,7 +232,7 @@ public class ChartFragment extends Fragment implements BaseView,OnChartValueSele
     }
 
 
-    public void restoreBackGroundColor(String text){
+    public void restoreTextViewBackGroundColor(String text){
         if (text.equals(day1.getText().toString())){
             day1.setBackgroundColor(WHITE);
             day1.setTextColor(GRAY);
@@ -266,11 +262,10 @@ public class ChartFragment extends Fragment implements BaseView,OnChartValueSele
             all.setBackgroundColor(WHITE);
             all.setTextColor(GRAY);
         }
-
     }
 
 
-    public String getLabel(Data data){
+    public String getXValue(Data data){
 
         if (clickTextView.equals(day1.getText().toString())){
             return data.getMinute();
@@ -284,7 +279,6 @@ public class ChartFragment extends Fragment implements BaseView,OnChartValueSele
             return data.getLabel().split(" ")[0];
         }
 
-
         if (clickTextView.equals(all.getText().toString())){
             return data.getDate().split(",")[1];
         }
@@ -294,25 +288,68 @@ public class ChartFragment extends Fragment implements BaseView,OnChartValueSele
     }
 
 
-    private void setData(List<StockData> dataList) {
+//    private void setData(List<StockData> dataList) {
+//
+//        ArrayList<String> xAxisValues = new ArrayList<>();
+//        ArrayList<Entry> yValues = new ArrayList<>();
+//
+//        for (int i = 0; i < dataList.size(); i++) {
+//            Data data = (Data) dataList.get(i);
+//            if (data != null) {
+//                String xValue = getXValue(data);
+//                xAxisValues.add(xValue);
+//                Entry entry = new Entry(i, data.getHigh());
+//                yValues.add(entry);
+//                map.put(entry, data);
+//            }
+//        }
+//
+//        LineDataSet set1;
+//
+//        if (lineChart.getData() != null && lineChart.getData().getDataSetCount() > 0){
+//            set1 = (LineDataSet) lineChart.getData().getDataSetByIndex(0);
+//            set1.setValues(yValues);
+//            set1.notifyDataSetChanged();
+//            lineChart.getData().notifyDataChanged();
+//            lineChart.notifyDataSetChanged();
+//        } else {
+//            set1 = new LineDataSet(yValues, "Data Set 1");
+//            set1.setAxisDependency(YAxis.AxisDependency.LEFT);
+//            set1.setColor(stock.getQuote().getChange() >= 0 ? Utils.GREEN : Utils.RED);
+//            set1.setDrawCircles(false);
+//            set1.setDrawFilled(true);
+//            set1.setFillColor(stock.getQuote().getChange() >= 0 ? filledUpColor : filledDownColor);
+//
+//            LineData data = new LineData(set1);
+//            data.setDrawValues(false);
+//
+//            lineChart.setData(data);
+//
+//        }
+//
+//        xAxis.setValueFormatter(new IndexAxisValueFormatter(xAxisValues));
+//        set1.setHighlightEnabled(true);
+//        set1.setHighlightLineWidth(1.2f);
+//        set1.setHighLightColor(BLACK);
+//        set1.setDrawVerticalHighlightIndicator(true);
+//        set1.setDrawHorizontalHighlightIndicator(false);
+//
+//    }
+
+    private void setData() {
 
         ArrayList<String> xAxisValues = new ArrayList<>();
         ArrayList<Entry> yValues = new ArrayList<>();
 
         for (int i = 0; i < dataList.size(); i++) {
-
             Data data = (Data) dataList.get(i);
-
             if (data != null) {
-                String xValue = getLabel(data);
+                String xValue = getXValue(data);
                 xAxisValues.add(xValue);
-                float price = data.getHigh();
-                Entry entry = new Entry(i, price);
+                Entry entry = new Entry(i, data.getHigh());
                 yValues.add(entry);
-
                 map.put(entry, data);
             }
-
         }
 
         LineDataSet set1;
@@ -339,10 +376,12 @@ public class ChartFragment extends Fragment implements BaseView,OnChartValueSele
         }
 
         xAxis.setValueFormatter(new IndexAxisValueFormatter(xAxisValues));
+//        set1.setHighlightEnabled(isPress ? true : false);
         set1.setHighlightEnabled(true);
         set1.setHighlightLineWidth(1.2f);
+
         set1.setHighLightColor(BLACK);
-        set1.setDrawVerticalHighlightIndicator(true);
+        set1.setDrawVerticalHighlightIndicator(isPress ? true : false);
         set1.setDrawHorizontalHighlightIndicator(false);
 
     }
@@ -355,20 +394,27 @@ public class ChartFragment extends Fragment implements BaseView,OnChartValueSele
 
     @Override
     public void updateData(List<StockData> data) {
-        List<StockData> dataList1 = new ArrayList<>();
+//        List<StockData> dataList1 = new ArrayList<>();
+        dataList.clear();
         for (int i = 0; i < data.size(); i++){
-            dataList1.add(data.get(i));
+            dataList.add(data.get(i));
         }
 
-        setData(dataList1);
+        setData();
         lineChart.invalidate();
     }
 
 
     @Override
     public void onValueSelected(Entry e, Highlight h) {
-        Data data = map.get(e);
+        highlight = h;
 
+
+
+
+        System.out.println("Highligh" + highlight.getX());
+        System.out.println("onValueSelected");
+        Data data = map.get(e);
         chartOpen.setText(data.getOpen());
         chartClose.setText(data.getClose());
         chartHigh.setText(data.getHighString());
@@ -379,7 +425,30 @@ public class ChartFragment extends Fragment implements BaseView,OnChartValueSele
     }
 
     @Override
-    public void onNothingSelected() {
+    public void onNothingSelected() { }
 
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+
+        isPress = true;
+        System.out.println("OnTouch11111111");
+
+        setData();
+
+        if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL){
+            System.out.println("ACTION_UP");
+            isPress = false;
+            setData();
+        }
+
+        return false;
+    }
+
+    @Override
+    public void onClick(View v) {
+//        isPress = true;
+//        System.out.println("onClick");
+//
+//        setData();
     }
 }
