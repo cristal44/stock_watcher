@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+
+import com.example.mywatchlist.MyViewPager;
 import com.example.mywatchlist.R;
 import com.example.mywatchlist.data.Stock;
 import com.example.mywatchlist.data.StockData;
@@ -22,7 +24,8 @@ import static android.graphics.Color.rgb;
 
 public class DetailsActivity extends AppCompatActivity implements BaseView{
     private TabLayout tabs;
-    private ViewPager viewPager;
+//    private ViewPager viewPager;
+    private MyViewPager viewPager;
     private Toolbar toolbar;
     private TextView title;
     private Stock stock;
@@ -47,7 +50,9 @@ public class DetailsActivity extends AppCompatActivity implements BaseView{
 
     public void init(){
         tabs = findViewById(R.id.tabs);
-        viewPager = findViewById(R.id.view_pager);
+//        viewPager = findViewById(R.id.view_pager);
+        viewPager = (MyViewPager) findViewById(R.id.view_pager);
+        viewPager.setPagingEnabled(false);
         toolbar = (Toolbar)findViewById(R.id.detailToolbar);
         title = findViewById(R.id.title);
     }
