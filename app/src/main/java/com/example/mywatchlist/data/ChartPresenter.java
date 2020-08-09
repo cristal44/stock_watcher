@@ -22,7 +22,7 @@ public class ChartPresenter implements PresenterBase {
 
     public void getCharts(String symbol, String range) {
 
-        Call<List<Data>> chartCall = StockClient.getStockRetrofit().create(StockDataAPI.class).getChart(symbol, range, "Tsk_c0c5eca3abc64defb30295bb4ed704a7");
+        Call<List<Data>> chartCall = StockClient.getStockRetrofit().create(StockDataAPI.class).getChart(symbol, range);
         chartCall.enqueue(new Callback<List<Data>>() {
             @Override
             public void onResponse(Call<List<Data>> call, Response<List<Data>> response) {
@@ -44,7 +44,7 @@ public class ChartPresenter implements PresenterBase {
     }
 
     public void getTodayData(String symbol){
-        Call<Charts> todayChartCall = StockClient.getStockRetrofit().create(StockDataAPI.class).getTodayChart(symbol,  "Tsk_c0c5eca3abc64defb30295bb4ed704a7");
+        Call<Charts> todayChartCall = StockClient.getStockRetrofit().create(StockDataAPI.class).getTodayChart(symbol);
         todayChartCall.enqueue(new Callback<Charts>() {
             @Override
             public void onResponse(Call<Charts> call, Response<Charts> response) {

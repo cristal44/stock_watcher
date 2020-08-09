@@ -13,18 +13,30 @@ import retrofit2.http.Query;
 public interface StockDataAPI {
     @GET("ref-data/symbols")
     Call<List<StockName>> getStockSymbolNameList();
+
+
 //
 //    @GET("stock/{symbol}/quote")
 //    Call<Quote> getQuote(@Path("symbol") String symbol, @Query("token") String token);
 
-    @GET("stock/{symbol}/batch?types=quote,news,company,stats,earnings&period=annual")
-    Call<Stock> getStock(@Path("symbol") String symbol, @Query("token") String token);
+//    @GET("stock/{symbol}/batch?types=quote,news,company,stats,earnings&period=annual")
+//    Call<Stock> getStock(@Path("symbol") String symbol, @Query("token") String token);
 
+//
+//    @GET("stock/{symbol}/chart/{range}")
+//    Call<List<Data>>  getChart(@Path("symbol") String symbol, @Path("range") String range, @Query("token") String token);
+//
+//
+//    @GET("stock/{symbol}/chart/dynamic")
+//    Call<Charts> getTodayChart(@Path("symbol") String symbol, @Query("token") String token);
+
+    @GET("stock/{symbol}/batch?types=quote,news,company,stats,earnings&period=annual")
+    Call<Stock> getStock(@Path("symbol") String symbol);
 
     @GET("stock/{symbol}/chart/{range}")
-    Call<List<Data>>  getChart(@Path("symbol") String symbol, @Path("range") String range, @Query("token") String token);
+    Call<List<Data>>  getChart(@Path("symbol") String symbol, @Path("range") String range);
 
 
     @GET("stock/{symbol}/chart/dynamic")
-    Call<Charts> getTodayChart(@Path("symbol") String symbol, @Query("token") String token);
+    Call<Charts> getTodayChart(@Path("symbol") String symbol);
 }

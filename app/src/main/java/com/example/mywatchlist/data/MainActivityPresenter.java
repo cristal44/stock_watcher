@@ -17,7 +17,7 @@ public class MainActivityPresenter {
     }
 
     public void getStockObject(String symbol) {
-        Call<Stock> quoteCall = StockClient.getStockRetrofit().create(StockDataAPI.class).getStock(symbol, "Tsk_c0c5eca3abc64defb30295bb4ed704a7");
+        Call<Stock> quoteCall = StockClient.getStockRetrofit().create(StockDataAPI.class).getStock(symbol);
         quoteCall.enqueue(new Callback<Stock>() {
             @Override
             public void onResponse(Call<Stock> call, Response<Stock> response) {
