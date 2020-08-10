@@ -8,40 +8,40 @@ import android.text.TextUtils;
 import android.widget.ListView;
 import android.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-import com.example.mywatchlist.ListViewAdapter;
+import com.example.mywatchlist.ui.adapter.ListViewAdapter;
 import com.example.mywatchlist.R;
-import com.example.mywatchlist.data.PresenterBase;
-import com.example.mywatchlist.data.SearchViewPresenter;
-import com.example.mywatchlist.data.StockData;
-import com.example.mywatchlist.data.StockName;
+import com.example.mywatchlist.presenter.PresenterBase;
+import com.example.mywatchlist.presenter.SearchViewPresenter;
+import com.example.mywatchlist.entity.StockData;
+import com.example.mywatchlist.entity.StockSymbol;
 import java.util.ArrayList;
 import java.util.List;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+import static android.graphics.Color.WHITE;
 import static android.graphics.Color.rgb;
 
 public class SearchActivity extends AppCompatActivity implements BaseView{
-    private ListView listView;
+
+    @BindView(R.id.listView) ListView listView;
+    @BindView(R.id.searchView) SearchView searchView;
+    @BindView(R.id.toolbar2) Toolbar toolbar;
     private ListViewAdapter adapter;
-    private List<StockName> arrayList = new ArrayList<>();
-    private SearchView searchView;
-    private Toolbar toolbar;
+    private List<StockSymbol> arrayList = new ArrayList<>();
+    private PresenterBase searchViewPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        ButterKnife.bind(this);
 
-        PresenterBase presenterBase = new SearchViewPresenter(this);
-        presenterBase.getData();
+        searchViewPresenter = new SearchViewPresenter(this);
+        searchViewPresenter.getData("");
 
-        init();
         setToolbar();
         setSearchView();
-    }
-
-    private void init() {
-        toolbar = findViewById(R.id.toolbar2);
-        listView = findViewById(R.id.listView);
-        searchView = findViewById(R.id.searchView);
     }
 
     private void setToolbar() {
@@ -49,12 +49,11 @@ public class SearchActivity extends AppCompatActivity implements BaseView{
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.getNavigationIcon().setColorFilter(rgb(15,157,88), PorterDuff.Mode.SRC_ATOP);
-//        toolbar.setNavigationIcon(R.drawable.ic_back);
     }
 
     private void setSearchView() {
         GradientDrawable backgroundGradient = (GradientDrawable) searchView.getBackground();
-        backgroundGradient.setColor(rgb(255,255,255));
+        backgroundGradient.setColor(WHITE);
 
         searchView.onActionViewExpanded();
         searchView.setQueryHint("Search");
@@ -82,18 +81,27 @@ public class SearchActivity extends AppCompatActivity implements BaseView{
 
 
     @Override
-    public void display() {
+    public void displayDialog() {
 
     }
 
     @Override
-    public void updateData(List<StockData> list) {
+    public void success(List<StockData> list) {
         arrayList.clear();
         for (StockData stockName : list){
-            arrayList.add((StockName) stockName);
+            arrayList.add((StockSymbol) stockName);
         }
 
         adapter = new ListViewAdapter(this,arrayList);
         listView.setAdapter(adapter);
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (searchViewPresenter != null){
+            searchViewPresenter = null;
+        }
     }
 }

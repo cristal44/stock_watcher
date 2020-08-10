@@ -7,26 +7,28 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import com.example.mywatchlist.MyAdapter;
 import com.example.mywatchlist.R;
-import com.example.mywatchlist.data.MainActivityPresenter;
-import com.example.mywatchlist.data.Stock;
-import com.example.mywatchlist.data.StockData;
-import com.example.mywatchlist.data.StockName;
+import com.example.mywatchlist.presenter.MainActivityPresenter;
+import com.example.mywatchlist.entity.Stock;
+import com.example.mywatchlist.entity.StockData;
+import com.example.mywatchlist.ui.adapter.WatchlistAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, BaseView{
-    private RecyclerView recyclerView;
-    private MyAdapter myAdapter;
+
+    @BindView(R.id.stockRecyclerView) RecyclerView recyclerView;
+    @BindView(R.id.toolbar) Toolbar toolbar;
+    private WatchlistAdapter watchlistAdapter;
     private static List<Stock> stockList = new ArrayList<>();
     private MainActivityPresenter mainActivityPresenter;
     private String selectedSymbol;
@@ -36,29 +38,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ButterKnife.bind(this);
+
         mainActivityPresenter = new MainActivityPresenter(this);
 
-        recyclerView = findViewById(R.id.stockRecyclerView);
+        setRecyclerView();
+        setToolBar();
+        getSelectedSymbol();
+    }
 
-        myAdapter = new MyAdapter(stockList, this);
-        recyclerView.setAdapter(myAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+    private void getSelectedSymbol() {
+        // Get selectedStock from SearchActivity
+        Intent intent = getIntent();
+        selectedSymbol = intent.getStringExtra("SELECTEDSYMBOL");
+        if (selectedSymbol != null) {
+            mainActivityPresenter.getData(selectedSymbol);
+        }
+    }
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+    private void setToolBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         toolbar.setTitle("My Watchlist");
         toolbar.setTitleTextAppearance(this, R.style.CustomText);
-
-        Intent intent = getIntent();
-        StockName stockName = (StockName) intent.getSerializableExtra("SELECTED");
-        if (stockName != null) {
-            selectedSymbol = stockName.getSymbol();
-            mainActivityPresenter.getStockObject(selectedSymbol);
-        }
     }
 
+    private void setRecyclerView() {
+        watchlistAdapter = new WatchlistAdapter(stockList, this);
+        recyclerView.setAdapter(watchlistAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+    }
 
     @Override
     public void onClick(View v) {
@@ -86,18 +96,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
-    public void updateData(List<StockData> list) {
-        stockList.clear();
+    public void success(List<StockData> list) {
+                stockList.clear();
         for (StockData data : list){
             stockList.add((Stock) data);
         }
-        myAdapter.notifyDataSetChanged();
+        watchlistAdapter.notifyDataSetChanged();
+
     }
 
     @Override
-    public void display() {
+    public void displayDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Duplicate Symbol")
                 .setMessage(selectedSymbol + " has been in the Watchlist")
@@ -110,8 +120,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         builder.show();
     }
 
-    public void displayAlertDialog(){
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mainActivityPresenter != null){
+            mainActivityPresenter = null;
+        }
     }
 }

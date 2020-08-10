@@ -40,7 +40,7 @@
             app:tabSelectedTextColor="#000000"/>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.example.mywatchlist.MyViewPager
+    <com.example.mywatchlist.ui.adapter.MyViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

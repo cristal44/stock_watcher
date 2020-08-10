@@ -5,29 +5,28 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-
-import com.example.mywatchlist.MyViewPager;
+import com.example.mywatchlist.MyColor;
+import com.example.mywatchlist.ui.adapter.MyViewPager;
 import com.example.mywatchlist.R;
-import com.example.mywatchlist.data.Stock;
-import com.example.mywatchlist.data.StockData;
+import com.example.mywatchlist.entity.Stock;
 import com.google.android.material.tabs.TabLayout;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
-import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.example.mywatchlist.ui.main.SectionsPagerAdapter;
-import java.util.List;
-import static android.graphics.Color.rgb;
+import com.example.mywatchlist.ui.adapter.SectionsPagerAdapter;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class DetailsActivity extends AppCompatActivity implements BaseView{
-    private TabLayout tabs;
-//    private ViewPager viewPager;
-    private MyViewPager viewPager;
-    private Toolbar toolbar;
-    private TextView title;
+public class DetailsActivity extends AppCompatActivity {
+
+    @BindView(R.id.tabs) TabLayout tabs;
+    @BindView(R.id.view_pager) MyViewPager viewPager;
+    @BindView(R.id.detailToolbar) Toolbar toolbar;
+    @BindView(R.id.title) TextView title;
+
     private Stock stock;
 
     @SuppressLint("ResourceType")
@@ -35,26 +34,24 @@ public class DetailsActivity extends AppCompatActivity implements BaseView{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+        ButterKnife.bind(this);
 
-        Intent intent = getIntent();
-        stock = (Stock) intent.getSerializableExtra("SELECTEDSTOCK");
-
-        init();
+        inti();
+        getStockFromMainActivity();
         setTabDivider();
         setupToolbar();
+    }
 
+    private void inti() {
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager(),this,3,stock);
         viewPager.setAdapter(sectionsPagerAdapter);
+        viewPager.setPagingEnabled(false);
         tabs.setupWithViewPager(viewPager);
     }
 
-    public void init(){
-        tabs = findViewById(R.id.tabs);
-//        viewPager = findViewById(R.id.view_pager);
-        viewPager = (MyViewPager) findViewById(R.id.view_pager);
-        viewPager.setPagingEnabled(false);
-        toolbar = (Toolbar)findViewById(R.id.detailToolbar);
-        title = findViewById(R.id.title);
+    public void getStockFromMainActivity(){
+        Intent intent = getIntent();
+        stock = (Stock) intent.getSerializableExtra("SELECTEDSTOCK");
     }
 
     public void setTabDivider(){
@@ -62,7 +59,7 @@ public class DetailsActivity extends AppCompatActivity implements BaseView{
         if (root instanceof LinearLayout) {
             ((LinearLayout) root).setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
             GradientDrawable drawable = new GradientDrawable();
-            drawable.setColor(rgb(171,171,171));
+            drawable.setColor(MyColor.GREY);
             drawable.setSize(2, 1);
             ((LinearLayout) root).setDividerPadding(10);
             ((LinearLayout) root).setDividerDrawable(drawable);
@@ -75,18 +72,8 @@ public class DetailsActivity extends AppCompatActivity implements BaseView{
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
-        toolbar.getNavigationIcon().setColorFilter(rgb(15,157,88), PorterDuff.Mode.SRC_ATOP);
+        toolbar.getNavigationIcon().setColorFilter(MyColor.GREEN, PorterDuff.Mode.SRC_ATOP);
         toolbar.setNavigationIcon(R.drawable.ic_back);
-    }
-
-    @Override
-    public void display() {
-
-    }
-
-    @Override
-    public void updateData(List<StockData> list) {
-
     }
 
     public Stock getData(){
