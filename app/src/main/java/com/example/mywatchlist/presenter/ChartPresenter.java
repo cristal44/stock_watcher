@@ -30,7 +30,7 @@ public class ChartPresenter implements PresenterBase {
             Data data = (Data) stockData;
             data.setxValueString(getValue(data));
         }
-        chartFragment.success(list);
+        chartFragment.display(list);
     }
 
     public String getValue(Data data) {

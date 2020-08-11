@@ -1,10 +1,10 @@
 package com.example.mywatchlist.model;
 
-import com.example.mywatchlist.presenter.OnFinish;
 import com.example.mywatchlist.api.StockClient;
-import com.example.mywatchlist.entity.StockData;
 import com.example.mywatchlist.api.StockDataAPI;
-import com.example.mywatchlist.entity.StockSymbol;
+import com.example.mywatchlist.entity.Quote;
+import com.example.mywatchlist.entity.StockData;
+import com.example.mywatchlist.presenter.OnFinish;
 import java.util.ArrayList;
 import java.util.List;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -14,34 +14,27 @@ import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class SearchSymbolModel implements IModel {
+public class QuoteModel implements IModel {
     private OnFinish onFinish;
 
-    public SearchSymbolModel(OnFinish onFinish) {
+    public QuoteModel(OnFinish onFinish) {
         this.onFinish = onFinish;
     }
 
     @Override
-    public void getData(String string) {
-        StockDataAPI stockDataAPI = StockClient.getSymbolRetrofit().create(StockDataAPI.class);
-
-        Observable<List<StockSymbol>> getStockNameList = stockDataAPI.getStockSymbolNameList();
-        getStockNameList.subscribeOn(Schedulers.io())
-                .retry(10)
+    public void getData(String symbol) {
+        StockDataAPI stockDataAPI = StockClient.getStockRetrofit().create(StockDataAPI.class);
+        Observable<Quote> getThreeQuotes = stockDataAPI.getQuotes(symbol);
+        getThreeQuotes.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<StockSymbol>>() {
+                .subscribe(new Observer<Quote>() {
                     @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
+                    public void onSubscribe(@NonNull Disposable d) { }
 
                     @Override
-                    public void onNext(@NonNull List<StockSymbol> stockSymbols) {
+                    public void onNext(@NonNull Quote quote) {
                         List<StockData> list = new ArrayList<>();
-
-                        for (StockSymbol s : stockSymbols){
-                            list.add(s);
-                        }
+                        list.add(quote);
                         onFinish.onFinishListener(list);
                     }
 
@@ -55,5 +48,7 @@ public class SearchSymbolModel implements IModel {
 
                     }
                 });
+
+
     }
 }

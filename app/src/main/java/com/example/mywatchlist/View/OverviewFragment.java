@@ -20,7 +20,6 @@ import static android.graphics.Color.WHITE;
 
 
 public class OverviewFragment extends Fragment {
-
     @BindView(R.id.overviewCompanyName) TextView companyName;
     @BindView(R.id.overviewPrice) TextView price;
     @BindView(R.id.overviewChange) TextView change;
@@ -51,14 +50,12 @@ public class OverviewFragment extends Fragment {
     @BindView(R.id.style) TextView style;
     @BindView(R.id.employee) TextView employees;
     @BindView(R.id.ceo) TextView ceo;
-
     @BindView(R.id.overviewLayout) RelativeLayout overviewLayout;
     @BindView(R.id.keyLayout) LinearLayout keyLayout;
     @BindView(R.id.earningGridLayout) GridLayout earningLayout;
     @BindView(R.id.companyProfileLayout) LinearLayout companyProfileLayout;
 
     private Stock stock;
-
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -67,7 +64,6 @@ public class OverviewFragment extends Fragment {
         stock = detailsActivity.getData();
         display();
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -102,12 +98,12 @@ public class OverviewFragment extends Fragment {
     public void display() {
         companyName.setText(stock.getQuote().getCompanyName());
         price.setText(String.format("%.2f", stock.getQuote().getLatestPrice()));
-        change.setText(String.format("%s %.2f", stock.getPlusOrMinors(), Math.abs(stock.getQuote().getChange())));
-        change.setTextColor(stock.getColor());
-        changePercent.setText(String.format("(%s %.2f%%)",stock.getPlusOrMinors(),Math.abs(stock.getQuote().getChangePercent() * 100)));
-        changePercent.setTextColor(stock.getColor());
-        upOrDownArrow.setText(stock.getUpOrDownArrow());
-        upOrDownArrow.setTextColor(stock.getColor());
+        change.setText(String.format("%s %.2f", stock.getQuote().getPlusOrMinors(), Math.abs(stock.getQuote().getChange())));
+        change.setTextColor(stock.getQuote().getColor());
+        changePercent.setText(String.format("(%s %.2f%%)",stock.getQuote().getPlusOrMinors(),Math.abs(stock.getQuote().getChangePercent() * 100)));
+        changePercent.setTextColor(stock.getQuote().getColor());
+        upOrDownArrow.setText(stock.getQuote().getUpOrDownArrow());
+        upOrDownArrow.setTextColor(stock.getQuote().getColor());
         time.setText(Utils.getFormatTime(stock.getQuote().getLatestUpdate()));
         open.setText(String.format("%.2f", stock.getQuote().getOpen()));
         previousClose.setText(String.format("%.2f", stock.getQuote().getPreviousClose()));

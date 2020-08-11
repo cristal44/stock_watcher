@@ -7,293 +7,309 @@
     android:layout_height="match_parent"
     tools:context=".View.MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swiper"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-    </androidx.appcompat.widget.Toolbar>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-
-    <View
-        android:id="@+id/divider1"
-        android:layout_width="6dp"
-        android:layout_height="80dp"
-        android:layout_margin="16dp"
-        android:background="#0F9D58"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-    <TextView
-        android:id="@+id/dowTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="16dp"
-        android:layout_toRightOf="@id/divider1"
-        android:text="DJIA"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toRightOf="@id/divider1"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-    <TextView
-        android:id="@+id/dowPriceText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="6dp"
-        android:text="23,598.00"
-        android:textColor="#5e5e5e"
-        android:textSize="14dp"
-        app:layout_constraintLeft_toRightOf="@id/divider1"
-        app:layout_constraintTop_toBottomOf="@+id/dowTextView" />
-
-    <TextView
-        android:id="@+id/triangleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="▲"
-        app:layout_constraintBottom_toBottomOf="@+id/dowChangeText"
-        app:layout_constraintEnd_toStartOf="@+id/dowChangeText"
-        app:layout_constraintStart_toEndOf="@+id/divider1" />
-
-    <TextView
-        android:id="@+id/dowChangeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="6dp"
-        android:text="19.00"
-        android:textColor="#5e5e5e"
-        android:textSize="14dp"
-        app:layout_constraintLeft_toRightOf="@id/divider1"
-        app:layout_constraintTop_toBottomOf="@+id/dowPriceText" />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-    <TextView
-        android:id="@+id/dowPercentageText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="(99.00%)"
-        android:textColor="#5e5e5e"
-        android:textSize="14dp"
-        app:layout_constraintBottom_toBottomOf="@+id/dowChangeText"
-        app:layout_constraintStart_toEndOf="@+id/dowChangeText"
-        app:layout_constraintTop_toTopOf="@+id/dowChangeText" />
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="6dp"
+                android:layout_height="80dp"
+                android:layout_margin="16dp"
+                android:background="#0F9D58"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="6dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="16dp"
-        android:background="#0F9D58"
-        app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            <TextView
+                android:id="@+id/dowSymbol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@id/divider1"
+                android:text="DJIA"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toRightOf="@id/divider1"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <TextView
-        android:id="@+id/dowTextView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="16dp"
-        android:layout_toRightOf="@id/divider1"
-        android:text="DJIA"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toRightOf="@id/divider2"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            <TextView
+                android:id="@+id/dowPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="27,688.52"
+                android:textColor="#000000"
+                android:textSize="14dp"
+                app:layout_constraintLeft_toRightOf="@id/divider1"
+                app:layout_constraintTop_toBottomOf="@+id/dowSymbol" />
 
-    <TextView
-        android:id="@+id/dowPriceText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="6dp"
-        android:text="23,598.00"
-        android:textColor="#5e5e5e"
-        android:textSize="14dp"
-        app:layout_constraintLeft_toRightOf="@id/divider2"
-        app:layout_constraintTop_toBottomOf="@+id/dowTextView" />
+            <TextView
+                android:id="@+id/dowUpOrDown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▲"
+                android:textColor="#0F9D58"
+                app:layout_constraintBottom_toBottomOf="@+id/dowChange"
+                app:layout_constraintEnd_toStartOf="@+id/dowChange"
+                app:layout_constraintStart_toEndOf="@+id/divider1" />
 
-    <TextView
-        android:id="@+id/triangleText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="▲"
-        app:layout_constraintBottom_toBottomOf="@+id/dowChangeText"
-        app:layout_constraintEnd_toStartOf="@+id/dowChangeText1"
-        app:layout_constraintStart_toEndOf="@+id/divider2" />
-
-    <TextView
-        android:id="@+id/dowChangeText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="6dp"
-        android:text="19.00"
-        android:textColor="#5e5e5e"
-        android:textSize="14dp"
-        app:layout_constraintLeft_toRightOf="@id/divider2"
-        app:layout_constraintTop_toBottomOf="@+id/dowPriceText" />
+            <TextView
+                android:id="@+id/dowChange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="+257.05"
+                android:textColor="#0F9D58"
+                android:textSize="12dp"
+                app:layout_constraintLeft_toRightOf="@id/divider1"
+                app:layout_constraintTop_toBottomOf="@+id/dowPrice" />
 
 
-    <TextView
-        android:id="@+id/dowPercentageText1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="(99.00%)"
-        android:textColor="#5e5e5e"
-        android:textSize="14dp"
-        app:layout_constraintBottom_toBottomOf="@+id/dowChangeText1"
-        app:layout_constraintStart_toEndOf="@+id/dowChangeText1"
-        app:layout_constraintTop_toTopOf="@+id/dowChangeText1" />
+            <TextView
+                android:id="@+id/dowPercent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(+0.93%)"
+                android:textColor="#0F9D58"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/dowChange"
+                app:layout_constraintStart_toEndOf="@+id/dowChange"
+                app:layout_constraintTop_toTopOf="@+id/dowChange" />
 
-    <View
-        android:id="@+id/divider3"
-        android:layout_width="6dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="16dp"
-        android:background="#0F9D58"
-        app:layout_constraintStart_toStartOf="@+id/guideline6"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="6dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="16dp"
+                android:background="#0F9D58"
+                app:layout_constraintStart_toStartOf="@+id/guideline5"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <TextView
-        android:id="@+id/dowTextView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="16dp"
-        android:layout_toRightOf="@id/divider1"
-        android:text="DJIA"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toRightOf="@id/divider3"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            <TextView
+                android:id="@+id/naSymbol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@id/divider1"
+                android:text="NASDAQ"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toRightOf="@id/divider2"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <TextView
-        android:id="@+id/dowPriceText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="6dp"
-        android:text="23,598.00"
-        android:textColor="#5e5e5e"
-        android:textSize="14dp"
-        app:layout_constraintLeft_toRightOf="@id/divider3"
-        app:layout_constraintTop_toBottomOf="@+id/dowTextView" />
+            <TextView
+                android:id="@+id/naPriceText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="10,920.71"
+                android:textColor="#000000"
+                android:textSize="14dp"
+                app:layout_constraintLeft_toRightOf="@id/divider2"
+                app:layout_constraintTop_toBottomOf="@+id/dowSymbol" />
 
-    <TextView
-        android:id="@+id/triangleText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="▲"
-        app:layout_constraintBottom_toBottomOf="@+id/dowChangeText2"
-        app:layout_constraintEnd_toStartOf="@+id/dowChangeText2"
-        app:layout_constraintStart_toEndOf="@+id/divider3" />
+            <TextView
+                android:id="@+id/naUpOrDown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▼"
+                android:textColor="#DB4437"
+                app:layout_constraintBottom_toBottomOf="@+id/dowChange"
+                app:layout_constraintEnd_toStartOf="@+id/naChange"
+                app:layout_constraintStart_toEndOf="@+id/divider2" />
 
-    <TextView
-        android:id="@+id/dowChangeText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="6dp"
-        android:text="19.00"
-        android:textColor="#5e5e5e"
-        android:textSize="14dp"
-        app:layout_constraintLeft_toRightOf="@id/divider3"
-        app:layout_constraintTop_toBottomOf="@+id/dowPriceText" />
-
-
-    <TextView
-        android:id="@+id/dowPercentageText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="(99.00%)"
-        android:textColor="#5e5e5e"
-        android:textSize="14dp"
-        app:layout_constraintBottom_toBottomOf="@+id/dowChangeText2"
-        app:layout_constraintStart_toEndOf="@+id/dowChangeText2"
-        app:layout_constraintTop_toTopOf="@+id/dowChangeText2" />
+            <TextView
+                android:id="@+id/naChange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="-80.41"
+                android:textColor="#DB4437"
+                android:textSize="12dp"
+                app:layout_constraintLeft_toRightOf="@id/divider2"
+                app:layout_constraintTop_toBottomOf="@+id/dowPrice" />
 
 
+            <TextView
+                android:id="@+id/naPercent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(-0.72%)"
+                android:textColor="#DB4437"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/naChange"
+                app:layout_constraintStart_toEndOf="@+id/naChange"
+                app:layout_constraintTop_toTopOf="@+id/naChange" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.04"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="6dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="16dp"
+                android:background="#0F9D58"
+                app:layout_constraintStart_toStartOf="@+id/guideline6"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="16dp" />
+            <TextView
+                android:id="@+id/spSymbol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="16dp"
+                android:layout_toRightOf="@id/divider1"
+                android:text="SP"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toRightOf="@id/divider3"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="16dp" />
+            <TextView
+                android:id="@+id/spPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="3,352.60"
+                android:textColor="#000000"
+                android:textSize="14dp"
+                app:layout_constraintLeft_toRightOf="@id/divider3"
+                app:layout_constraintTop_toBottomOf="@+id/dowSymbol" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.35" />
+            <TextView
+                android:id="@+id/spUpOrDown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▲"
+                android:textColor="#0F9D58"
+                app:layout_constraintBottom_toBottomOf="@+id/spChange"
+                app:layout_constraintEnd_toStartOf="@+id/spChange"
+                app:layout_constraintStart_toEndOf="@+id/divider3" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.6605081" />
+            <TextView
+                android:id="@+id/spChange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:text="+3.93"
+                android:textColor="#0F9D58"
+                android:textSize="12dp"
+                app:layout_constraintLeft_toRightOf="@id/divider3"
+                app:layout_constraintTop_toBottomOf="@+id/dowPrice" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/divider1" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Basic View ▼"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/divider1" />
+            <TextView
+                android:id="@+id/spPercent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(+0.12%)"
+                android:textColor="#0F9D58"
+                android:textSize="12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/spChange"
+                app:layout_constraintStart_toEndOf="@+id/spChange"
+                app:layout_constraintTop_toTopOf="@+id/spChange" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/stockRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.04"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.35" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.6605081" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/divider1" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Basic View ▼"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/divider1" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/stockRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline4"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline2"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

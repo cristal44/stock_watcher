@@ -1,6 +1,7 @@
 package com.example.mywatchlist.api;
 
 import com.example.mywatchlist.entity.Data;
+import com.example.mywatchlist.entity.Quote;
 import com.example.mywatchlist.entity.Stock;
 import com.example.mywatchlist.entity.StockSymbol;
 import java.util.List;
@@ -21,4 +22,7 @@ public interface StockDataAPI {
 
     @GET("stock/{symbol}/chart/{range}")
     Observable<List<Data>>  getChart(@Path("symbol") String symbol, @Path("range") String range);
+
+    @GET("stock/{symbol}/quote")
+    Observable<Quote> getQuotes(@Path("symbol") String symbol);
 }

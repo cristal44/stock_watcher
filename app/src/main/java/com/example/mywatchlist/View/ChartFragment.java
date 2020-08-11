@@ -140,8 +140,8 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
 
         day1.setBackgroundColor(GRAY);
         day1.setTextColor(WHITE);
-        lineColor = stock.getColor();
-        filledColor = stock.getColor();
+        lineColor = stock.getQuote().getColor();
+        filledColor = stock.getQuote().getColor();
 
         getData("today");
     }
@@ -258,7 +258,7 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
     }
 
     @Override
-    public void success(List<StockData> data) {
+    public void display(List<StockData> data) {
         dataList.clear();
         for (int i = 0; i < data.size(); i++) {
             dataList.add(data.get(i));
@@ -266,6 +266,7 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
         setData();
         lineChart.invalidate();
     }
+
 
     @Override
     public void onValueSelected(Entry e, Highlight h) {
@@ -325,7 +326,7 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
     private void setClickColor(TextView textView) {
         textView.setBackgroundColor(GRAY);
         textView.setTextColor(WHITE);
-        lineColor = textView.getId() == R.id.d1 ? stock.getColor() : MyColor.GREEN;
-        filledColor = textView.getId() == R.id.d1 ? stock.getColor() : MyColor.GREEN;
+        lineColor = textView.getId() == R.id.d1 ? stock.getQuote().getColor() : MyColor.GREEN;
+        filledColor = textView.getId() == R.id.d1 ? stock.getQuote().getColor() : MyColor.GREEN;
     }
 }

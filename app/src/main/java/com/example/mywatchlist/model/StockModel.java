@@ -14,7 +14,6 @@ import io.reactivex.rxjava3.core.Observer;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-
 public class StockModel implements IModel {
     private OnFinish onFinish;
 
@@ -25,18 +24,16 @@ public class StockModel implements IModel {
     @Override
     public void getData(String symbol) {
         StockDataAPI stockDataAPI = StockClient.getStockRetrofit().create(StockDataAPI.class);
-        Observable<Stock>  getStockData = stockDataAPI.getStock(symbol);
+        Observable<Stock> getStockData = stockDataAPI.getStock(symbol);
         getStockData.subscribeOn(Schedulers.io())
+                .retry(10)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Stock>() {
                     @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
+                    public void onSubscribe(@NonNull Disposable d) { }
 
                     @Override
                     public void onNext(@NonNull Stock s) {
-                        System.out.println(s.getSymbol());
                         List<StockData> list = new ArrayList<>();
                         list.add(s);
                         onFinish.onFinishListener(list);

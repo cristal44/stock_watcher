@@ -24,6 +24,6 @@ public class SearchViewPresenter implements PresenterBase {
 
     @Override
     public void onFinishListener(List<StockData> list) {
-        baseView.success(list);
+        baseView.display(list);
     }
 }

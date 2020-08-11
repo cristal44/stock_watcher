@@ -40,11 +40,11 @@ public class WatchlistAdapter extends RecyclerView.Adapter<WatchlistAdapter.MyVi
         holder.stockPrice.setText(String.format("%.2f", stock.getQuote().getLatestPrice()));
         holder.stockChange.setText(String.format("%.2f", Math.abs(stock.getQuote().getChange())));
         holder.stockPercentage.setText(String.format("%.2f%%", Math.abs(stock.getQuote().getChangePercent() * 100)));
-        holder.stockPlusOrMinor.setText(stock.getPlusOrMinors());
+        holder.stockPlusOrMinor.setText(stock.getQuote().getPlusOrMinors());
 
         holder.viewColor.setBackgroundResource(R.drawable.custom_rounded_corners);
         GradientDrawable drawable = (GradientDrawable) holder.viewColor.getBackground();
-        drawable.setColor(stock.getColor());
+        drawable.setColor(stock.getQuote().getColor());
     }
 
     @Override

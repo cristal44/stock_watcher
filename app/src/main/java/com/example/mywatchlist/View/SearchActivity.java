@@ -27,6 +27,7 @@ public class SearchActivity extends AppCompatActivity implements BaseView{
     @BindView(R.id.listView) ListView listView;
     @BindView(R.id.searchView) SearchView searchView;
     @BindView(R.id.toolbar2) Toolbar toolbar;
+
     private ListViewAdapter adapter;
     private List<StockSymbol> arrayList = new ArrayList<>();
     private PresenterBase searchViewPresenter;
@@ -86,7 +87,7 @@ public class SearchActivity extends AppCompatActivity implements BaseView{
     }
 
     @Override
-    public void success(List<StockData> list) {
+    public void display(List<StockData> list) {
         arrayList.clear();
         for (StockData stockName : list){
             arrayList.add((StockSymbol) stockName);

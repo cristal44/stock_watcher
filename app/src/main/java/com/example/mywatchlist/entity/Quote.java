@@ -1,5 +1,6 @@
 package com.example.mywatchlist.entity;
 
+import com.example.mywatchlist.MyColor;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,7 +9,7 @@ import java.io.Serializable;
 import static android.graphics.Color.rgb;
 import static com.example.mywatchlist.Utils.formatValue;
 
-public class Quote implements Serializable {
+public class Quote implements Serializable ,StockData{
 
     @SerializedName("symbol")
     @Expose
@@ -160,6 +161,20 @@ public class Quote implements Serializable {
     @SerializedName("isUSMarketOpen")
     @Expose
     private boolean isUSMarketOpen;
+
+
+
+    public String getPlusOrMinors(){
+        return change > 0 ? "+" : (change < 0 ? "-" : "");
+    }
+
+    public int getColor(){
+        return change > 0 ? MyColor.GREEN : (change < 0 ? MyColor.RED : MyColor.GREY);
+    }
+
+    public String getUpOrDownArrow(){
+        return change > 0 ? "▲" : (change < 0 ? "▼" : "");
+    }
 
 
     public String getSymbol() {

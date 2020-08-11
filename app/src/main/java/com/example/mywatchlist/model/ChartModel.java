@@ -48,6 +48,7 @@ public class ChartModel implements IModel{
 
                     @Override
                     public void onError(@NonNull Throwable e) {
+                        e.printStackTrace();
 
                     }
 

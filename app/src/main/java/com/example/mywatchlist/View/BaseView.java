@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface BaseView {
     public void displayDialog();
-    public void success(List<StockData> list);
+    public void display(List<StockData> list);
 }

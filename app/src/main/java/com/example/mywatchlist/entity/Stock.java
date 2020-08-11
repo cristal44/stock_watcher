@@ -51,15 +51,5 @@ public class Stock implements StockData, Serializable{
         return quote.getSymbol();
     }
 
-    public String getPlusOrMinors(){
-        return quote.getChange() > 0 ? "+" : (quote.getChange() < 0 ? "-" : "");
-    }
 
-    public int getColor(){
-        return quote.getChange() > 0 ? MyColor.GREEN : (quote.getChange() < 0 ? MyColor.RED : MyColor.GREY);
-    }
-
-    public String getUpOrDownArrow(){
-        return quote.getChange() > 0 ? "▲" : (quote.getChange() < 0 ? "▼" : "");
-    }
 }

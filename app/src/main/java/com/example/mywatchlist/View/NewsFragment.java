@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 public class NewsFragment extends Fragment implements View.OnClickListener{
 
     @BindView(R.id.newsRecyclerView) RecyclerView recyclerView;
+
     private List<News> newsList = new ArrayList<>();
     private Stock stock;
 
