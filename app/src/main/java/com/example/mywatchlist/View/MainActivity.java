@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -15,9 +16,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 import com.example.mywatchlist.R;
+import com.example.mywatchlist.SwipeHelper;
 import com.example.mywatchlist.presenter.MainActivityPresenter;
 import com.example.mywatchlist.entity.Stock;
 import com.example.mywatchlist.entity.StockData;
@@ -27,7 +28,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, BaseView, SwipeRefreshLayout.OnRefreshListener {
+public class MainActivity extends AppCompatActivity implements BaseView, SwipeRefreshLayout.OnRefreshListener, WatchlistAdapter.OnStockListener {
 
     @BindView(R.id.stockRecyclerView) RecyclerView recyclerView;
     @BindView(R.id.toolbar) Toolbar toolbar;
@@ -91,20 +92,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setRecyclerView() {
         watchlistAdapter = new WatchlistAdapter(stockList, this);
+
+
+        ItemTouchHelper.Callback callback = new SwipeHelper(watchlistAdapter);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+        watchlistAdapter.setItemTouchHelper(itemTouchHelper);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
         recyclerView.setAdapter(watchlistAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
     }
 
-    @Override
-    public void onClick(View v) {
-        final int position = recyclerView.getChildLayoutPosition(v);
-        final Stock stock = stockList.get(position);
 
+    @Override
+    public void onStockClick(int position) {
         Intent intent = new Intent(this, DetailsActivity.class);
-        intent.putExtra("SELECTEDSTOCK", stock);
+        intent.putExtra("SELECTEDSTOCK", stockList.get(position));
         startActivity(intent);
     }
+
+    private void deleteNote(Stock stock){
+        stockList.remove(stock);
+        watchlistAdapter.notifyDataSetChanged();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -220,4 +232,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onRefresh() {
         mainActivityPresenter.getData("refresh");
     }
+
 }
