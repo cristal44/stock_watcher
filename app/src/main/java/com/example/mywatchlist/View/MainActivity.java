@@ -18,7 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import com.example.mywatchlist.R;
-import com.example.mywatchlist.SwipeHelper;
+import com.example.mywatchlist.ui.adapter.SwipeHelper;
 import com.example.mywatchlist.presenter.MainActivityPresenter;
 import com.example.mywatchlist.entity.Stock;
 import com.example.mywatchlist.entity.StockData;
@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
     private static List<Stock> stockList = new ArrayList<>();
     private MainActivityPresenter mainActivityPresenter;
     private String selectedSymbol;
-    public static List<String> refreshSymbol = new ArrayList<>();
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -62,9 +61,7 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
-
         mainActivityPresenter = new MainActivityPresenter(this);
-
         mainActivityPresenter.getData("all");
 
         setRecyclerView();
@@ -91,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
     }
 
     private void setRecyclerView() {
-        watchlistAdapter = new WatchlistAdapter(stockList, this);
+        watchlistAdapter = new WatchlistAdapter(stockList, this, this);
 
 
         ItemTouchHelper.Callback callback = new SwipeHelper(watchlistAdapter);
@@ -104,17 +101,18 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
     }
 
+    public void stockListChanged(Stock stock){
+        mainActivityPresenter.updateList(stock);
+    }
+
+
+
 
     @Override
     public void onStockClick(int position) {
         Intent intent = new Intent(this, DetailsActivity.class);
         intent.putExtra("SELECTEDSTOCK", stockList.get(position));
         startActivity(intent);
-    }
-
-    private void deleteNote(Stock stock){
-        stockList.remove(stock);
-        watchlistAdapter.notifyDataSetChanged();
     }
 
 
@@ -159,18 +157,19 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
     }
 
     public void displayDJIA(Stock stock) {
+        int color = stock.getQuote().getColor();
 
         dowSymbol.setText(stock.getSymbol());
         dowPrice.setText(String.format("%.2f", stock.getQuote().getLatestPrice()));
 
         dowUpOrDown.setText(stock.getQuote().getUpOrDownArrow());
-        dowUpOrDown.setTextColor(stock.getQuote().getColor());
+        dowUpOrDown.setTextColor(color);
 
         dowChange.setText(String.format("%.2f", stock.getQuote().getChange()));
-        dowChange.setTextColor(stock.getQuote().getColor());
+        dowChange.setTextColor(color);
 
         dowPercent.setText(String.format("(%.2f%%)", stock.getQuote().getChangePercent() * 100));
-        dowPercent.setTextColor(stock.getQuote().getColor());
+        dowPercent.setTextColor(color);
     }
 
     public void displayNAS(Stock stock) {

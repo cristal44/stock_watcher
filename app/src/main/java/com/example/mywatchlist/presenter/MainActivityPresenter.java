@@ -3,6 +3,7 @@ package com.example.mywatchlist.presenter;
 import android.os.Build;
 import androidx.annotation.RequiresApi;
 import com.example.mywatchlist.View.BaseView;
+import com.example.mywatchlist.entity.Stock;
 import com.example.mywatchlist.entity.StockData;
 import com.example.mywatchlist.model.IModel;
 import com.example.mywatchlist.model.StockModel;
@@ -72,5 +73,13 @@ public class MainActivityPresenter implements PresenterBase {
                 mainActivity.display(stocks);
             }
         }
+    }
+
+    public void updateList(Stock stock) {
+       if (stocks.contains(stock)){
+           stocks.remove(stock);
+       } else {
+           stocks.add(stock);
+       }
     }
 }
