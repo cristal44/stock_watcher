@@ -18,6 +18,7 @@ import com.example.mywatchlist.View.MainActivity;
 import com.example.mywatchlist.entity.Stock;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;

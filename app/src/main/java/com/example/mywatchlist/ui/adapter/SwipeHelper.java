@@ -15,6 +15,8 @@ import com.example.mywatchlist.MyColor;
 import com.example.mywatchlist.R;
 import com.example.mywatchlist.ui.adapter.ItemTouchHelperAdapter;
 
+import java.util.Collections;
+
 public class SwipeHelper extends ItemTouchHelper.Callback {
     private final ItemTouchHelperAdapter adapter;
     private Drawable icon;
@@ -39,15 +41,15 @@ public class SwipeHelper extends ItemTouchHelper.Callback {
     @Override
     public void clearView(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
         super.clearView(recyclerView, viewHolder);
-        viewHolder.itemView.setBackgroundColor(
-                ContextCompat.getColor(viewHolder.itemView.getContext(), R.color.colorPrimary)
-        );
+        viewHolder.itemView.setAlpha(1f);
+        viewHolder.itemView.setBackgroundColor(Color.WHITE);
     }
 
     @Override
     public void onSelectedChanged(@Nullable RecyclerView.ViewHolder viewHolder, int actionState) {
         super.onSelectedChanged(viewHolder, actionState);
         if (actionState == ItemTouchHelper.ACTION_STATE_DRAG) {
+            viewHolder.itemView.setAlpha(0.5f);
             viewHolder.itemView.setBackgroundColor(MyColor.GREY);
         }
     }
@@ -55,13 +57,14 @@ public class SwipeHelper extends ItemTouchHelper.Callback {
     @Override
     public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
         final int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
-        final int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.DOWN;
+        final int swipeFlags = ItemTouchHelper.START | ItemTouchHelper.END;
         return makeMovementFlags(dragFlags, swipeFlags);
     }
 
     @Override
     public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
         adapter.onItemMove(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+
         return true;
     }
 
@@ -115,4 +118,5 @@ public class SwipeHelper extends ItemTouchHelper.Callback {
         background.draw(c);
         icon.draw(c);
     }
+
 }

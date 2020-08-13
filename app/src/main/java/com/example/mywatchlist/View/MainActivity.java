@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
 
         ButterKnife.bind(this);
         mainActivityPresenter = new MainActivityPresenter(this);
-        mainActivityPresenter.getData("all");
+        mainActivityPresenter.getData("threeIndex");
 
         setRecyclerView();
         setToolBar();
@@ -90,7 +90,6 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
     private void setRecyclerView() {
         watchlistAdapter = new WatchlistAdapter(stockList, this, this);
 
-
         ItemTouchHelper.Callback callback = new SwipeHelper(watchlistAdapter);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
         watchlistAdapter.setItemTouchHelper(itemTouchHelper);
@@ -101,12 +100,10 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void stockListChanged(Stock stock){
         mainActivityPresenter.updateList(stock);
     }
-
-
-
 
     @Override
     public void onStockClick(int position) {
