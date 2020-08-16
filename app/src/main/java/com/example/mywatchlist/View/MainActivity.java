@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import com.example.mywatchlist.R;
 import com.example.mywatchlist.ui.adapter.SwipeHelper;
@@ -28,8 +29,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class MainActivity extends AppCompatActivity implements BaseView, SwipeRefreshLayout.OnRefreshListener, WatchlistAdapter.OnStockListener {
-
     @BindView(R.id.stockRecyclerView) RecyclerView recyclerView;
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.swiper) SwipeRefreshLayout swipeRefreshLayout;
@@ -48,13 +49,16 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
     @BindView(R.id.spUpOrDown) TextView spUpOrDown;
     @BindView(R.id.spChange) TextView spChange;
     @BindView(R.id.spPercent) TextView spPercent;
+    @BindView(R.id.basicViewSort) TextView basicViewSort;
+    @BindView(R.id.priceSort) TextView priceSorted;
+    @BindView(R.id.changeSort) TextView changeSorted;
 
     private WatchlistAdapter watchlistAdapter;
     private static List<Stock> stockList = new ArrayList<>();
     private MainActivityPresenter mainActivityPresenter;
     private String selectedSymbol;
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,12 +66,54 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
 
         ButterKnife.bind(this);
         mainActivityPresenter = new MainActivityPresenter(this);
-        mainActivityPresenter.getData("threeIndex");
+        mainActivityPresenter.getDataForIndex();
 
         setRecyclerView();
         setToolBar();
         getSelectedSymbol();
         swipeRefreshLayout.setOnRefreshListener(this);
+        sortedByName();
+        sortedByPrice();
+        sortedByChange();
+    }
+
+    public void sortedByName(){
+        basicViewSort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivityPresenter.sortedStocksByName();
+            }
+        });
+    }
+
+    public void displayBasicViewSortedText(String icon){
+        basicViewSort.setText("Basic View " + icon);
+    }
+
+    public void sortedByPrice(){
+        priceSorted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivityPresenter.sortedStocksByPrice();
+            }
+        });
+    }
+
+    public void displayPriceSortedText(String icon){
+        priceSorted.setText("Price " + icon);
+    }
+
+    public void sortedByChange(){
+        changeSorted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mainActivityPresenter.sortedStocksByChange();
+            }
+        });
+    }
+
+    public void displayChangeSortedText(String icon){
+        changeSorted.setText("% change " + icon);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -133,25 +179,13 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
     @Override
     public void display(List<StockData> list) {
         stockList.clear();
-
         for (StockData data : list) {
-            switch (data.getSymbol()){
-                case "AAPL":
-                    displayDJIA((Stock)data);
-                    break;
-                case "AMZN":
-                    displayNAS((Stock)data);
-                    break;
-                case "TSLA":
-                    displaySP((Stock)data);
-                    break;
-                default:
                     stockList.add((Stock) data);
                     watchlistAdapter.notifyDataSetChanged();
             }
-        }
-        swipeRefreshLayout.setRefreshing(false);
+        stopRefresh();
     }
+
 
     public void displayDJIA(Stock stock) {
         int color = stock.getQuote().getColor();
@@ -226,7 +260,10 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onRefresh() {
-        mainActivityPresenter.getData("refresh");
+        mainActivityPresenter.refreshData();
     }
 
+    public void stopRefresh(){
+        swipeRefreshLayout.setRefreshing(false);
+    }
 }
