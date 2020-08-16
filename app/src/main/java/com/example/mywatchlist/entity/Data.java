@@ -109,8 +109,13 @@ public class Data implements StockData {
         return average == null ? "-" : String.format("%.2f", average);
     }
 
-    public String getVolume() {
+    public String getVolumeString() {
         return formatValue(volume);
+    }
+
+
+    public float getVolume() {
+        return volume;
     }
 
     public void setxValueString(String xValueString){

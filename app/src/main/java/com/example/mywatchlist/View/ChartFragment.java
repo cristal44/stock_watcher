@@ -2,6 +2,8 @@ package com.example.mywatchlist.View;
 
 import android.graphics.Color;
 import android.os.Bundle;
+
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -14,16 +16,23 @@ import com.example.mywatchlist.presenter.ChartPresenter;
 import com.example.mywatchlist.entity.Data;
 import com.example.mywatchlist.entity.Stock;
 import com.example.mywatchlist.entity.StockData;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.github.mikephil.charting.interfaces.datasets.IBarLineScatterCandleBubbleDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,36 +43,25 @@ import butterknife.ButterKnife;
 import static android.graphics.Color.BLACK;
 import static android.graphics.Color.GRAY;
 import static android.graphics.Color.WHITE;
+import static android.graphics.Color.argb;
 
 public class ChartFragment extends Fragment implements BaseView, OnChartValueSelectedListener, View.OnTouchListener {
-    @BindView(R.id.d1)
-    TextView day1;
-    @BindView(R.id.d5)
-    TextView day5;
-    @BindView(R.id.m1)
-    TextView month1;
-    @BindView(R.id.m6)
-    TextView month6;
-    @BindView(R.id.y1)
-    TextView year1;
-    @BindView(R.id.all)
-    TextView all;
-    @BindView(R.id.chartOpen)
-    TextView chartOpen;
-    @BindView(R.id.chartClose)
-    TextView chartClose;
-    @BindView(R.id.chartHigh)
-    TextView chartHigh;
-    @BindView(R.id.chartLow)
-    TextView chartLow;
-    @BindView(R.id.chartTime)
-    TextView chartTime;
-    @BindView(R.id.chartVolume)
-    TextView chartVolume;
-    @BindView(R.id.chartAverageVolume)
-    TextView chartAverageVolume;
-    @BindView(R.id.lineChart)
-    LineChart lineChart;
+    @BindView(R.id.d1) TextView day1;
+    @BindView(R.id.d5) TextView day5;
+    @BindView(R.id.m1) TextView month1;
+    @BindView(R.id.m6) TextView month6;
+    @BindView(R.id.y1) TextView year1;
+    @BindView(R.id.all) TextView all;
+    @BindView(R.id.chartOpen) TextView chartOpen;
+    @BindView(R.id.chartClose) TextView chartClose;
+    @BindView(R.id.chartHigh) TextView chartHigh;
+    @BindView(R.id.chartLow) TextView chartLow;
+    @BindView(R.id.chartTime) TextView chartTime;
+    @BindView(R.id.chartVolume) TextView chartVolume;
+    @BindView(R.id.chartAverageVolume) TextView chartAverageVolume;
+    @BindView(R.id.lineChart) LineChart lineChart;
+    @BindView(R.id.barChart) BarChart barChart;
+
 
     private Stock stock;
     private XAxis xAxis;
@@ -91,14 +89,35 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
                              Bundle savedInstanceState) {
         View fragmentView = inflater.inflate(R.layout.fragment_chart, container, false);
         ButterKnife.bind(this, fragmentView);
-        inti(fragmentView);
-        intiChart();
+        inti();
+
+        intiLineChart();
         setClickableTextView();
+
+        intiBarChart();
 
         return fragmentView;
     }
 
-    private void intiChart() {
+    private void intiBarChart(){
+        barChart.getLegend().setEnabled(false);
+        barChart.getDescription().setEnabled(false);
+
+        barChart.getXAxis().setEnabled(false);
+
+        barChart.getAxisLeft().setEnabled(false);
+
+        barChart.getAxisRight().setEnabled(false);
+        setDataForBarChart();
+    }
+
+
+
+    private void intiLineChart() {
+        lineChart.getLegend().setEnabled(false);
+        lineChart.getDescription().setEnabled(false);
+        lineChart.getAxisLeft().setEnabled(false);
+
         lineChart.setDragEnabled(true);
         lineChart.setScaleEnabled(false);
         lineChart.setDrawBorders(false);
@@ -106,30 +125,21 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
         lineChart.setOnChartValueSelectedListener(this);
         lineChart.setOnTouchListener(this);
 
-        Legend legend = lineChart.getLegend();
-        legend.setEnabled(false);
-
-        Description description = lineChart.getDescription();
-        description.setEnabled(false);
-
         xAxis = lineChart.getXAxis();
         xAxis.setDrawGridLines(true);
-        xAxis.setDrawLabels(true);
         xAxis.setLabelCount(5);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawAxisLine(false);
-        xAxis.setAvoidFirstLastClipping(true);
 
         YAxis rightAxis = lineChart.getAxisRight();
-        YAxis leftAxis = lineChart.getAxisLeft();
-        leftAxis.setEnabled(false);
         rightAxis.setLabelCount(4);
-        rightAxis.setDrawAxisLine(true);
+        rightAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
+        rightAxis.setDrawGridLines(true);
 
         setData();
     }
 
-    private void inti(View fragmentView) {
+    private void inti() {
         chartOpen.setText(String.format("%.2f", stock.getQuote().getOpen()));
         chartClose.setText(String.format("%.2f", stock.getQuote().getClose()));
         chartHigh.setText(String.format("%.2f", stock.getQuote().getHigh()));
@@ -176,7 +186,7 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
             public void onClick(View v) {
                 setAllClickableTextViewColor();
                 setClickColor(month1);
-                getData("1m");
+                getData("1mm");
 
             }
         });
@@ -209,6 +219,38 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
                 getData("max");
             }
         });
+    }
+
+    public void setDataForBarChart(){
+        List<BarEntry> values = new ArrayList<>();
+
+        if (!dataList.isEmpty()){
+            for (int i = 0; i < dataList.size(); i++){
+                Data data = (Data) dataList.get(i);
+                values.add(new BarEntry(i, data.getVolume()));
+            }
+
+        }
+
+        BarDataSet set1;
+        if (barChart.getData() != null && barChart.getData().getDataSetCount() > 0){
+            set1 = (BarDataSet) barChart.getData().getDataSetByIndex(0);
+            set1.setValues((values));
+            barChart.getData().notifyDataChanged();
+            barChart.notifyDataSetChanged();
+        } else {
+            set1 = new BarDataSet(values, "ssssss");
+            set1.setDrawIcons(false);
+
+
+            set1.setColor(GRAY);
+
+            ArrayList<IBarDataSet> dataSets = new ArrayList<>();
+            dataSets.add(set1);
+            BarData data = new BarData(dataSets);
+            data.setDrawValues(false);
+            barChart.setData(data);
+        }
     }
 
 
@@ -264,6 +306,10 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
             dataList.add(data.get(i));
         }
         setData();
+        setDataForBarChart();
+
+        barChart.invalidate();
+
         lineChart.invalidate();
     }
 
@@ -275,7 +321,7 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
         chartClose.setText(data.getClose());
         chartHigh.setText(data.getHighString());
         chartLow.setText(data.getLow());
-        chartVolume.setText(data.getVolume());
+        chartVolume.setText(data.getVolumeString());
         chartAverageVolume.setText(data.getAverage());
         chartTime.setText(String.format("%s%s", data.getDate(), data.getMinute() == null ? "" : " at " + data.getLabel()));
     }

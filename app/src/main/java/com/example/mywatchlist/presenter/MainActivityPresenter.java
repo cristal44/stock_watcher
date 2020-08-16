@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
-
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class MainActivityPresenter implements PresenterBase {
 

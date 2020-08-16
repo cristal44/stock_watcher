@@ -38,7 +38,7 @@ public class ChartPresenter implements PresenterBase {
             case "today":
                 return data.getMinute();
             case "5dm":
-            case "1m":
+            case "1mm":
                 return data.getDate().split(" ")[1].split(",")[0];
             case "6m":
             case "1y":
