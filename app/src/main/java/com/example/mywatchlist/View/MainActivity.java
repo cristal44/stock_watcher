@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
     }
 
     public void displayBasicViewSortedText(String icon){
-        basicViewSort.setText("Basic View " + icon);
+        basicViewSort.setText("A-Z " + icon);
     }
 
     public void sortedByPrice(){

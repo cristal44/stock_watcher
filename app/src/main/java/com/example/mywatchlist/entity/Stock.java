@@ -24,7 +24,20 @@ public class Stock implements StockData, Serializable{
     @SerializedName("stats")
     @Expose
     private Stats stats;
+    @SerializedName("upcoming-earnings")
+    @Expose
+    public List<UpcomingEarning> upcomingEarnings = null;
+    @SerializedName("estimates")
+    @Expose
+    public Estimates estimates;
 
+    public Estimates getEstimates() {
+        return estimates;
+    }
+
+    public List<UpcomingEarning> getUpcomingEarnings() {
+        return upcomingEarnings;
+    }
 
     public Quote getQuote() {
         return quote;

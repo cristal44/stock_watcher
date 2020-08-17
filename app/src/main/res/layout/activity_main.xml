@@ -271,7 +271,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginTop="16dp"
-                    android:text="Basic View ▲"
+                    android:text="A-Z ▼"
                     android:textStyle="bold"/>
 
 
@@ -282,7 +282,7 @@
                     android:layout_weight="1"
                     android:layout_marginTop="16dp"
                     android:layout_toRightOf="@id/basicViewSort"
-                    android:text="Price ▲"
+                    android:text="Price ▼"
                     android:textStyle="bold"
                     android:textAlignment="textEnd"/>
 
@@ -293,7 +293,7 @@
                     android:layout_weight="1"
                     android:layout_marginTop="16dp"
                     android:layout_toRightOf="@id/priceSort"
-                    android:text="% change ▲"
+                    android:text="% change ▼"
                     android:textStyle="bold"
                     android:textAlignment="textEnd"/>
 

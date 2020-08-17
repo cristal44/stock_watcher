@@ -4,6 +4,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.example.mywatchlist.R;
 import com.example.mywatchlist.Utils;
+import com.example.mywatchlist.entity.Earning;
+import com.example.mywatchlist.entity.Estimate;
 import com.example.mywatchlist.entity.Stock;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import static android.graphics.Color.WHITE;
-
 
 public class OverviewFragment extends Fragment {
     @BindView(R.id.overviewCompanyName) TextView companyName;
@@ -39,7 +41,7 @@ public class OverviewFragment extends Fragment {
     @BindView(R.id.peRatio) TextView peRatio;
     @BindView(R.id.sharesOutstanding) TextView sharesOutstanding;
     @BindView(R.id.beta) TextView beta;
-    @BindView(R.id.earningDate) TextView upEarningDate;
+    @BindView(R.id.reportDate) TextView reportDate;
     @BindView(R.id.estimate) TextView upEarningEstimate;
     @BindView(R.id.estimateRange) TextView upEarningEstimateRange;
     @BindView(R.id.earningActual) TextView laEarningActual;
@@ -47,13 +49,14 @@ public class OverviewFragment extends Fragment {
     @BindView(R.id.d5change) TextView laEarning5D;
     @BindView(R.id.sector) TextView sector;
     @BindView(R.id.industry) TextView industry;
-    @BindView(R.id.style) TextView style;
+    @BindView(R.id.website) TextView website;
     @BindView(R.id.employee) TextView employees;
     @BindView(R.id.ceo) TextView ceo;
     @BindView(R.id.overviewLayout) RelativeLayout overviewLayout;
     @BindView(R.id.keyLayout) LinearLayout keyLayout;
     @BindView(R.id.earningGridLayout) GridLayout earningLayout;
     @BindView(R.id.companyProfileLayout) LinearLayout companyProfileLayout;
+    @BindView(R.id.openOrCloseTextview) TextView estimateAnnouncedTime;
 
     private Stock stock;
 
@@ -129,15 +132,23 @@ public class OverviewFragment extends Fragment {
         sharesOutstanding.setText(stock.getStats().getSharesOutstanding());
 
         beta.setText(String.format("%.2f",stock.getStats().getBeta()));
-        upEarningDate.setText("–");
-        upEarningEstimate.setText("–");
-        upEarningEstimateRange.setText("–");
-        laEarningActual.setText("–");
-        laEarningEstimate.setText("–");
-        laEarning5D.setText("–");
+
+        Estimate estimate = stock.getEstimates().getEstimates().get(0);
+        reportDate.setText(estimate == null ? "-" : estimate.getReportDate());
+        upEarningEstimate.setText(String.format("%.2f", estimate.getConsensusEPS()));
+        upEarningEstimateRange.setText(String.format("%d",estimate.getNumberOfEstimates()));
+//        estimateAnnouncedTime.setText(estimate.getAnnounceTime());
+
+        Earning earning = stock.getEarnings().getEarnings().get(0);
+        laEarningActual.setText(String.format("%.2f",earning.getActualEPS()));
+        laEarningEstimate.setText(String.format("%.2f", earning.getConsensusEPS()));
+        laEarning5D.setText(String.format("%d", earning.getNumberOfEstimates()));
         sector.setText(stock.getCompany().getSector());
         industry.setText(stock.getCompany().getIndustry());
-        style.setText("–");
+
+        website.setText(stock.getCompany().getWebsite());
+        Linkify.addLinks(website, Linkify.WEB_URLS);
+
         employees.setText(String.format("%d", stock.getCompany().getEmployees()));
         ceo.setText(stock.getCompany().getCEO());
     }

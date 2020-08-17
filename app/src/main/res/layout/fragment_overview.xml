@@ -681,12 +681,12 @@
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="4dp"
                         android:layout_marginRight="16dp"
-                        android:text="Date"
+                        android:text="Report Date"
                         android:textColor="#000000"
                         android:textSize="12dp" />
 
                     <TextView
-                        android:id="@+id/earningDate"
+                        android:id="@+id/reportDate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
@@ -766,11 +766,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginRight="16dp"
-                        android:text="Estimate Range"
+                        android:text="Number of Estimates"
                         android:textColor="#000000"
-                        android:textSize="12dp" />
+                        android:textSize="9dp" />
 
                     <TextView
                         android:id="@+id/estimateRange"
@@ -892,9 +892,9 @@
                         android:layout_height="wrap_content"
                         android:maxLines="1"
                         android:layout_marginLeft="16dp"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="8dp"
                         android:layout_marginRight="16dp"
-                        android:text="5D % Chg After Earning"
+                        android:text="Number of Estimates"
                         android:textColor="#000000"
                         android:textSize="8dp" />
 
@@ -1088,15 +1088,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
-                        android:text="Style"
+                        android:text="Website"
                         android:textSize="16dp" />
 
                     <TextView
-                        android:id="@+id/style"
+                        android:id="@+id/website"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="16dp"
-                        android:text="Large Cap Growth"
                         android:textAlignment="textEnd"
                         android:textColor="#000000"
                         android:textSize="16dp" />

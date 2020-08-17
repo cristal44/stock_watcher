@@ -17,7 +17,7 @@ public interface StockDataAPI {
     @GET("ref-data/symbols")
     Observable<List<StockSymbol>> getStockSymbolNameList();
 
-    @GET("stock/{symbol}/batch?types=quote,news,company,stats,earnings&period=annual")
+    @GET("stock/{symbol}/batch?types=quote,news,company,stats,earnings,estimates")
     Observable<Stock> getStock(@Path("symbol") String symbol);
 
     @GET("stock/{symbol}/chart/{range}")
