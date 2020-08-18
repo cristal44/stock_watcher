@@ -126,7 +126,7 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
         rightAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
         rightAxis.setDrawGridLines(true);
 
-        setData();
+        setDataForLineChart();
     }
 
     private void inti() {
@@ -149,7 +149,6 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
     private void getData(String range) {
         chartPresenter.getData(symbol + "," + range);
     }
-
 
     private void setClickableTextView() {
         day1.setOnClickListener(new View.OnClickListener() {
@@ -232,7 +231,6 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
             set1 = new BarDataSet(values, "ssssss");
             set1.setDrawIcons(false);
 
-
             set1.setColor(GRAY);
 
             ArrayList<IBarDataSet> dataSets = new ArrayList<>();
@@ -244,7 +242,7 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
     }
 
 
-    private void setData() {
+    private void setDataForLineChart() {
         ArrayList<String> xAxisValues = new ArrayList<>();
         ArrayList<Entry> yValues = new ArrayList<>();
 
@@ -286,16 +284,12 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
     }
 
     @Override
-    public void displayDialog() {
-    }
-
-    @Override
     public void display(List<StockData> data) {
         dataList.clear();
         for (int i = 0; i < data.size(); i++) {
             dataList.add(data.get(i));
         }
-        setData();
+        setDataForLineChart();
         setDataForBarChart();
 
         barChart.invalidate();
@@ -327,12 +321,12 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
             Highlight h = lineChart.getHighlightByTouchPoint(event.getX(), event.getY());
             h.setDraw(event.getX(), event.getY());
             lineChart.highlightValue(h, true);
-            setData();
+            setDataForLineChart();
             return true;
         }
         if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
             isPress = false;
-            setData();
+            setDataForLineChart();
         }
         return false;
     }

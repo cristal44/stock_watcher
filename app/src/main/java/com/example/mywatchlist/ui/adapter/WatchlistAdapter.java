@@ -21,7 +21,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
 public class WatchlistAdapter extends RecyclerView.Adapter<WatchlistAdapter.MyViewHolder> implements ItemTouchHelperAdapter {
     private List<Stock> stockList;
     private OnStockListener stockListener;
@@ -29,7 +28,6 @@ public class WatchlistAdapter extends RecyclerView.Adapter<WatchlistAdapter.MyVi
     private MainActivity mainActivity;
     private Stock recentlyDeletedStock;
     private int recentlyDeletedStockPosition;
-
 
     public WatchlistAdapter(List<Stock> stockList, OnStockListener stockListener, MainActivity mainActivity) {
         this.stockList = stockList;

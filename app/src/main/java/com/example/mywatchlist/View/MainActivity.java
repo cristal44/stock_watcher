@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
 
         ButterKnife.bind(this);
         mainActivityPresenter = new MainActivityPresenter(this);
-        mainActivityPresenter.getDataForIndex();
+//        mainActivityPresenter.getDataForIndex();
 
         setRecyclerView();
         setToolBar();
@@ -234,7 +234,6 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
         spPercent.setTextColor(color);
     }
 
-    @Override
     public void displayDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Duplicate Symbol")

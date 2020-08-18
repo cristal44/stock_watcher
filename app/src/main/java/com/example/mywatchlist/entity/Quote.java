@@ -3,10 +3,7 @@ package com.example.mywatchlist.entity;
 import com.example.mywatchlist.MyColor;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
-
-import static android.graphics.Color.rgb;
 import static com.example.mywatchlist.Utils.formatValue;
 
 public class Quote implements Serializable ,StockData{

@@ -21,6 +21,8 @@ import java.util.stream.Collectors;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class MainActivityPresenter implements PresenterBase {
+
+    private static ConnectivityManager connectivityManager;
     private MainActivity mainActivity;
     private IModel stockModel;
     private static List<StockData> stocks = new ArrayList<>();
@@ -31,13 +33,16 @@ public class MainActivityPresenter implements PresenterBase {
     private boolean isSortedByPrice = true;
     private boolean isSortedByChange = true;
     private static boolean isFirst = true;
-    private static ConnectivityManager connectivityManager;
 
     public MainActivityPresenter(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
         stockModel = new StockModel(this);
 
-        readFile();
+        try {
+            readFromFile();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void getDataForIndex() {
@@ -62,48 +67,26 @@ public class MainActivityPresenter implements PresenterBase {
         symbolList.stream().forEach(s -> stockModel.getData(s));
     }
 
-
     @Override
     public void onFinishListener(List<StockData> list) {
         StockData data = list.get(0);
 
-        switch (data.getSymbol()) {
-            case "AAPL":
-                mainActivity.displayDJIA((Stock) data);
-                threeIndexList.add(data);
-                break;
-            case "AMZN":
-                mainActivity.displayNAS((Stock) data);
-                threeIndexList.add(data);
-                break;
-            case "TSLA":
-                mainActivity.displaySP((Stock) data);
-                threeIndexList.add(data);
-                break;
-            default:
-                setDataForRequestSymbol(data);
-        }
+        if (data.getSymbol().equals("AAPL") || data.getSymbol().equals("AMZN") || data.getSymbol().equals("TSLA")){
+            threeIndexList.add(data);
 
+            if (threeIndexList.size() == 3){
+                setDataForThreeIndex(threeIndexList);
+            }
+        } else {
+            setDataForRequestSymbol(data);
+        }
 
         if (isRefresh && sizeBeforeRefresh == 0 && threeIndexList.size() == 3) {
             isRefresh = false;
             threeIndexList.clear();
             mainActivity.stopRefresh();
         }
-
-        System.out.println(threeIndexList.size());
     }
-
-
-    public void updateList(Stock stock) {
-        if (stocks.contains(stock)) {
-            stocks.remove(stock);
-        } else {
-            stocks.add(stock);
-        }
-        writeToFile();
-    }
-
 
     private void setDataForRequestSymbol(StockData stockData) {
         for (int i = 0; i < stocks.size(); i++) {
@@ -116,8 +99,35 @@ public class MainActivityPresenter implements PresenterBase {
         }
         stocks.add(stockData);
 
-        writeToFile();
+        writeStocksFile();
         mainActivity.display(stocks);
+    }
+
+    public void setDataForThreeIndex(List<StockData> list){
+        for (StockData data : list) {
+            switch (data.getSymbol()) {
+                case "AAPL":
+                    mainActivity.displayDJIA((Stock) data);
+                    break;
+                case "AMZN":
+                    mainActivity.displayNAS((Stock) data);
+                    break;
+                case "TSLA":
+                    mainActivity.displaySP((Stock) data);
+                    break;
+            }
+        }
+        writeIndexFile();
+    }
+
+
+    public void updateList(Stock stock) {
+        if (stocks.contains(stock)) {
+            stocks.remove(stock);
+        } else {
+            stocks.add(stock);
+        }
+        writeStocksFile();
     }
 
     public void sortedStocksByName() {
@@ -132,7 +142,7 @@ public class MainActivityPresenter implements PresenterBase {
 
         }
         mainActivity.display(stocks);
-        writeToFile();
+        writeStocksFile();
     }
 
     public void sortedStocksByPrice() {
@@ -151,7 +161,7 @@ public class MainActivityPresenter implements PresenterBase {
         stocks.clear();
         stockList.forEach(s -> stocks.add(s));
         mainActivity.display(stocks);
-        writeToFile();
+        writeStocksFile();
     }
 
 
@@ -172,7 +182,7 @@ public class MainActivityPresenter implements PresenterBase {
         stocks.clear();
         stockList.forEach(s -> stocks.add(s));
         mainActivity.display(stocks);
-        writeToFile();
+        writeStocksFile();
     }
 
     public List<Stock> convertToStockList() {
@@ -182,10 +192,18 @@ public class MainActivityPresenter implements PresenterBase {
         return stockList;
     }
 
-    public void writeToFile() {
-        String stocksString = new Gson().toJson(stocks);
+    public void writeIndexFile(){
+        writeToFile("threeIndex.txt", threeIndexList);
+    }
+
+    public void writeStocksFile(){
+        writeToFile("stocks.txt", stocks);
+    }
+
+    public void writeToFile(String fileName, List<StockData> list) {
+        String stocksString = new Gson().toJson(list);
         try {
-            FileOutputStream fileOutputStream = mainActivity.openFileOutput("stocks.txt", Context.MODE_PRIVATE);
+            FileOutputStream fileOutputStream = mainActivity.openFileOutput(fileName, Context.MODE_PRIVATE);
             fileOutputStream.write(stocksString.getBytes());
             fileOutputStream.flush();
             fileOutputStream.close();
@@ -194,63 +212,58 @@ public class MainActivityPresenter implements PresenterBase {
         }
     }
 
-    public void readFile() {
+    public void readFromFile() {
+        if (isFirst) {
+
+            List<StockData> indexList = readDataFromfile("threeIndex.txt", threeIndexList);
+            if (!isNetWorkConnected() && !indexList.isEmpty()){
+                setDataForThreeIndex(indexList);
+            } else {
+                getDataForIndex();
+            }
+
+            List<StockData> stockList = readDataFromfile("stocks.txt", stocks);
+            stocks.clear();
+            stocks.addAll(stockList);
+
+            if (!stocks.isEmpty()) {
+                if (isNetWorkConnected()) {
+                    refreshData();
+                } else {
+                    mainActivity.setStockList(convertToStockList());
+                }
+            }
+
+            isFirst = false;
+        }
+    }
+
+    public List<StockData> readDataFromfile(String filename, List<StockData> stockDataList){
+        List<StockData> dataList = new ArrayList<>();
+        String stocksResult = "";
         try {
-            readFromFile();
+            StringBuffer stringBuffer = new StringBuffer();
+            FileInputStream fileInputStream = mainActivity.openFileInput(filename);
+            int ch;
+            while ((ch = fileInputStream.read()) != -1) {
+                stringBuffer.append((char) ch);
+            }
+            fileInputStream.close();
+            stocksResult = stringBuffer.toString();
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
 
-    public void readFromFile() {
-
-        if (isFirst) {
-            try {
-                String stocksResult = "";
-                try {
-                    StringBuffer stringBuffer = new StringBuffer();
-                    FileInputStream fileInputStream = mainActivity.openFileInput("stocks.txt");
-                    int ch;
-                    while ((ch = fileInputStream.read()) != -1) {
-                        stringBuffer.append((char) ch);
-                    }
-                    fileInputStream.close();
-                    stocksResult = stringBuffer.toString();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                if (!stocksResult.isEmpty()) {
-
-                    Gson gson = new Gson();
-                    Type empTypeList = new TypeToken<ArrayList<Stock>>() {
-                    }.getType();
-
-                    stocks.clear();
-                    stocks = gson.fromJson(stocksResult, empTypeList);
-
-
-                    if (!stocks.isEmpty()) {
-                        if (isNetWorkConnected()) {
-                            refreshData();
-                        } else {
-                            List<Stock> stockList = new ArrayList<>();
-                            stocks.forEach(t -> stockList.add((Stock)t));
-                            mainActivity.setStockList(stockList);
-                        }
-                    }
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            isFirst = false;
+        if (!stocksResult.isEmpty()) {
+            Type empTypeList = new TypeToken<ArrayList<Stock>>() {}.getType();
+            dataList = new Gson().fromJson(stocksResult, empTypeList);
         }
 
+        return dataList;
     }
 
-    public boolean isNetWorkConnected(){
-        if(connectivityManager == null) {
+    public boolean isNetWorkConnected() {
+        if (connectivityManager == null) {
             connectivityManager =
                     (ConnectivityManager) mainActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
         }

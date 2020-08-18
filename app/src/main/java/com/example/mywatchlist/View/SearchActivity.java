@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 import static android.graphics.Color.WHITE;
 import static android.graphics.Color.rgb;
 
@@ -80,12 +79,6 @@ public class SearchActivity extends AppCompatActivity implements BaseView{
         });
     }
 
-
-    @Override
-    public void displayDialog() {
-
-    }
-
     @Override
     public void display(List<StockData> list) {
         arrayList.clear();
@@ -95,7 +88,6 @@ public class SearchActivity extends AppCompatActivity implements BaseView{
 
         adapter = new ListViewAdapter(this,arrayList);
         listView.setAdapter(adapter);
-
     }
 
     @Override

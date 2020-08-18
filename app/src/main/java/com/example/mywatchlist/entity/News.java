@@ -2,7 +2,6 @@ package com.example.mywatchlist.entity;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
 
 public class News implements Serializable {

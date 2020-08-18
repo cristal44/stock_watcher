@@ -113,7 +113,6 @@ public class Data implements StockData {
         return formatValue(volume);
     }
 
-
     public float getVolume() {
         return volume;
     }

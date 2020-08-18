@@ -60,8 +60,8 @@ public class Estimate implements Serializable {
                 return "After Close";
             case "DMT":
                 return "During Market";
+            default:
+                return "-";
         }
-
-        return "-";
     }
 }

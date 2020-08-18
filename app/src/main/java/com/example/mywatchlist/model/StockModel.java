@@ -26,7 +26,7 @@ public class StockModel implements IModel {
         StockDataAPI stockDataAPI = StockClient.getStockRetrofit().create(StockDataAPI.class);
         Observable<Stock> getStockData = stockDataAPI.getStock(symbol);
         getStockData.subscribeOn(Schedulers.io())
-                .retry(100)
+                .retry(25)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Stock>() {
                     @Override
