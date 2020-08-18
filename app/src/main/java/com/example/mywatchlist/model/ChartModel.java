@@ -34,7 +34,6 @@ public class ChartModel implements IModel{
                 .subscribe(new Observer<List<Data>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-
                     }
 
                     @Override

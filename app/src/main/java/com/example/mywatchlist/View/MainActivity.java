@@ -54,10 +54,9 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
     @BindView(R.id.changeSort) TextView changeSorted;
 
     private WatchlistAdapter watchlistAdapter;
-    private static List<Stock> stockList = new ArrayList<>();
     private MainActivityPresenter mainActivityPresenter;
     private String selectedSymbol;
-
+    private List<Stock> stockList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
         sortedByChange();
     }
 
-    public void sortedByName(){
+    public void sortedByName() {
         basicViewSort.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,11 +85,11 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
         });
     }
 
-    public void displayBasicViewSortedText(String icon){
+    public void displayBasicViewSortedText(String icon) {
         basicViewSort.setText("A-Z " + icon);
     }
 
-    public void sortedByPrice(){
+    public void sortedByPrice() {
         priceSorted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,11 +98,11 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
         });
     }
 
-    public void displayPriceSortedText(String icon){
+    public void displayPriceSortedText(String icon) {
         priceSorted.setText("Price " + icon);
     }
 
-    public void sortedByChange(){
+    public void sortedByChange() {
         changeSorted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
         });
     }
 
-    public void displayChangeSortedText(String icon){
+    public void displayChangeSortedText(String icon) {
         changeSorted.setText("% change " + icon);
     }
 
@@ -147,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void stockListChanged(Stock stock){
+    public void stockListChanged(Stock stock) {
         mainActivityPresenter.updateList(stock);
     }
 
@@ -180,9 +179,9 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
     public void display(List<StockData> list) {
         stockList.clear();
         for (StockData data : list) {
-                    stockList.add((Stock) data);
-                    watchlistAdapter.notifyDataSetChanged();
-            }
+            stockList.add((Stock) data);
+            watchlistAdapter.notifyDataSetChanged();
+        }
         stopRefresh();
     }
 
@@ -263,7 +262,11 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
         mainActivityPresenter.refreshData();
     }
 
-    public void stopRefresh(){
+    public void stopRefresh() {
         swipeRefreshLayout.setRefreshing(false);
+    }
+
+    public void setStockList(List<Stock> stocks) {
+        this.stockList = stocks;
     }
 }

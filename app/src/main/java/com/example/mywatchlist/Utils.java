@@ -1,11 +1,24 @@
 package com.example.mywatchlist;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
+import androidx.appcompat.app.AlertDialog;
+
+import com.example.mywatchlist.entity.StockData;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
 public class Utils {
+
 
     public static String getPlusOrMinors(double change) {
         return change > 0 ? "+" : (change < 0 ? "-" : "");
@@ -34,4 +47,7 @@ public class Utils {
         DecimalFormat decimalFormat = new DecimalFormat("#.#");
         return String.format("%s%s", decimalFormat.format(value), arr[index]);
     }
+
+
+
 }
