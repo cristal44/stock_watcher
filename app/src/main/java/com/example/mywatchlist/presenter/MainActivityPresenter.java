@@ -5,7 +5,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
 import com.example.mywatchlist.View.MainActivity;
 import com.example.mywatchlist.entity.Stock;
 import com.example.mywatchlist.entity.StockData;
@@ -235,7 +234,6 @@ public class MainActivityPresenter implements PresenterBase {
                         if (isNetWorkConnected()) {
                             refreshData();
                         } else {
-//                            onFinishListener((stocks));
                             List<Stock> stockList = new ArrayList<>();
                             stocks.forEach(t -> stockList.add((Stock)t));
                             mainActivity.setStockList(stockList);

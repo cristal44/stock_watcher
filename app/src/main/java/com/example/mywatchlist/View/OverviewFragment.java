@@ -137,7 +137,6 @@ public class OverviewFragment extends Fragment {
         reportDate.setText(estimate == null ? "-" : estimate.getReportDate());
         upEarningEstimate.setText(String.format("%.2f", estimate.getConsensusEPS()));
         upEarningEstimateRange.setText(String.format("%d",estimate.getNumberOfEstimates()));
-//        estimateAnnouncedTime.setText(estimate.getAnnounceTime());
 
         Earning earning = stock.getEarnings().getEarnings().get(0);
         laEarningActual.setText(String.format("%.2f",earning.getActualEPS()));

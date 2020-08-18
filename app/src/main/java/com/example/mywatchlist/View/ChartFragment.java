@@ -2,8 +2,6 @@ package com.example.mywatchlist.View;
 
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -17,10 +15,7 @@ import com.example.mywatchlist.entity.Data;
 import com.example.mywatchlist.entity.Stock;
 import com.example.mywatchlist.entity.StockData;
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -32,7 +27,6 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
-import com.github.mikephil.charting.interfaces.datasets.IBarLineScatterCandleBubbleDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,7 +37,6 @@ import butterknife.ButterKnife;
 import static android.graphics.Color.BLACK;
 import static android.graphics.Color.GRAY;
 import static android.graphics.Color.WHITE;
-import static android.graphics.Color.argb;
 
 public class ChartFragment extends Fragment implements BaseView, OnChartValueSelectedListener, View.OnTouchListener {
     @BindView(R.id.d1) TextView day1;
@@ -61,7 +54,6 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
     @BindView(R.id.chartAverageVolume) TextView chartAverageVolume;
     @BindView(R.id.lineChart) LineChart lineChart;
     @BindView(R.id.barChart) BarChart barChart;
-
 
     private Stock stock;
     private XAxis xAxis;
@@ -110,8 +102,6 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
         barChart.getAxisRight().setEnabled(false);
         setDataForBarChart();
     }
-
-
 
     private void intiLineChart() {
         lineChart.getLegend().setEnabled(false);

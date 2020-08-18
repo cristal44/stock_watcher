@@ -7,17 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import com.example.mywatchlist.R;
 import com.example.mywatchlist.View.MainActivity;
 import com.example.mywatchlist.entity.StockSymbol;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class ListViewAdapter extends BaseAdapter {
-
     private Context context;
     private LayoutInflater inflater;
     private List<StockSymbol> list;

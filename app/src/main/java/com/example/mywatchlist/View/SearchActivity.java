@@ -14,11 +14,6 @@ import com.example.mywatchlist.presenter.PresenterBase;
 import com.example.mywatchlist.presenter.SearchViewPresenter;
 import com.example.mywatchlist.entity.StockData;
 import com.example.mywatchlist.entity.StockSymbol;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;

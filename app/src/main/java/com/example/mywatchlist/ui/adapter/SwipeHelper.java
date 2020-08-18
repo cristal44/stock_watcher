@@ -10,12 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.mywatchlist.MyColor;
 import com.example.mywatchlist.R;
-import com.example.mywatchlist.ui.adapter.ItemTouchHelperAdapter;
-
-import java.util.Collections;
 
 public class SwipeHelper extends ItemTouchHelper.Callback {
     private final ItemTouchHelperAdapter adapter;

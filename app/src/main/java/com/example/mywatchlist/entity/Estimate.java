@@ -32,10 +32,6 @@ public class Estimate implements Serializable {
         return consensusEPS;
     }
 
-//    public String getAnnounceTime() {
-//        return announceTime;
-//    }
-
     public Integer getNumberOfEstimates() {
         return numberOfEstimates;
     }

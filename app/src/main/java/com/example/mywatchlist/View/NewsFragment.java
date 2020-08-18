@@ -9,14 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.mywatchlist.ui.adapter.NewsAdapter;
 import com.example.mywatchlist.R;
 import com.example.mywatchlist.entity.News;
 import com.example.mywatchlist.entity.Stock;
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

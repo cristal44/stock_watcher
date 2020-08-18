@@ -163,7 +163,6 @@ public class Quote implements Serializable ,StockData{
     private boolean isUSMarketOpen;
 
 
-
     public String getPlusOrMinors(){
         return change > 0 ? "+" : (change < 0 ? "-" : "");
     }

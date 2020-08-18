@@ -12,8 +12,6 @@ import retrofit2.http.Path;
 //https://api.iextrading.com/1.0/ref-data/symbols
 //https://cloud.iexapis.com/stable/stock/twtr/chart/5d?token=pk_21c2a832de954d13b6ccdf397b29a341
 public interface StockDataAPI {
-
-
     @GET("ref-data/symbols")
     Observable<List<StockSymbol>> getStockSymbolNameList();
 

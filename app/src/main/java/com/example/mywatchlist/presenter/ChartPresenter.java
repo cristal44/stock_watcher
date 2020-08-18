@@ -23,7 +23,6 @@ public class ChartPresenter implements PresenterBase {
         range = symbol.split(",")[1];
     }
 
-
     @Override
     public void onFinishListener(List<StockData> list) {
         for (StockData stockData : list) {

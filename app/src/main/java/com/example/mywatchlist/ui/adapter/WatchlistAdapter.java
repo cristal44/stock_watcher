@@ -2,25 +2,22 @@ package com.example.mywatchlist.ui.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.mywatchlist.R;
 import com.example.mywatchlist.View.MainActivity;
 import com.example.mywatchlist.entity.Stock;
 import com.google.android.material.snackbar.Snackbar;
-
-import java.util.Collections;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -43,7 +40,6 @@ public class WatchlistAdapter extends RecyclerView.Adapter<WatchlistAdapter.MyVi
     public Context getContext() {
         return mainActivity;
     }
-
 
     @NonNull
     @Override
@@ -81,6 +77,7 @@ public class WatchlistAdapter extends RecyclerView.Adapter<WatchlistAdapter.MyVi
         notifyItemMoved(fromPosition, toPosition);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onItemSwiped(int position) {
         recentlyDeletedStock = stockList.get(position);
@@ -98,6 +95,7 @@ public class WatchlistAdapter extends RecyclerView.Adapter<WatchlistAdapter.MyVi
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void showUndoSnackbar() {
         View view = mainActivity.findViewById(R.id.layout);
         Snackbar snackbar = Snackbar.make(view, "Item was removed from the list", Snackbar.LENGTH_LONG);
@@ -105,6 +103,7 @@ public class WatchlistAdapter extends RecyclerView.Adapter<WatchlistAdapter.MyVi
         snackbar.show();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void undoDelete() {
         stockList.add(recentlyDeletedStockPosition, recentlyDeletedStock);
         mainActivity.stockListChanged(recentlyDeletedStock);

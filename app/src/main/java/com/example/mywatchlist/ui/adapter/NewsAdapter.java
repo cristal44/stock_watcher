@@ -42,7 +42,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyNewsViewHold
         Picasso.get().load(news.getImage()).resize(200, 200).into(holder.newsImage);
     }
 
-
     @Override
     public int getItemCount() {
         return newsList.size();
