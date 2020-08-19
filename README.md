@@ -1,4 +1,4 @@
-# Stock Watchlist
+# Stock Watcher
 This is a financial android application that using the IEX API to monitor real-time stock data. This app is based on MVP (Model View Presenter) architecture.
 
 ## Features
