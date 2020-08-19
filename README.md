@@ -17,7 +17,7 @@ This is a financial android application that using the IEX API to monitor real-t
 *	Butterknife
 *	Picasso
 *	MPAndroidChart
-*	RecyclerView, TabLayout and WebView
+*	RecyclerView, TabLayout, SearchView and WebView
 
 ## Screenshot
 ![github-small](https://user-images.githubusercontent.com/55339512/90585939-a012f980-e19b-11ea-8088-31995bccb374.png)
