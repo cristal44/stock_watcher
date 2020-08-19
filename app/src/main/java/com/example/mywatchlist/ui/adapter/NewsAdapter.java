@@ -39,7 +39,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyNewsViewHold
         holder.title.setText(news.getHeadline());
         holder.source.setText(news.getSource() );
         holder.date.setText(Utils.getFormatTime(news.getDatetime()));
-        Picasso.get().load(news.getImage()).resize(200, 200).into(holder.newsImage);
+        Picasso.get().load(news.getImage()).resize(250, 200).into(holder.newsImage);
     }
 
     @Override
@@ -53,7 +53,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyNewsViewHold
         @BindView(R.id.newsSource) TextView source;
         @BindView(R.id.newsDate) TextView date;
         @BindView(R.id.newsImage) ImageView newsImage;
-
 
         public MyNewsViewHolder(@NonNull View itemView) {
             super(itemView);

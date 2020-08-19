@@ -40,6 +40,7 @@ public class ChartPresenter implements PresenterBase {
             case "1mm":
                 return data.getDate().split(" ")[1].split(",")[0];
             case "6m":
+                return data.getDate().split(",")[0];
             case "1y":
                 return data.getLabel().split(" ")[0];
             case "max":

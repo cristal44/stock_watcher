@@ -6,10 +6,12 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import androidx.annotation.RequiresApi;
 import com.example.mywatchlist.View.MainActivity;
+import com.example.mywatchlist.entity.Quote;
 import com.example.mywatchlist.entity.Stock;
 import com.example.mywatchlist.entity.StockData;
 import com.example.mywatchlist.model.IModel;
 import com.example.mywatchlist.model.StockModel;
+import com.example.mywatchlist.model.ThreeIndexModel;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.FileInputStream;
@@ -24,7 +26,7 @@ public class MainActivityPresenter implements PresenterBase {
 
     private static ConnectivityManager connectivityManager;
     private MainActivity mainActivity;
-    private IModel stockModel;
+    private IModel stockModel, quoteModel;
     private static List<StockData> stocks = new ArrayList<>();
     private List<StockData> threeIndexList = new ArrayList<>();
     private int sizeBeforeRefresh;
@@ -37,6 +39,7 @@ public class MainActivityPresenter implements PresenterBase {
     public MainActivityPresenter(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
         stockModel = new StockModel(this);
+        quoteModel = new ThreeIndexModel(this);
 
         try {
             readFromFile();
@@ -45,11 +48,12 @@ public class MainActivityPresenter implements PresenterBase {
         }
     }
 
+    // IEX doesn't support them any more, so making fake data for these 3 indices.
     public void getDataForIndex() {
         threeIndexList.clear();
-        stockModel.getData("AAPL");
-        stockModel.getData("AMZN");
-        stockModel.getData("TSLA");
+        quoteModel.getData("DJIA");
+        quoteModel.getData("NASDAQ");
+        quoteModel.getData("SPX");
     }
 
     @Override
@@ -62,6 +66,10 @@ public class MainActivityPresenter implements PresenterBase {
         sizeBeforeRefresh = stocks.size();
 
         getDataForIndex();
+        callAllStocks();
+    }
+
+    public void callAllStocks() {
         List<String> symbolList = stocks.stream().map(s -> s.getSymbol()).collect(Collectors.toList());
         stocks.clear();
         symbolList.stream().forEach(s -> stockModel.getData(s));
@@ -70,13 +78,15 @@ public class MainActivityPresenter implements PresenterBase {
     @Override
     public void onFinishListener(List<StockData> list) {
         StockData data = list.get(0);
+        System.out.println(data.getSymbol());
 
-        if (data.getSymbol().equals("AAPL") || data.getSymbol().equals("AMZN") || data.getSymbol().equals("TSLA")){
+        if (data instanceof Quote) {
             threeIndexList.add(data);
 
-            if (threeIndexList.size() == 3){
+            if (threeIndexList.size() == 3) {
                 setDataForThreeIndex(threeIndexList);
             }
+
         } else {
             setDataForRequestSymbol(data);
         }
@@ -103,20 +113,23 @@ public class MainActivityPresenter implements PresenterBase {
         mainActivity.display(stocks);
     }
 
-    public void setDataForThreeIndex(List<StockData> list){
+    public void setDataForThreeIndex(List<StockData> list) {
+        Quote dia = null, nas = null, sp = null;
+
         for (StockData data : list) {
             switch (data.getSymbol()) {
-                case "AAPL":
-                    mainActivity.displayDJIA((Stock) data);
+                case "DJIA":
+                    dia = (Quote) data;
                     break;
-                case "AMZN":
-                    mainActivity.displayNAS((Stock) data);
+                case "NASDAQ":
+                    nas = (Quote) data;
                     break;
-                case "TSLA":
-                    mainActivity.displaySP((Stock) data);
+                case "SPX":
+                    sp = (Quote) data;
                     break;
             }
         }
+        mainActivity.displayThreeIndices(dia, nas, sp);
         writeIndexFile();
     }
 
@@ -192,11 +205,11 @@ public class MainActivityPresenter implements PresenterBase {
         return stockList;
     }
 
-    public void writeIndexFile(){
+    public void writeIndexFile() {
         writeToFile("threeIndex.txt", threeIndexList);
     }
 
-    public void writeStocksFile(){
+    public void writeStocksFile() {
         writeToFile("stocks.txt", stocks);
     }
 
@@ -216,7 +229,7 @@ public class MainActivityPresenter implements PresenterBase {
         if (isFirst) {
 
             List<StockData> indexList = readDataFromfile("threeIndex.txt", threeIndexList);
-            if (!isNetWorkConnected() && !indexList.isEmpty()){
+            if (!isNetWorkConnected() && !indexList.isEmpty()) {
                 setDataForThreeIndex(indexList);
             } else {
                 getDataForIndex();
@@ -228,17 +241,16 @@ public class MainActivityPresenter implements PresenterBase {
 
             if (!stocks.isEmpty()) {
                 if (isNetWorkConnected()) {
-                    refreshData();
+                    callAllStocks();
                 } else {
                     mainActivity.setStockList(convertToStockList());
                 }
             }
-
             isFirst = false;
         }
     }
 
-    public List<StockData> readDataFromfile(String filename, List<StockData> stockDataList){
+    public List<StockData> readDataFromfile(String filename, List<StockData> stockDataList) {
         List<StockData> dataList = new ArrayList<>();
         String stocksResult = "";
         try {
@@ -275,15 +287,5 @@ public class MainActivityPresenter implements PresenterBase {
             return false;
         }
     }
-
-
-//    private void noNetWorkDialog(String string) {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity);
-//        builder.setTitle("No Network Connection");
-//        builder.setMessage(string);
-//        AlertDialog dialog = builder.create();
-//        dialog.show();
-//    }
-
 
 }

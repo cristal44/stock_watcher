@@ -14,11 +14,6 @@ public class StockSymbol implements StockData, Serializable {
     @Expose
     private String name;
 
-    public StockSymbol(String symbol, String name) {
-        this.symbol = symbol;
-        this.name = name;
-    }
-
     public String getName() {
         return name;
     }

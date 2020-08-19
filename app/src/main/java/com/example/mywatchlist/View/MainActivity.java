@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import com.example.mywatchlist.R;
+import com.example.mywatchlist.entity.Quote;
 import com.example.mywatchlist.ui.adapter.SwipeHelper;
 import com.example.mywatchlist.presenter.MainActivityPresenter;
 import com.example.mywatchlist.entity.Stock;
@@ -30,7 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
-public class MainActivity extends AppCompatActivity implements BaseView, SwipeRefreshLayout.OnRefreshListener, WatchlistAdapter.OnStockListener {
+public class MainActivity extends AppCompatActivity implements BaseView, SwipeRefreshLayout.OnRefreshListener, WatchlistAdapter.OnStockListener{
     @BindView(R.id.stockRecyclerView) RecyclerView recyclerView;
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.swiper) SwipeRefreshLayout swipeRefreshLayout;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
     private WatchlistAdapter watchlistAdapter;
     private MainActivityPresenter mainActivityPresenter;
     private String selectedSymbol;
-    private List<Stock> stockList = new ArrayList<>();
+    private static List<Stock> stockList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,50 +66,32 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
 
         ButterKnife.bind(this);
         mainActivityPresenter = new MainActivityPresenter(this);
-//        mainActivityPresenter.getDataForIndex();
 
         setRecyclerView();
         setToolBar();
         getSelectedSymbol();
         swipeRefreshLayout.setOnRefreshListener(this);
-        sortedByName();
-        sortedByPrice();
-        sortedByChange();
     }
 
-    public void sortedByName() {
-        basicViewSort.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mainActivityPresenter.sortedStocksByName();
-            }
-        });
+    public void onSymbolSort(View view){
+        mainActivityPresenter.sortedStocksByName();
     }
 
     public void displayBasicViewSortedText(String icon) {
         basicViewSort.setText("A-Z " + icon);
     }
 
-    public void sortedByPrice() {
-        priceSorted.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mainActivityPresenter.sortedStocksByPrice();
-            }
-        });
+    public void onPriceSort(View view){
+        mainActivityPresenter.sortedStocksByPrice();
     }
+
 
     public void displayPriceSortedText(String icon) {
         priceSorted.setText("Price " + icon);
     }
 
-    public void sortedByChange() {
-        changeSorted.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mainActivityPresenter.sortedStocksByChange();
-            }
-        });
+    public void onChangeSort(View view) {
+        mainActivityPresenter.sortedStocksByChange();
     }
 
     public void displayChangeSortedText(String icon) {
@@ -185,53 +168,26 @@ public class MainActivity extends AppCompatActivity implements BaseView, SwipeRe
         stopRefresh();
     }
 
-
-    public void displayDJIA(Stock stock) {
-        int color = stock.getQuote().getColor();
-
-        dowSymbol.setText(stock.getSymbol());
-        dowPrice.setText(String.format("%.2f", stock.getQuote().getLatestPrice()));
-
-        dowUpOrDown.setText(stock.getQuote().getUpOrDownArrow());
-        dowUpOrDown.setTextColor(color);
-
-        dowChange.setText(String.format("%.2f", stock.getQuote().getChange()));
-        dowChange.setTextColor(color);
-
-        dowPercent.setText(String.format("(%.2f%%)", stock.getQuote().getChangePercent() * 100));
-        dowPercent.setTextColor(color);
+    public void displayThreeIndices(Quote dia, Quote nas, Quote sp){
+        displayIndex(dia,dowSymbol,dowPrice,dowUpOrDown,dowChange,dowPercent);
+        displayIndex(nas,naSymbol,naPrice,naUpOrDown,naChange,naPercent);
+        displayIndex(sp,spSymbol,spPrice,spUpOrDown,spChange,spPercent);
     }
 
-    public void displayNAS(Stock stock) {
-        int color = stock.getQuote().getColor();
+    public void displayIndex(Quote quote, TextView symbol, TextView price, TextView upOrDown, TextView change, TextView percentage) {
+        int color = quote.getColor();
 
-        naSymbol.setText(stock.getSymbol());
-        naPrice.setText(String.format("%.2f", stock.getQuote().getLatestPrice()));
+        symbol.setText(quote.getSymbol());
+        price.setText(String.format("%.2f", quote.getLatestPrice()));
 
-        naUpOrDown.setText(stock.getQuote().getUpOrDownArrow());
-        naUpOrDown.setTextColor(color);
+        upOrDown.setText(quote.getUpOrDownArrow());
+        upOrDown.setTextColor(color);
 
-        naChange.setText(String.format("%.2f", stock.getQuote().getChange()));
-        naChange.setTextColor(color);
+        change.setText(String.format("%.2f", quote.getChange()));
+        change.setTextColor(color);
 
-        naPercent.setText(String.format("(%.2f%%)", stock.getQuote().getChangePercent() * 100));
-        naPercent.setTextColor(color);
-    }
-
-    public void displaySP(Stock stock) {
-        int color = stock.getQuote().getColor();
-
-        spSymbol.setText(stock.getSymbol());
-        spPrice.setText(String.format("%.2f", stock.getQuote().getLatestPrice()));
-
-        spUpOrDown.setText(stock.getQuote().getUpOrDownArrow());
-        spUpOrDown.setTextColor(color);
-
-        spChange.setText(String.format("%.2f", stock.getQuote().getChange()));
-        spChange.setTextColor(color);
-
-        spPercent.setText(String.format("(%.2f%%)", stock.getQuote().getChangePercent() * 100));
-        spPercent.setTextColor(color);
+        percentage.setText(String.format("(%.2f%%)", quote.getChangePercent() * 100));
+        percentage.setTextColor(color);
     }
 
     public void displayDialog() {

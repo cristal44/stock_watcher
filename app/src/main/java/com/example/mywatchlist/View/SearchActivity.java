@@ -1,8 +1,10 @@
 package com.example.mywatchlist.View;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.ListView;
@@ -10,11 +12,8 @@ import android.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import com.example.mywatchlist.ui.adapter.ListViewAdapter;
 import com.example.mywatchlist.R;
-import com.example.mywatchlist.presenter.PresenterBase;
 import com.example.mywatchlist.presenter.SearchViewPresenter;
 import com.example.mywatchlist.entity.StockData;
-import com.example.mywatchlist.entity.StockSymbol;
-import java.util.ArrayList;
 import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,8 +27,7 @@ public class SearchActivity extends AppCompatActivity implements BaseView{
     @BindView(R.id.toolbar2) Toolbar toolbar;
 
     private ListViewAdapter adapter;
-    private List<StockSymbol> arrayList = new ArrayList<>();
-    private PresenterBase searchViewPresenter;
+    private SearchViewPresenter searchViewPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,14 +77,10 @@ public class SearchActivity extends AppCompatActivity implements BaseView{
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void display(List<StockData> list) {
-        arrayList.clear();
-        for (StockData stockName : list){
-            arrayList.add((StockSymbol) stockName);
-        }
-
-        adapter = new ListViewAdapter(this,arrayList);
+        adapter = new ListViewAdapter(this,searchViewPresenter.getDisplayList(list));
         listView.setAdapter(adapter);
     }
 

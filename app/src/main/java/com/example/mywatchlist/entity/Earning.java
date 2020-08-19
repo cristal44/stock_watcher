@@ -41,7 +41,6 @@ public class Earning implements Serializable {
     @Expose
     private Object currency;
 
-
     public Double getActualEPS() {
         return actualEPS;
     }

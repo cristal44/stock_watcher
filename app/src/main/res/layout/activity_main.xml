@@ -272,6 +272,8 @@
                     android:layout_weight="1"
                     android:layout_marginTop="16dp"
                     android:text="A-Z ▼"
+                    android:onClick="onSymbolSort"
+                    android:clickable="true"
                     android:textStyle="bold"/>
 
 
@@ -284,7 +286,9 @@
                     android:layout_toRightOf="@id/basicViewSort"
                     android:text="Price ▼"
                     android:textStyle="bold"
-                    android:textAlignment="textEnd"/>
+                    android:textAlignment="textEnd"
+                    android:onClick="onPriceSort"
+                    android:clickable="true"/>
 
                 <TextView
                     android:id="@+id/changeSort"
@@ -295,7 +299,9 @@
                     android:layout_toRightOf="@id/priceSort"
                     android:text="% change ▼"
                     android:textStyle="bold"
-                    android:textAlignment="textEnd"/>
+                    android:textAlignment="textEnd"
+                    android:onClick="onChangeSort"
+                    android:clickable="true"/>
 
             </LinearLayout>
 

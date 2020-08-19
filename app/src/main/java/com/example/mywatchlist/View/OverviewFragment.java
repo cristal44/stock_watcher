@@ -17,6 +17,7 @@ import com.example.mywatchlist.Utils;
 import com.example.mywatchlist.entity.Earning;
 import com.example.mywatchlist.entity.Estimate;
 import com.example.mywatchlist.entity.Stock;
+import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import static android.graphics.Color.WHITE;
@@ -133,10 +134,11 @@ public class OverviewFragment extends Fragment {
 
         beta.setText(String.format("%.2f",stock.getStats().getBeta()));
 
-        Estimate estimate = stock.getEstimates().getEstimates().get(0);
+        List<Estimate> estimateList = stock.getEstimates().getEstimates();
+        Estimate estimate = estimateList == null ? null : stock.getEstimates().getEstimates().get(0);
         reportDate.setText(estimate == null ? "-" : estimate.getReportDate());
-        upEarningEstimate.setText(String.format("%.2f", estimate.getConsensusEPS()));
-        upEarningEstimateRange.setText(String.format("%d",estimate.getNumberOfEstimates()));
+        upEarningEstimate.setText(estimate == null ? "-" : String.format("%.2f", estimate.getConsensusEPS()));
+        upEarningEstimateRange.setText(estimate == null? "-" :String.format("%d",estimate.getNumberOfEstimates()));
 
         Earning earning = stock.getEarnings().getEarnings().get(0);
         laEarningActual.setText(String.format("%.2f",earning.getActualEPS()));

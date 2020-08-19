@@ -91,15 +91,31 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
         return fragmentView;
     }
 
+    private void inti() {
+        chartOpen.setText(String.format("%.2f", stock.getQuote().getOpen()));
+        chartClose.setText(String.format("%.2f", stock.getQuote().getClose()));
+        chartHigh.setText(String.format("%.2f", stock.getQuote().getHigh()));
+        chartLow.setText(String.format("%.2f", stock.getQuote().getLow()));
+        chartTime.setText(stock.getQuote().getLatestTime());
+        chartVolume.setText(stock.getQuote().getVolume());
+        chartAverageVolume.setText(stock.getQuote().getAvgTotalVolume());
+
+        day1.setBackgroundColor(GRAY);
+        day1.setTextColor(WHITE);
+        lineColor = stock.getQuote().getColor();
+        filledColor = stock.getQuote().getColor();
+
+        getData("today");
+    }
+
     private void intiBarChart(){
         barChart.getLegend().setEnabled(false);
         barChart.getDescription().setEnabled(false);
 
         barChart.getXAxis().setEnabled(false);
-
         barChart.getAxisLeft().setEnabled(false);
-
         barChart.getAxisRight().setEnabled(false);
+
         setDataForBarChart();
     }
 
@@ -117,7 +133,6 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
 
         xAxis = lineChart.getXAxis();
         xAxis.setDrawGridLines(true);
-        xAxis.setLabelCount(5);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawAxisLine(false);
 
@@ -127,23 +142,6 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
         rightAxis.setDrawGridLines(true);
 
         setDataForLineChart();
-    }
-
-    private void inti() {
-        chartOpen.setText(String.format("%.2f", stock.getQuote().getOpen()));
-        chartClose.setText(String.format("%.2f", stock.getQuote().getClose()));
-        chartHigh.setText(String.format("%.2f", stock.getQuote().getHigh()));
-        chartLow.setText(String.format("%.2f", stock.getQuote().getLow()));
-        chartTime.setText(stock.getQuote().getLatestTime());
-        chartVolume.setText(stock.getQuote().getVolume());
-        chartAverageVolume.setText(stock.getQuote().getAvgTotalVolume());
-
-        day1.setBackgroundColor(GRAY);
-        day1.setTextColor(WHITE);
-        lineColor = stock.getQuote().getColor();
-        filledColor = stock.getQuote().getColor();
-
-        getData("today");
     }
 
     private void getData(String range) {
@@ -228,7 +226,7 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
             barChart.getData().notifyDataChanged();
             barChart.notifyDataSetChanged();
         } else {
-            set1 = new BarDataSet(values, "ssssss");
+            set1 = new BarDataSet(values, "volume");
             set1.setDrawIcons(false);
 
             set1.setColor(GRAY);
@@ -311,8 +309,7 @@ public class ChartFragment extends Fragment implements BaseView, OnChartValueSel
     }
 
     @Override
-    public void onNothingSelected() {
-    }
+    public void onNothingSelected() { }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
