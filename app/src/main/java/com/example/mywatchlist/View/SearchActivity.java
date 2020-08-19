@@ -6,6 +6,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -52,6 +53,8 @@ public class SearchActivity extends AppCompatActivity implements BaseView{
     private void setSearchView() {
         GradientDrawable backgroundGradient = (GradientDrawable) searchView.getBackground();
         backgroundGradient.setColor(WHITE);
+
+        searchView.setInputType(InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
 
         searchView.onActionViewExpanded();
         searchView.setQueryHint("Search");
