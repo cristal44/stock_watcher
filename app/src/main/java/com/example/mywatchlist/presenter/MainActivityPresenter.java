@@ -78,7 +78,6 @@ public class MainActivityPresenter implements PresenterBase {
     @Override
     public void onFinishListener(List<StockData> list) {
         StockData data = list.get(0);
-        System.out.println(data.getSymbol());
 
         if (data instanceof Quote) {
             threeIndexList.add(data);
